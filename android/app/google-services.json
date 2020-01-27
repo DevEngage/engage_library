@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "550663491461",
+    "firebase_url": "https://earnit-25464.firebaseio.com",
+    "project_id": "earnit-25464",
+    "storage_bucket": "earnit-25464.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:550663491461:android:7a181164f7f41f504ebeec",
+        "android_client_info": {
+          "package_name": "io.devengage.earnit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "550663491461-aggcc75q5i274h9oe03ue9iej1cqahlm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjQ3i1q32W4dXuldyUepH6CDndSaJfeUM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "550663491461-aggcc75q5i274h9oe03ue9iej1cqahlm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
