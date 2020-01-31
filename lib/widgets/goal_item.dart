@@ -43,10 +43,10 @@ class GoalItem extends HookWidget {
 
               Expanded(child: Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
                 Column(children: <Widget>[
-                  Text('10', style: TextStyle(color: Colors.black87, fontSize: 16)),
-                  Text('tasks', style: TextStyle(color: Colors.black87, fontSize: 10)),
+                  Text('10', style: TextStyle(color: Colors.teal, fontSize: 16)),
+                  // Text('tasks', style: TextStyle(color: Colors.black87, fontSize: 10)),
                 ],),
-                IconButton(icon: Icon(Icons.calendar_today), onPressed: () => true,),
+                // IconButton(icon: Icon(Icons.calendar_today), onPressed: () => true,),
                 IconButton(icon: Icon(Icons.notifications_none), color: Colors.teal, onPressed: () => true,),
                 // IconButton(icon: Icon(Icons.check_box_outline_blank), onPressed: () => true,),
               ],)),
@@ -74,6 +74,81 @@ class GoalItem extends HookWidget {
           title: Row(children: <Widget>[
             Row(children: <Widget>[ 
               Text('Tasks'), 
+              IconButton(icon: Icon(Icons.add_circle_outline), color: Colors.deepPurpleAccent, onPressed: () => _addEditTask(context),),
+            ],),
+            Expanded(child: Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
+                // Column(children: <Widget>[
+                //   Text('10', style: TextStyle(color: Colors.black87, fontSize: 16)),
+                //   Text('tasks', style: TextStyle(color: Colors.black87, fontSize: 10)),
+                // ],),
+                // IconButton(icon: Icon(Icons.notifications_none), color: Colors.teal, onPressed: () => true,),
+                // IconButton(icon: Icon(Icons.check_box_outline_blank), onPressed: () => true,),
+              ],)),
+          ]),
+          children: <Widget>[
+            TaskItem(),
+            TaskItem(),
+            // SimpleDialogOption(
+            //   onPressed: () { Navigator.pop(context, Department.treasury); },
+            //   child: const Text('Treasury department'),
+            // ),
+            // SimpleDialogOption(
+            //   onPressed: () { Navigator.pop(context, Department.state); },
+            //   child: const Text('State department'),
+            // ),
+          ],
+        );
+      }
+    );
+  }
+
+  Future<void> _addEditGoal(context) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          backgroundColor: Colors.white.withOpacity(0.8),
+          title: Row(children: <Widget>[
+            Row(children: <Widget>[ 
+              Text('Tasks'), 
+              IconButton(icon: Icon(Icons.add_circle_outline), color: Colors.deepPurpleAccent, onPressed: () => _addEditTask(context),),
+            ],),
+            Expanded(child: Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
+                // Column(children: <Widget>[
+                //   Text('10', style: TextStyle(color: Colors.black87, fontSize: 16)),
+                //   Text('tasks', style: TextStyle(color: Colors.black87, fontSize: 10)),
+                // ],),
+                // IconButton(icon: Icon(Icons.notifications_none), color: Colors.teal, onPressed: () => true,),
+                // IconButton(icon: Icon(Icons.check_box_outline_blank), onPressed: () => true,),
+              ],)),
+          ]),
+          children: <Widget>[
+            TaskItem(),
+            TaskItem(),
+            // SimpleDialogOption(
+            //   onPressed: () { Navigator.pop(context, Department.treasury); },
+            //   child: const Text('Treasury department'),
+            // ),
+            // SimpleDialogOption(
+            //   onPressed: () { Navigator.pop(context, Department.state); },
+            //   child: const Text('State department'),
+            // ),
+          ],
+        );
+      }
+    );
+  }
+
+
+  Future<void> _addEditTask(context) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          backgroundColor: Colors.white.withOpacity(0.8),
+          title: Row(children: <Widget>[
+            Row(children: <Widget>[ 
+              Text('Edit Task'), 
               IconButton(icon: Icon(Icons.add_circle_outline), color: Colors.deepPurpleAccent, onPressed: () => true,),
             ],),
             Expanded(child: Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
@@ -101,5 +176,6 @@ class GoalItem extends HookWidget {
       }
     );
   }
+
 
 }

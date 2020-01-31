@@ -57,7 +57,20 @@ class HomeScreen extends HookWidget {
           ),
         )
       ),
-      GoalItem(),
+
+      if (results.value.isEmpty) ...[GoalItem(),],
+
+      if (results.value.isEmpty) Row(children: <Widget>[
+        Expanded(child: Container(
+        margin: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(20),
+        // color: Colors.green,
+        decoration: new BoxDecoration(
+                    color: Colors.white.withOpacity(0.65),
+                    borderRadius: new BorderRadius.all(
+                        const Radius.circular(15.0))),
+        child: Text('You have no goals lined up. Add one!', style: TextStyle(fontSize: 18, color: Colors.black54),)
+        ))]),
     ],)); // ListView.builder()
   }
 
