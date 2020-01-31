@@ -6,9 +6,10 @@ class GoalItem extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final expended = useState(false);
 
 
-    return Column(children: <Widget>[
+    return GestureDetector(onTap: () => expended.value = !expended.value, child: Column(children: <Widget>[
       Row(children: <Widget>[
         Expanded(child: Container(
         margin: const EdgeInsets.all(10),
@@ -20,24 +21,32 @@ class GoalItem extends HookWidget {
                         const Radius.circular(15.0))),
         child: Row(children: <Widget>[
           
-          Transform.scale(
-                scale: 1.5, child: 
+          Container(child: 
+            Transform.scale(
+                scale: 1.3, child: 
                 Theme(
                   data: ThemeData(unselectedWidgetColor: Colors.deepPurple),
                   child: Checkbox(value: false, tristate: false, onChanged: (bool newVal) => true, ))),
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-            Text('Name'),
-            Text('Reward')
-          ],),
-          Expanded(child: Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
-            Transform.rotate(angle: -1.5, child: IconButton(icon: Icon(Icons.chevron_left), onPressed: () => true,),),
+          ),
+              
+          Expanded( child: Row(children: <Widget>[
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+              Text('Goal: '),
+              Wrap(children: <Widget>[ Text('Reward: '), Text('Reward', style: TextStyle(color: Colors.yellowAccent),)],),
+            ],),
+            Expanded(child: Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
+              Transform.rotate(angle: expended.value ? -1.6 : 0, child: IconButton(icon: Icon(Icons.chevron_left), onPressed: () => true,),),
 
-          ],)),
+            ],)),
+          ],) ),
+
+
         ],),
         ),),]),
-
+        
+        
         // add subitems
-      ],);
+      ],));
        // ListView.builder()
   }
 
