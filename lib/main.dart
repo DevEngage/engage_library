@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'EarnIt',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -79,9 +79,34 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-     appBar: AppBar(
-       title: Text('Games Revealed'),
-     ),
+    //  appBar: AppBar(
+    //    title: Container(
+    //       color: Colors.black38,
+    //           child: Padding(
+    //             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+    //             child: TextFormField(
+    //               onChanged: (value) => filterSearchResults(value),
+    //               style: Theme.of(context)
+    //                   .textTheme
+    //                   .title
+    //                   .copyWith(color: Colors.white, letterSpacing: 1.2),
+    //               decoration: new InputDecoration(
+    //                 border: InputBorder.none,
+    //                 hintText: "Ran 30 mins",
+    //                 focusColor: AppTheme.white,
+    //                 hintStyle:
+    //                     Theme.of(context).textTheme.subhead.copyWith(color: AppTheme.figmaGray),
+    //                 icon: Icon(
+    //                   Icons.search,
+    //                   color: AppTheme.figmaGreen,
+    //                 ),
+    //                 contentPadding: EdgeInsets.zero,
+    //               ),
+    //               keyboardType: TextInputType.text,
+    //             ),
+    //           )
+    //         ),
+    //  ),
      body: _children[_currentIndex], // new
      bottomNavigationBar: BottomNavigationBar(
        onTap: onTabTapped, // new
@@ -89,11 +114,11 @@ class _MyHomePageState extends State<MyHomePage> {
        items: [
          new BottomNavigationBarItem(
            icon: Icon(Icons.home),
-           title: Text('Home'),
+           title: Text('Goals'),
          ),
          new BottomNavigationBarItem(
            icon: Icon(Icons.mail),
-           title: Text('Following'),
+           title: Text('World'),
          ),
          new BottomNavigationBarItem(
            icon: Icon(Icons.person),
