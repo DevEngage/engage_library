@@ -1,4 +1,4 @@
-package com.example.earn_it
+package io.devengage.earnit
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

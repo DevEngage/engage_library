@@ -97,7 +97,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "27949665bbac3e862e03e9e5211582d2d5a20c17"
+      resolved-ref: aade54a066a90c5fcb555ec43aee64b4e7d43473
       url: "https://github.com/DevEngage/engagefire_flutter"
     source: git
     version: "0.1.0"

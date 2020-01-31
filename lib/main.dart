@@ -1,4 +1,4 @@
-import 'package:earn_it/screens/home_screen.dart';
+import 'package:EarnIt/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());

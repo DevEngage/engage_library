@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>550663491461-aoiq9entl32m32mq1fta7mt98q37m40f.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.550663491461-aoiq9entl32m32mq1fta7mt98q37m40f</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBOjhT_UGKLkTNPgrprTX3fH2Ea9Q3CiL0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>550663491461</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>io.devengage.earnit</string>
+	<key>PROJECT_ID</key>
+	<string>earnit-25464</string>
+	<key>STORAGE_BUCKET</key>
+	<string>earnit-25464.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:550663491461:ios:9d4265abf4c88ddd4ebeec</string>
+	<key>DATABASE_URL</key>
+	<string>https://earnit-25464.firebaseio.com</string>
+</dict>
+</plist>
