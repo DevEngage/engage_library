@@ -108,11 +108,11 @@ class _MyHomePageState extends State<MyHomePage> {
     //         ),
     //  ),
      body: _children[_currentIndex], // new
-     floatingActionButton: _currentIndex == 0 ? FloatingActionButton(
-       backgroundColor: Colors.deepPurple, 
-       child: Icon(Icons.add), 
-       onPressed: () => true,
-     ) : null,
+    //  floatingActionButton: _currentIndex == 0 ? FloatingActionButton(
+    //    backgroundColor: Colors.deepPurple, 
+    //    child: Icon(Icons.add), 
+    //    onPressed: () => true,
+    //  ) : null,
      bottomNavigationBar: BottomNavigationBar(
        onTap: onTabTapped, // new
        currentIndex: _currentIndex, // new
