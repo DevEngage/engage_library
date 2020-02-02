@@ -29,13 +29,14 @@ class HomeScreen extends HookWidget {
       //   print("Exception when calling DefaultApi->analyzeARecipeSearchQuery: $e\n");
       // }
       results.value = list;
+      
     }
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
        backgroundColor: Colors.deepPurple, 
        child: Icon(Icons.add), 
-       onPressed: () => _addEditGoal(context, currentDate, goalCategory),
+       onPressed: () => Navigator.pushNamed(context, '/editGoals', arguments: <String, dynamic> { 'id': null }) // _addEditGoal(context, currentDate, goalCategory),
      ),
       body: Container(
         decoration: BoxDecoration(
@@ -82,7 +83,7 @@ class HomeScreen extends HookWidget {
                       color: Colors.white.withOpacity(0.65),
                       borderRadius: BorderRadius.all(
                           const Radius.circular(15.0))),
-          child: Text('You have no goals lined up. Add one!', style: TextStyle(fontSize: 18, color: Colors.black54),)
+          child: Center(child: Text('You have no goals lined up. Add one!', style: TextStyle(fontSize: 18, color: Colors.black54),))
           ))]),
       ],))); // ListView.builder()
     }
