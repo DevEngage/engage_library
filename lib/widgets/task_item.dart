@@ -55,6 +55,7 @@ class TaskItem extends HookWidget {
         context: context,
         builder: (BuildContext context) {
           return Container(
+            height: 120,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16.0),
@@ -66,67 +67,23 @@ class TaskItem extends HookWidget {
               children: <Widget>[
                 ListTile(
                   title: Text(
-                    "Inbox",
-                    style: TextStyle(color: Colors.white),
+                    'Edit',
+                    style: TextStyle(color: Colors.black),
                   ),
                   leading: Icon(
-                    Icons.inbox,
-                    color: Colors.white,
+                    Icons.edit,
+                    color: Colors.black,
                   ),
                   onTap: () {},
                 ),
                 ListTile(
                   title: Text(
-                    "Starred",
-                    style: TextStyle(color: Colors.white),
+                    'Delete',
+                    style: TextStyle(color: Colors.redAccent),
                   ),
                   leading: Icon(
-                    Icons.star_border,
-                    color: Colors.white,
-                  ),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text(
-                    "Sent",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  leading: Icon(
-                    Icons.send,
-                    color: Colors.white,
-                  ),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text(
-                    "Trash",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  leading: Icon(
-                    Icons.delete_outline,
-                    color: Colors.white,
-                  ),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text(
-                    "Spam",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  leading: Icon(
-                    Icons.error,
-                    color: Colors.white,
-                  ),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text(
-                    "Drafts",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  leading: Icon(
-                    Icons.mail_outline,
-                    color: Colors.white,
+                    Icons.delete,
+                    color: Colors.redAccent,
                   ),
                   onTap: () {},
                 ),

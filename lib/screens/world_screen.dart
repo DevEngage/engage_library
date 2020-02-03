@@ -20,9 +20,9 @@ class WorldScreen extends HookWidget {
     return Container(
         decoration: BoxDecoration(
           color: Colors.deepPurple.withOpacity(0.5),
-          image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/imgs/space_world.jpeg'), colorFilter: ColorFilter.mode(Colors.black45, BlendMode.srcOver))), // Image.asset('assets/imgs/background.png') ),
+          image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/imgs/space_world_medium.jpg'), colorFilter: ColorFilter.mode(Colors.black45, BlendMode.srcOver))), // Image.asset('assets/imgs/background.png') ),
         child: ListView(children: <Widget>[
-
+          GoalItem(),
         ]));
   }
 

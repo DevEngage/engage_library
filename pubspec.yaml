@@ -77,8 +77,10 @@ flutter:
   assets:
     - assets/imgs/background.png
     - assets/imgs/mountain.jpeg
+    - assets/imgs/mountain_medium.jpg
     - assets/imgs/green_background.jpg
     - assets/imgs/space_world.jpeg
+    - assets/imgs/space_world_medium.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

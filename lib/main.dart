@@ -1,12 +1,31 @@
 import 'package:EarnIt/screens/goal_screen.dart';
 import 'package:EarnIt/screens/home_screen.dart';
 import 'package:EarnIt/screens/profile_screen.dart';
+import 'package:EarnIt/screens/task_edit_screens.dart';
 import 'package:EarnIt/screens/world_screen.dart';
+import 'package:EarnIt/services/goals_services.dart';
+import 'package:engagefire/mobile.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/goal_edit_screens.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Provider.debugCheckInvalidValueType = null;
+  await EngageFire.init(
+    name: 'EarnIt', 
+    iosGoogleAppID: '1:550663491461:ios:9d4265abf4c88ddd4ebeec', 
+    androidGoogleAppID: '1:550663491461:android:7a181164f7f41f504ebeec', 
+    gcmSenderID: '550663491461', 
+    apiKey: 'AIzaSyBOjhT_UGKLkTNPgrprTX3fH2Ea9Q3CiL0', 
+    projectID: 'earnit-25464',
+    storageBucket: 'earnit-25464.appspot.com',
+  );
+  // await EngageService.addServices([
+  //   GoalsService(),
+  // ]);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -31,6 +50,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => MyHomePage(title: 'Flutter Demo Home Page'),
         '/editGoals': (context) => GoalEdit(),
         '/viewGoal': (context) => GoalScreen(),
+        '/editTask': (context) => TaskEdit(),
       }
     );
   }
@@ -132,8 +152,8 @@ class _MyHomePageState extends State<MyHomePage> {
            title: Text('Goals'),
          ),
          new BottomNavigationBarItem(
-           icon: Icon(Icons.people),
-           title: Text('World'),
+           icon: Icon(Icons.content_copy),
+           title: Text('Templates'),
          ),
          new BottomNavigationBarItem(
            icon: Icon(Icons.person),

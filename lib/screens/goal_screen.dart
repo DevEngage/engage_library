@@ -37,10 +37,10 @@ class GoalScreen extends HookWidget {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-       backgroundColor: Colors.deepPurple, 
-       child: Icon(Icons.add), 
-       onPressed: () => Navigator.pushNamed(context, '/editGoals', arguments: <String, dynamic> { 'id': null }) // _addEditGoal(context, currentDate, goalCategory),
-     ),
+        backgroundColor: Colors.deepPurple, 
+        child: Icon(Icons.add), 
+        onPressed: () => Navigator.pushNamed(context, '/editTask', arguments: <String, dynamic> { 'id': null }) // _addEditGoal(context, currentDate, goalCategory),
+      ),
       appBar: AppBar(
         // backgroundColor: Colors.white,
         elevation: 0,
@@ -51,7 +51,7 @@ class GoalScreen extends HookWidget {
       body: Container(
         decoration: BoxDecoration(
           color: Colors.deepPurple.withOpacity(0.5),
-          image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/imgs/mountain.jpeg'), colorFilter: ColorFilter.mode(Colors.black45, BlendMode.srcOver))), // Image.asset('assets/imgs/background.png') ),
+          image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/imgs/mountain_medium.jpg'), colorFilter: ColorFilter.mode(Colors.black45, BlendMode.srcOver))), // Image.asset('assets/imgs/background.png') ),
         child: ListView(children: <Widget>[
         // GoalItem(),
         Container(child: Text('')),
