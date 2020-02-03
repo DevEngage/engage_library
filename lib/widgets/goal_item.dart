@@ -3,13 +3,74 @@ import 'package:EarnIt/widgets/task_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+
+
+
+
+
+class Entry {
+  Entry(this.title, [this.children = const <Widget>[]]);
+  final String title;
+  final List<Widget> children;
+}
+
+class EntryItem extends StatelessWidget {
+  const EntryItem(this.entry);
+
+  final Entry entry;
+
+  Widget _buildTiles(Entry root) {
+    if (root.children.isEmpty)
+      return ListTile(title: Text(root.title));
+    return ExpansionTile(
+      backgroundColor: Colors.white,
+      key: PageStorageKey<Entry>(root),
+      title: Text(root.title),
+      children: root.children,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _buildTiles(entry);
+  }
+}
+
+class GoalsAccordian extends HookWidget {
+  final List list;
+  List<Entry> data = [];
+
+  GoalsAccordian({this.list = const []}) {
+    data = list.map((item) => 
+      Entry('test', [
+        Text('test')
+        // TaskItem(),
+        // TaskItem(),
+        // TaskItem(),
+      ])
+    ).toList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return data.isEmpty ? Text('Loading') : ListView.builder(
+      itemBuilder: (BuildContext context, int index) => EntryItem(data[index]),
+      itemCount: data.length,
+    );
+  }
+
+}
+
+
 class GoalItem extends HookWidget {
+  bool changePage;
+  GoalItem({this.changePage = true});
 
   @override
   Widget build(BuildContext context) {
     final expended = useState(false);
 
-    return GestureDetector(onTap: () => _askedToLead(context), child: Column(children: <Widget>[
+    return GestureDetector(onTap: () => changePage ? Navigator.pushNamed(context, '/viewGoal', arguments: <String, dynamic> { 'id': null }) : null, child: Column(children: <Widget>[
       Row(children: <Widget>[
         Expanded(child: Container(
         margin: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 5),
@@ -62,6 +123,21 @@ class GoalItem extends HookWidget {
       ],));
        // ListView.builder()
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

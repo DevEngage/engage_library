@@ -43,7 +43,7 @@ class HomeScreen extends HookWidget {
           color: Colors.deepPurple.withOpacity(0.5),
           image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/imgs/background.png'))), // Image.asset('assets/imgs/background.png') ),
         child: ListView(children: <Widget>[
-        Container(
+          Container(
           color: Colors.black38,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -73,6 +73,10 @@ class HomeScreen extends HookWidget {
         if (results.value.isEmpty) ...[
           GoalItem(),
         ],
+
+        // GoalsAccordian(
+        //   list: ['teet']
+        // ),
 
         if (results.value.isEmpty) Row(children: <Widget>[
           Expanded(child: Container(

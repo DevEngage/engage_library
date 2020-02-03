@@ -19,7 +19,7 @@ class TaskItem extends HookWidget {
           padding: const EdgeInsets.all(10),
           // color: Colors.green,
           decoration: new BoxDecoration(
-                      color: Colors.white.withOpacity(0.7),
+                      color: Colors.white.withOpacity(0.9),
                       borderRadius: new BorderRadius.all(
                           const Radius.circular(2.0))),
           child: Row(children: <Widget>[

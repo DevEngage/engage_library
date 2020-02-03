@@ -6,7 +6,13 @@ class ProfileScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('test'); // ListView.builder()
+    return Container(
+        decoration: BoxDecoration(
+          color: Colors.deepPurple.withOpacity(0.5),
+          image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/imgs/green_background.jpg'))), // Image.asset('assets/imgs/background.png') ),
+        child: ListView(children: <Widget>[
+
+        ]));
   }
 
 }

@@ -1,7 +1,10 @@
+import 'package:EarnIt/screens/goal_screen.dart';
 import 'package:EarnIt/screens/home_screen.dart';
+import 'package:EarnIt/screens/profile_screen.dart';
+import 'package:EarnIt/screens/world_screen.dart';
 import 'package:flutter/material.dart';
 
-import 'dialogs/goal_edit.dart';
+import 'screens/goal_edit_screens.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,6 +30,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => MyHomePage(title: 'Flutter Demo Home Page'),
         '/editGoals': (context) => GoalEdit(),
+        '/viewGoal': (context) => GoalScreen(),
       }
     );
   }
@@ -55,8 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
   final List<Widget> _children = [
    HomeScreen(),
-   Text('test 2'),
-   Text('test 3'),
+   WorldScreen(),
+   ProfileScreen(),
  ];
 
   void _incrementCounter() {
