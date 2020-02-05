@@ -56,18 +56,7 @@ class TaskEdit extends HookWidget {
             children: <Widget>[
               TextFormField(
                 decoration: const InputDecoration(
-                  hintText: 'Name your goal',
-                ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter some text';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  hintText: 'What is your reward?',
+                  hintText: 'Name your task',
                 ),
                 validator: (value) {
                   if (value.isEmpty) {

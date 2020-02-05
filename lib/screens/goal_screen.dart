@@ -46,7 +46,12 @@ class GoalScreen extends HookWidget {
         elevation: 0,
         // leading: Text('Reward: Food'),
         // title: Text('Goal Name'),
-        bottom: PreferredSize(child: GoalItem(changePage: false), preferredSize: Size.fromHeight(60),)
+        bottom: PreferredSize(preferredSize: Size.fromHeight(60), 
+          child: Column(children: <Widget>[
+            Text('Reward: test'),
+            Text('details here')
+          ],)
+        )
       ),
       body: Container(
         decoration: BoxDecoration(

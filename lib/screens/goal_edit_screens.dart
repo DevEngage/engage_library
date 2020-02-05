@@ -1,3 +1,4 @@
+import 'package:EarnIt/models/goal_model.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -5,16 +6,23 @@ import 'package:intl/intl.dart';
 
 class GoalEdit extends HookWidget {
   final id;
+  GoalModel goal;
 
   GoalEdit({
-    this.id
-  });
+    this.id,
+    this.goal,
+  }) {
+    if (id == null) {
+      goal = GoalModel();
+    }
+  }
   
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     final dateFormat = DateFormat("MMM d, yyyy hh:mm a");
 
+    final goalState = useState<GoalModel>(goal);
     final currentDate = useState<DateTime>();
     final goalCategory = useState<String>();
 
@@ -38,7 +46,11 @@ class GoalEdit extends HookWidget {
         color: Colors.deepPurple, 
         padding: const EdgeInsets.all(12),
         child: Text('Save', style: TextStyle(color: Colors.white, fontSize: 20)), 
-        onPressed: () => Navigator.pushNamed(context, '/editGoals', arguments: <String, dynamic> { 'id': null }) // _addEditGoal(context, currentDate, goalCategory),
+        onPressed: () async {
+          // Navigator.pushNamed(context, '/editGoals', arguments: <String, dynamic> { 'id': null }) // _addEditGoal(context, currentDate, goalCategory),
+          await goal.save();
+          Navigator.pop(context);
+        }
       ),
       appBar: AppBar(
        title: Text(id != null ? 'Edit ' : 'Create ' + 'Goal'),
@@ -62,6 +74,7 @@ class GoalEdit extends HookWidget {
                   }
                   return null;
                 },
+                onChanged: (value) => goalState.value.name = value,
               ),
               TextFormField(
                 decoration: const InputDecoration(
@@ -73,12 +86,14 @@ class GoalEdit extends HookWidget {
                   }
                   return null;
                 },
+                onChanged: (value) => goalState.value.reward = value,
               ),
 
               TextFormField(
                 decoration: const InputDecoration(
                   hintText: 'Details',
                 ),
+                onChanged: (value) => goalState.value.details = value,
                 // validator: (value) {
                 //   if (value.isEmpty) {
                 //     return 'Please enter some text';
@@ -96,6 +111,7 @@ class GoalEdit extends HookWidget {
                   DateTimeField(
                     initialValue: currentDate.value,
                     format: dateFormat,
+                    onChanged: (DateTime value) => goalState.value.dueAt = value.millisecondsSinceEpoch,
                     onShowPicker: (context, currentValue) async {
                       final date = await showDatePicker(
                           context: context,
@@ -130,7 +146,7 @@ class GoalEdit extends HookWidget {
                   // ),
                   value: goalCategory.value,
                   onChanged: (dynamic newValue) {
-                    goalCategory.value = newValue;
+                    goalState.value.category = newValue;
                   },
                   items: categories.map((item) {
                     return DropdownMenuItem<dynamic>(

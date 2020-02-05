@@ -1,4 +1,5 @@
 
+import 'package:EarnIt/models/goal_model.dart';
 import 'package:EarnIt/widgets/task_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -63,8 +64,9 @@ class GoalsAccordian extends HookWidget {
 
 
 class GoalItem extends HookWidget {
-  bool changePage;
-  GoalItem({this.changePage = true});
+  final bool changePage;
+  final GoalModel goal;
+  GoalItem({this.changePage = true, this.goal});
 
   @override
   Widget build(BuildContext context) {
@@ -87,14 +89,14 @@ class GoalItem extends HookWidget {
                 scale: 1.3, child: 
                 Theme(
                   data: ThemeData(unselectedWidgetColor: Colors.deepPurple),
-                  child: Radio<bool>(value: true, groupValue: true, activeColor: Colors.deepPurple, onChanged: (bool newVal) => true, ))),
+                  child: Radio<bool>(value: goal.isDone, groupValue: true, activeColor: Colors.deepPurple, onChanged: (bool newVal) => true, ))),
           ),
               
           Expanded( child: 
             Row(children: <Widget>[
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-                Text('Goal: workout'),
-                Wrap(children: <Widget>[ Text('Reward: '), Text('Pizza', style: TextStyle(color: Colors.yellowAccent),)],),
+                Text('Goal: ${goal.name}'),
+                Wrap(children: <Widget>[ Text('Reward: '), Text(goal.reward, style: TextStyle(color: Colors.yellowAccent),)],),
               ],),
               // Expanded(child: Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
               //   Transform.rotate(angle: expended.value ? -1.6 : 0, child: IconButton(icon: Icon(Icons.chevron_left), onPressed: () => true,),),

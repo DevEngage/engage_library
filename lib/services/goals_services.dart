@@ -2,7 +2,7 @@
 import 'package:EarnIt/models/goal_model.dart';
 import 'package:engagefire/mobile.dart';
 
-class GoalsService { //extends EngageService<GoalModal> 
+class GoalsService { //extends EngageService<GoalModel> 
 
   static List categories = [
     {
@@ -18,13 +18,14 @@ class GoalsService { //extends EngageService<GoalModal>
       "value": "Walking",
     },
   ];
+  
 
   // GoalsService(): super(
   //   name: 'goals',
   //   path: 'goals',
   // );
 
-  // Future<List<GoalModal>> getGoals() {
+  // Future<List<GoalModel>> getGoals() {
   //   return getItems();
   // }
 
