@@ -72,7 +72,7 @@ class GoalItem extends HookWidget {
   Widget build(BuildContext context) {
     final expended = useState(false);
 
-    return GestureDetector(onTap: () => changePage ? Navigator.pushNamed(context, '/viewGoal', arguments: <String, dynamic> { 'id': null }) : null, child: Column(children: <Widget>[
+    return GestureDetector(onTap: () => changePage ? Navigator.pushNamed(context, '/viewGoal', arguments: <String, dynamic> { 'id': null, 'goal': goal }) : null, child: Column(children: <Widget>[
       Row(children: <Widget>[
         Expanded(child: Container(
         margin: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 5),

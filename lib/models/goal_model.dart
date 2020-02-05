@@ -1,3 +1,4 @@
+import 'package:EarnIt/models/task_model.dart';
 import 'package:engagefire/core/doc.dart';
 import 'package:engagefire/core/firestore.dart';
 
@@ -17,6 +18,8 @@ class GoalModel {
   String category = '';
 
   EngageDoc $doc;
+
+  List<TaskModel> $tasks = [];
 
   GoalModel([Map data]) {
     if (data != null) map(data);
@@ -39,7 +42,7 @@ class GoalModel {
 
   GoalModel.engage(EngageDoc doc) {
     $doc = doc;
-     map($doc.$doc);
+    map($doc.$doc);
   }
 
   map(Map data) {
@@ -79,14 +82,19 @@ class GoalModel {
     await $doc.$save();
   }
 
-  toogleCheck() { 
+  Future toogleCheck() async { 
     isDone = !isDone;
-    save();
+    await save();
     return isDone;
   }
 
   cleanUp() {
 
+  }
+
+  Future getTasks() async {
+    $tasks = await $doc.$getSub('tasks').getList();
+    return $tasks;
   }
 
 }

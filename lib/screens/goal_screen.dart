@@ -4,16 +4,23 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
+import 'package:EarnIt/models/goal_model.dart';
 
 class GoalScreen extends HookWidget {
   final id;
+  // final GoalModel goal;
 
   GoalScreen({
-    this.id
+    this.id,
+    // this.goal,
   });
   
   @override
   Widget build(BuildContext context) {
+    final dynamic args = ModalRoute.of(context).settings.arguments;
+    print(args);
+    GoalModel goal = args['goal'];
+    // goal = EngageFirestore.getInstanceItem('goals', id);
     final _formKey = GlobalKey<FormState>();
     final dateFormat = DateFormat("MMM d, yyyy hh:mm a");
 
@@ -35,6 +42,8 @@ class GoalScreen extends HookWidget {
       },
     ];
 
+    if (goal == null) return Text('Loading...');
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.deepPurple, 
@@ -44,13 +53,19 @@ class GoalScreen extends HookWidget {
       appBar: AppBar(
         // backgroundColor: Colors.white,
         elevation: 0,
+        title: Text(goal.name),
         // leading: Text('Reward: Food'),
         // title: Text('Goal Name'),
-        bottom: PreferredSize(preferredSize: Size.fromHeight(60), 
-          child: Column(children: <Widget>[
-            Text('Reward: test'),
-            Text('details here')
-          ],)
+        bottom: PreferredSize(preferredSize: Size.fromHeight(30), 
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 76),
+            child: Row(children: <Widget>[
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+                Text('Reward: ${goal.reward}'),
+                Text(goal.details)
+              ],)
+            ],)
+          )
         )
       ),
       body: Container(

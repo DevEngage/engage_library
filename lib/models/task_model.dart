@@ -31,4 +31,10 @@ class TaskModel {
     $doc.$doc['isDone'] = isDone;
     $doc.$save();
   }
+
+  Future toogleCheck() async { 
+    isDone = !isDone;
+    await save();
+    return isDone;
+  }
 }
