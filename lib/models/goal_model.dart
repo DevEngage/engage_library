@@ -97,4 +97,11 @@ class GoalModel {
     return $tasks;
   }
 
+  Future saveTask(TaskModel task) async {
+    bool isNew = task.$id == null;
+    await task.save();
+    // EngageDoc savedTask = await $doc.$getSub('tasks').save(task);
+    if (isNew) $tasks.add(task);
+  }
+
 }

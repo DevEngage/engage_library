@@ -1,8 +1,12 @@
 
+import 'package:EarnIt/models/task_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class TaskItem extends HookWidget {
+  final TaskModel task;
+
+  TaskItem({this.task});
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +38,8 @@ class TaskItem extends HookWidget {
                 
             Expanded( child: Row(children: <Widget>[
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-                Text('Run for 30 mins'),
-                Text('Due: Tuesday', style: TextStyle(fontSize: 12, color: Colors.black54)),
+                Text(task.name),
+                Text('Due: ${task.dueAt}', style: TextStyle(fontSize: 12, color: Colors.black54)),
               ],),
             ],) ),
 

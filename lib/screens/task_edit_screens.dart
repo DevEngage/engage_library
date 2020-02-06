@@ -1,9 +1,11 @@
+import 'package:EarnIt/models/task_model.dart';
 import 'package:EarnIt/services/goals_services.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:engagefire/mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
+import 'package:EarnIt/models/goal_model.dart';
 
 class TaskEdit extends HookWidget {
   final id;
@@ -14,33 +16,27 @@ class TaskEdit extends HookWidget {
   
   @override
   Widget build(BuildContext context) {
+    final dynamic args = ModalRoute.of(context).settings.arguments;
+    GoalModel goal = args['goal'];
+    TaskModel task = args['task'] ?? TaskModel.blank();
     final _formKey = GlobalKey<FormState>();
     final dateFormat = DateFormat("MMM d, yyyy hh:mm a");
 
     final currentDate = useState<DateTime>();
     final goalCategory = useState<String>();
 
-    List categories = [
-      {
-        "display": "Food",
-        "value": "Food",
-      },
-      {
-        "display": "Climbing",
-        "value": "Climbing",
-      },
-      {
-        "display": "Walking",
-        "value": "Walking",
-      },
-    ];
+    final taskState = useState<TaskModel>(task);
 
     return Scaffold(
       floatingActionButton: MaterialButton(
         color: Colors.deepPurple, 
         padding: const EdgeInsets.all(12),
         child: Text('Save', style: TextStyle(color: Colors.white, fontSize: 20)), 
-        onPressed: () => Navigator.pushNamed(context, '/editGoals', arguments: <String, dynamic> { 'id': null }) // _addEditGoal(context, currentDate, goalCategory),
+        onPressed: () {
+          goal.saveTask(taskState);
+          Navigator.pop(context);
+          // Navigator.pushNamed(context, '/editGoals', arguments: <String, dynamic> { 'id': null }) // _addEditGoal(context, currentDate, goalCategory),
+        }
       ),
       appBar: AppBar(
        title: Text(id != null ? 'Edit ' : 'Create ' + 'Task'),
@@ -64,12 +60,14 @@ class TaskEdit extends HookWidget {
                   }
                   return null;
                 },
+                onChanged: (value) => taskState.value.name = value,
               ),
 
               TextFormField(
                 decoration: const InputDecoration(
                   hintText: 'Details',
                 ),
+                onChanged: (value) => taskState.value.details = value,
                 // validator: (value) {
                 //   if (value.isEmpty) {
                 //     return 'Please enter some text';
@@ -87,6 +85,7 @@ class TaskEdit extends HookWidget {
                   DateTimeField(
                     initialValue: currentDate.value,
                     format: dateFormat,
+                    onChanged: (DateTime value) => taskState.value.dueAt = value.millisecondsSinceEpoch,
                     onShowPicker: (context, currentValue) async {
                       final date = await showDatePicker(
                           context: context,
@@ -121,7 +120,7 @@ class TaskEdit extends HookWidget {
                   // ),
                   value: goalCategory.value,
                   onChanged: (dynamic newValue) {
-                    goalCategory.value = newValue;
+                    taskState.value.category = newValue;
                   },
                   items: GoalsService.categories.map((item) {
                     return DropdownMenuItem<dynamic>(
