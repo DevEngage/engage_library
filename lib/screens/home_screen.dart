@@ -13,35 +13,25 @@ import 'package:intl/intl.dart';
 
 class HomeScreen extends HookWidget {
 
-  EngageFirestore goalsService = EngageFirestore.getInstance('goals');
-
+  EngageFirestore goalsService = EngageFirestore.getInstance('users/{userId}/goals');
 
   @override
   Widget build(BuildContext context) {
-    // final goals = useState<List<GoalModel>>([]);
-    // goalsService.getList().then((value) => print(value));
     final goalsStream = useMemoized(() => goalsService.stream(wrapper: (doc) => GoalModel.fromFirestore(doc)));
     final snapshot = useStream(goalsStream); //<List<GoalModel>>
-    print(snapshot.data);
-
-    final results = useState<List>([]);
-    // final currentDate = useState<DateTime>();
-    // final goalCategory = useState<String>();
+    final results = useState<List>(snapshot.data);
+    final searchString = useState<String>('');
 
     void filterSearchResults(String query) async {
-      List list = [];
+      searchString.value = query;
       if (query.length < 3) {
-        results.value = [];
+        results.value = snapshot.data;
         return;
       }
-      // try {
-      //   list = await ExerciseSearchModel.getState().search(query, replace: false);
-      // } catch (e) {
-      //   print("Exception when calling DefaultApi->analyzeARecipeSearchQuery: $e\n");
-      // }
-      results.value = list;
-      
+      print(snapshot.data);
+      results.value = (snapshot.data ?? []).where((goal) => goal.name.toLowerCase().contains(query.toLowerCase()) == true).toList();
     }
+    filterSearchResults(searchString.value);
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -59,7 +49,7 @@ class HomeScreen extends HookWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: TextFormField(
-              onChanged: (value) => filterSearchResults(value),
+              onChanged: (value) => searchString.value = value,
               style: Theme.of(context)
                   .textTheme
                   .title
@@ -82,7 +72,7 @@ class HomeScreen extends HookWidget {
         ),
 
         if (snapshot.data != null && snapshot.data.isNotEmpty) 
-          ...snapshot.data.map((item) => GoalItem(goal: item,)),
+          ...(results.value ?? []).map((item) => GoalItem(goal: item,)).toList(),
 
         // GoalsAccordian(
         //   list: ['teet']

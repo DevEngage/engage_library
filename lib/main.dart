@@ -5,6 +5,7 @@ import 'package:EarnIt/screens/task_edit_screens.dart';
 import 'package:EarnIt/screens/world_screen.dart';
 import 'package:EarnIt/services/goals_services.dart';
 import 'package:engagefire/mobile.dart';
+import 'package:engagefire/mobile/screens/login.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/goal_edit_screens.dart';
@@ -47,7 +48,17 @@ class MyApp extends StatelessWidget {
       ),
       // home: MyHomePage(title: 'Flutter Demo Home Page'),
       routes: {
-        '/': (context) => MyHomePage(title: 'Flutter Demo Home Page'),
+        '/': (context) => EngageLoginScreen(
+          logo: Image.asset('assets/icons/3.png', fit: BoxFit.fitWidth,),
+          logoIcon: Image.asset('assets/icons/3.png', width: 133,),
+          startBackground: AssetImage('assets/imgs/background.png'),
+          loginBackground: AssetImage('assets/imgs/mountain_medium.jpg'),
+          signupBackground: AssetImage('assets/imgs/space_world_medium.jpg'),
+          anonymous: true,
+          // google: true,
+          // twitter: false,
+        ),
+        '/home': (context) => MyHomePage(title: 'Flutter Demo Home Page'),
         '/editGoals': (context) => GoalEdit(),
         '/viewGoal': (context) => GoalScreen(),
         '/editTask': (context) => TaskEdit(),

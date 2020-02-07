@@ -72,6 +72,8 @@ class GoalItem extends HookWidget {
   Widget build(BuildContext context) {
     final expended = useState(false);
 
+    if (goal == null) return Text('');
+
     return GestureDetector(onTap: () => changePage ? Navigator.pushNamed(context, '/viewGoal', arguments: <String, dynamic> { 'id': null, 'goal': goal }) : null, child: Column(children: <Widget>[
       Row(children: <Widget>[
         Expanded(child: Container(
@@ -95,8 +97,8 @@ class GoalItem extends HookWidget {
           Expanded( child: 
             Row(children: <Widget>[
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-                Text('Goal: ${goal.name}'),
-                Wrap(children: <Widget>[ Text('Reward: '), Text(goal.reward, style: TextStyle(color: Colors.yellowAccent),)],),
+                Text('Goal: ${goal.name ?? ''}'),
+                Wrap(children: <Widget>[ Text('Reward: '), Text(goal.reward ?? '', style: TextStyle(color: Colors.yellowAccent),)],),
               ],),
               // Expanded(child: Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
               //   Transform.rotate(angle: expended.value ? -1.6 : 0, child: IconButton(icon: Icon(Icons.chevron_left), onPressed: () => true,),),
@@ -109,7 +111,9 @@ class GoalItem extends HookWidget {
                   // Text('tasks', style: TextStyle(color: Colors.black87, fontSize: 10)),
                 ],),
                 // IconButton(icon: Icon(Icons.calendar_today), onPressed: () => true,),
-                IconButton(icon: Icon(Icons.notifications_none), color: Colors.black45, onPressed: () => true,),
+
+                // IconButton(icon: Icon(Icons.notifications_none), color: Colors.black45, onPressed: () => true,),
+
                 // IconButton(icon: Icon(Icons.check_box_outline_blank), onPressed: () => true,),
               ],)),
 

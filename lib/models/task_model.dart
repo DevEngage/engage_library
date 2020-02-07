@@ -31,8 +31,8 @@ class TaskModel {
     category = data['category'];
   }
 
-  Future createNew() async {
-    $doc = await EngageFirestore.getInstance('goals').save({ //users/{userId}/
+  Future createNew([String goalId]) async {
+    $doc = await EngageFirestore.getInstance('users/{userId}/goals/$goalId/tasks').save({ //users/{userId}/
       'name': name,
       'details': details,
       'dueAt': dueAt,
@@ -42,9 +42,9 @@ class TaskModel {
     map($doc.$doc);
   }
 
-  Future save() async {
+  Future save([String goalId]) async {
     if ($doc == null) {
-      await createNew();
+      await createNew(goalId);
       return;
     }
     $doc.$doc['\$id'] = $id;

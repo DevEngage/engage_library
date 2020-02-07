@@ -42,7 +42,9 @@ class GoalScreen extends HookWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
           Text(goal.name),
-          Wrap(children: <Widget>[ Text(goal.reward, style: TextStyle(color: Colors.yellowAccent),)],), //Text('Reward: '), 
+
+          IconButton(icon: Icon(Icons.edit), onPressed: () => true,),
+          //Text('Reward: '), 
         ],)
         // leading: Text('Reward: Food'),
         // title: Text('Goal Name'),
@@ -65,7 +67,21 @@ class GoalScreen extends HookWidget {
           image: DecorationImage(fit: BoxFit.cover, image: AssetImage('assets/imgs/mountain_medium.jpg'), colorFilter: ColorFilter.mode(Colors.black45, BlendMode.srcOver))), // Image.asset('assets/imgs/background.png') ),
         child: ListView(children: <Widget>[
         // GoalItem(),
-        if (goal.details != null)
+        if (goal.reward != null)
+          Container(
+            color: Colors.white60,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            child: Row(children: <Widget>[
+              Wrap(children: <Widget>[ Text('Reward: ', style: TextStyle(fontSize: 18)), Text(goal.reward, style: TextStyle(color: Colors.yellowAccent, fontSize: 18),)],), 
+          ],),),
+        if (goal.dueAt != null)
+          Container(
+            color: Colors.white60,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            child: Row(children: <Widget>[
+              Wrap(children: <Widget>[ Text('Due: ${goal.dueAt}', style: TextStyle(),)],), 
+          ],),),
+        if (goal.details != null && goal.details != '')
           Container(
             color: Colors.white60,
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -73,7 +89,7 @@ class GoalScreen extends HookWidget {
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
                 // Text('Reward: ${goal.reward}'),
                 
-                Text(goal.details),
+                Text('Details: ${goal.details}'),
               ],)
             ],)
           ),

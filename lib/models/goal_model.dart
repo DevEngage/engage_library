@@ -57,7 +57,7 @@ class GoalModel {
   }
 
   Future createNew() async {
-    $doc = await EngageFirestore.getInstance('goals').save({ //users/{userId}/
+    $doc = await EngageFirestore.getInstance('users/{userId}/goals').save({ //users/{userId}/
       'name': name,
       'details': details,
       'reward': reward,

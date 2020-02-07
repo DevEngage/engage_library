@@ -33,7 +33,7 @@ class TaskEdit extends HookWidget {
         padding: const EdgeInsets.all(12),
         child: Text('Save', style: TextStyle(color: Colors.white, fontSize: 20)), 
         onPressed: () {
-          goal.saveTask(taskState);
+          goal.saveTask(taskState.value);
           Navigator.pop(context);
           // Navigator.pushNamed(context, '/editGoals', arguments: <String, dynamic> { 'id': null }) // _addEditGoal(context, currentDate, goalCategory),
         }

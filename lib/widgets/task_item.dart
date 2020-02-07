@@ -14,8 +14,8 @@ class TaskItem extends HookWidget {
     final checked = useState<bool>(false);
 
     return GestureDetector(
-      onTap: () => checked.value = !checked.value, 
-      onLongPress: () => _showOptions(context),
+      onTap: () => _showOptions(context), 
+      // onLongPress: () => _showOptions(context),
       child: Column(children: <Widget>[
         Row(children: <Widget>[
           Expanded(child: Container(
