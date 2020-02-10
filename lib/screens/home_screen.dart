@@ -1,25 +1,31 @@
 
+import 'package:EarnIt/models/goal.dart';
 import 'package:EarnIt/models/goal_model.dart';
 import 'package:EarnIt/widgets/goal_item.dart';
-import 'package:EarnIt/widgets/task_item.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:dropdown_formfield/dropdown_formfield.dart';
-import 'package:engagefire/core/doc.dart';
-import 'package:engagefire/mobile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
+import 'package:backendless_sdk/backendless_sdk.dart';
 
+class tmp {
+  List data = [];
+}
 class HomeScreen extends HookWidget {
 
-  EngageFirestore goalsService = EngageFirestore.getInstance('users/{userId}/goals');
+  // EngageFirestore goalsService = EngageFirestore.getInstance('users/{userId}/goals');
 
   @override
   Widget build(BuildContext context) {
-    final goalsStream = useMemoized(() => goalsService.stream(wrapper: (doc) => GoalModel.fromFirestore(doc)));
-    final snapshot = useStream(goalsStream); //<List<GoalModel>>
-    final results = useState<List>(snapshot.data);
+    // final goals = useFuture(Backendless.data.withClass<Goal>().find());
+    final goals = useFuture(useMemoized(() => Backendless.data.of('goal').find()));
+    // Backendless.files.upload()
+    print(goals.data);
+    // final goalsStream = useMemoized(() => goalsService.stream(wrapper: (doc) => GoalModel.fromFirestore(doc)));
+    // final snapshot = useStream(goalsStream); //<List<GoalModel>>
+    final snapshot = tmp();
+    final results = useState<List>(goals.data);
+    print(results.value);
     final searchString = useState<String>('');
 
     void filterSearchResults(String query) async {

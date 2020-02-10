@@ -25,11 +25,14 @@ dependencies:
   cupertino_icons: ^0.1.2
   font_awesome_flutter: ^8.5.0
 
-  firebase_auth: ^0.15.0+1
+  # firebase_auth: ^0.15.0+1
 
-  engagefire:
-    git:
-      url: https://github.com/DevEngage/engagefire_flutter
+  # engagefire:
+  #   git:
+  #     url: https://github.com/DevEngage/engagefire_flutter
+
+  flutter_login: ^1.0.14
+  backendless_sdk: ^1.1.1
 
   intl: ^0.15.8
   http: '>=0.11.1 <0.13.0'
@@ -46,6 +49,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: "^0.7.4"
+  build_runner: ^1.0.0
   
 flutter_icons:
   android: "launcher_icon" 
@@ -84,6 +88,9 @@ flutter:
 
     - assets/icons/3.png
     - assets/icons/4.png
+    - assets/icons/logo_gold_deep.png
+    - assets/icons/logo_gold.png
+    - assets/icons/logo_green.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

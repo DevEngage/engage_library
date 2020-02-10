@@ -1,6 +1,4 @@
-import 'package:EarnIt/widgets/goal_item.dart';
 import 'package:EarnIt/widgets/task_item.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
@@ -28,7 +26,7 @@ class GoalScreen extends HookWidget {
 
 
     if (goal == null) return Text('Loading...');
-    print(goal.$tasks);
+    print(goal.tasks);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.deepPurple, 
@@ -94,7 +92,7 @@ class GoalScreen extends HookWidget {
             ],)
           ),
         Container(child: Text('')),
-        ...goal.$tasks.map((task) => TaskItem(task: task)),
+        ...goal.tasks.map((task) => TaskItem(task: task)),
         // TaskItem(),
         // TaskItem(),
         // TaskItem(),

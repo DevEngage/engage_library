@@ -111,7 +111,7 @@ class GoalEdit extends HookWidget {
                   DateTimeField(
                     initialValue: currentDate.value,
                     format: dateFormat,
-                    onChanged: (DateTime value) => goalState.value.dueAt = value.millisecondsSinceEpoch,
+                    onChanged: (DateTime value) => goalState.value.dueAt = value,
                     onShowPicker: (context, currentValue) async {
                       final date = await showDatePicker(
                           context: context,

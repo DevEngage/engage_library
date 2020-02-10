@@ -1,30 +1,44 @@
+// import 'package:EarnIt/models/goal.dart';
 import 'package:EarnIt/screens/goal_screen.dart';
 import 'package:EarnIt/screens/home_screen.dart';
+import 'package:EarnIt/screens/login_screen.dart';
 import 'package:EarnIt/screens/profile_screen.dart';
 import 'package:EarnIt/screens/task_edit_screens.dart';
 import 'package:EarnIt/screens/world_screen.dart';
-import 'package:EarnIt/services/goals_services.dart';
-import 'package:engagefire/mobile.dart';
-import 'package:engagefire/mobile/screens/login.dart';
+import 'package:backendless_sdk/backendless_sdk.dart';
 import 'package:flutter/material.dart';
-
+import 'models/goal.dart';
+import 'models/task.dart';
 import 'screens/goal_edit_screens.dart';
+// import 'main.reflectable.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Provider.debugCheckInvalidValueType = null;
-  await EngageFire.init(
-    name: 'EarnIt', 
-    iosGoogleAppID: '1:550663491461:ios:9d4265abf4c88ddd4ebeec', 
-    androidGoogleAppID: '1:550663491461:android:7a181164f7f41f504ebeec', 
-    gcmSenderID: '550663491461', 
-    apiKey: 'AIzaSyBOjhT_UGKLkTNPgrprTX3fH2Ea9Q3CiL0', 
-    projectID: 'earnit-25464',
-    storageBucket: 'earnit-25464.appspot.com',
-  );
+  // await EngageFire.init(
+  //   name: 'EarnIt', 
+  //   iosGoogleAppID: '1:550663491461:ios:9d4265abf4c88ddd4ebeec', 
+  //   androidGoogleAppID: '1:550663491461:android:7a181164f7f41f504ebeec', 
+  //   gcmSenderID: '550663491461', 
+  //   apiKey: 'AIzaSyA5CJ1eP8Vs4A9jEFwcF-vN0bP9V4pmuOA', 
+  //   projectID: 'earnit-25464',
+  //   storageBucket: 'earnit-25464.appspot.com',
+  // );
+  // await EngageFirestore.getInstance('testworks').save({'test': 'test'});
   // await EngageService.addServices([
   //   GoalsService(),
   // ]);
+  // initializeReflectable();
+  // Goal();
+
+  Backendless.setUrl('https://api.backendless.com');
+  await Backendless.initApp(
+    "890F6585-E5DD-4F98-FF79-FE04C6E19200",
+    "F03DC88F-A563-4D0F-9811-0CC49F286227",
+    "68405719-9074-4627-9D28-24DC25708F88"
+  );
+  // Backendless.data.mapTableToClass("Goal", Goal);
+  // Backendless.data.mapTableToClass("Task", Task);
   runApp(MyApp());
 }
 
@@ -48,16 +62,7 @@ class MyApp extends StatelessWidget {
       ),
       // home: MyHomePage(title: 'Flutter Demo Home Page'),
       routes: {
-        '/': (context) => EngageLoginScreen(
-          logo: Image.asset('assets/icons/3.png', fit: BoxFit.fitWidth,),
-          logoIcon: Image.asset('assets/icons/3.png', width: 133,),
-          startBackground: AssetImage('assets/imgs/background.png'),
-          loginBackground: AssetImage('assets/imgs/mountain_medium.jpg'),
-          signupBackground: AssetImage('assets/imgs/space_world_medium.jpg'),
-          anonymous: true,
-          // google: true,
-          // twitter: false,
-        ),
+        '/': (context) => LoginScreen(),
         '/home': (context) => MyHomePage(title: 'Flutter Demo Home Page'),
         '/editGoals': (context) => GoalEdit(),
         '/viewGoal': (context) => GoalScreen(),

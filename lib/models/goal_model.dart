@@ -1,6 +1,7 @@
 import 'package:EarnIt/models/task_model.dart';
-import 'package:engagefire/core/doc.dart';
-import 'package:engagefire/core/firestore.dart';
+import 'package:backendless_sdk/backendless_sdk.dart';
+// import 'package:engagefire/core/doc.dart';
+// import 'package:engagefire/core/firestore.dart';
 
 /* 
   TODO:
@@ -8,18 +9,19 @@ import 'package:engagefire/core/firestore.dart';
  */
 
 class GoalModel {
-
-  String $id = '';
   String name = '';
-  int dueAt;
+  DateTime dueAt;
   String details = '';
   String reward = '';
   bool isDone = false;
   String category = '';
+  DateTime created;
+  DateTime updated;
+  BackendlessUser owner;
+  String objectId;
 
-  EngageDoc $doc;
-
-  List<TaskModel> $tasks = [];
+  List tasks = [];
+  // List<TaskModel> $tasks = [];
 
   GoalModel([Map data]) {
     if (data != null) map(data);
@@ -36,28 +38,28 @@ class GoalModel {
   // }
 
   GoalModel.fromFirestore(doc) {
-    $doc = EngageDoc.fromFirestore(doc);
-    map($doc.$doc);
+    // $doc = EngageDoc.fromFirestore(doc);
+    // map($doc.$doc);
   }
 
-  GoalModel.engage(EngageDoc doc) {
-    $doc = doc;
-    map($doc.$doc);
+  GoalModel.engage(Map doc) {
+    // $doc = doc;
+    // map($doc.$doc);
   }
 
   map(Map data) {
-    $id = data['\$id'];
+    objectId = data['objectId'];
     name = data['name'];
     details = data['details'];
     reward = data['reward'];
     dueAt = data['dueAt'];
     isDone = data['isDone'];
     category = data['category'];
-    // category = data['notify'];
   }
 
   Future createNew() async {
-    $doc = await EngageFirestore.getInstance('users/{userId}/goals').save({ //users/{userId}/
+    var saved = await Backendless.data.of('goal').save({ //users/{userId}/
+      'objectId': objectId,
       'name': name,
       'details': details,
       'reward': reward,
@@ -65,26 +67,28 @@ class GoalModel {
       'isDone': isDone,
       'category': category,
     });
-    map($doc.$doc);
+    print(saved);
+    // map(saved);
+    // map($doc.$doc);
   }
 
   Future save() async {
-    if ($doc == null) {
+    if (objectId == null) {
       await createNew();
       return;
     }
-    $doc.$doc['\$id'] = $id;
-    $doc.$doc['details'] = details;
-    $doc.$doc['reward'] = reward;
-    $doc.$doc['dueAt'] = dueAt;
-    $doc.$doc['isDone'] = isDone;
-    $doc.$doc['category'] = category;
-    await $doc.$save();
+    // $doc.$doc['\$id'] = $id;
+    // $doc.$doc['details'] = details;
+    // $doc.$doc['reward'] = reward;
+    // $doc.$doc['dueAt'] = dueAt;
+    // $doc.$doc['isDone'] = isDone;
+    // $doc.$doc['category'] = category;
+    // await $doc.$save();
   }
 
   Future toogleCheck() async { 
     isDone = !isDone;
-    await save();
+    // await save();
     return isDone;
   }
 
@@ -93,15 +97,15 @@ class GoalModel {
   }
 
   Future getTasks() async {
-    $tasks = await $doc.$getSub('tasks').getList();
-    return $tasks;
+    // $tasks = await $doc.$getSub('tasks').getList();
+    return [];
   }
 
   Future saveTask(TaskModel task) async {
-    bool isNew = task.$id == null;
-    await task.save();
-    // EngageDoc savedTask = await $doc.$getSub('tasks').save(task);
-    if (isNew) $tasks.add(task);
+    // bool isNew = task.$id == null;
+    // await task.save();
+    // // EngageDoc savedTask = await $doc.$getSub('tasks').save(task);
+    // if (isNew) $tasks.add(task);
   }
 
 }
