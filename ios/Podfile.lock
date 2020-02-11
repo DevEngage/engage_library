@@ -1,9 +1,4 @@
 PODS:
-  - backendless_sdk (0.0.1):
-    - BackendlessSwift
-    - Flutter
-  - BackendlessSwift (5.7.3):
-    - Socket.IO-Client-Swift
   - Flutter (1.0.0)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
@@ -18,21 +13,17 @@ PODS:
   - Starscream (3.1.1)
 
 DEPENDENCIES:
-  - backendless_sdk (from `.symlinks/plugins/backendless_sdk/ios`)
   - Flutter (from `Flutter`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
 
 SPEC REPOS:
   trunk:
-    - BackendlessSwift
     - FMDB
     - Socket.IO-Client-Swift
     - Starscream
 
 EXTERNAL SOURCES:
-  backendless_sdk:
-    :path: ".symlinks/plugins/backendless_sdk/ios"
   Flutter:
     :path: Flutter
   path_provider:
@@ -41,8 +32,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sqflite/ios"
 
 SPEC CHECKSUMS:
-  backendless_sdk: 0ac6808cf2a2a432375678b13f2433c57135ec74
-  BackendlessSwift: f56e7dcadb5c23089a87722a3960f868f05023ee
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d

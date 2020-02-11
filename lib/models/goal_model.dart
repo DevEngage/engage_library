@@ -1,7 +1,4 @@
 import 'package:EarnIt/models/task_model.dart';
-import 'package:backendless_sdk/backendless_sdk.dart';
-// import 'package:engagefire/core/doc.dart';
-// import 'package:engagefire/core/firestore.dart';
 
 /* 
   TODO:
@@ -17,7 +14,6 @@ class GoalModel {
   String category = '';
   DateTime created;
   DateTime updated;
-  BackendlessUser owner;
   String objectId;
 
   List tasks = [];
@@ -58,16 +54,16 @@ class GoalModel {
   }
 
   Future createNew() async {
-    var saved = await Backendless.data.of('goal').save({ //users/{userId}/
-      'objectId': objectId,
-      'name': name,
-      'details': details,
-      'reward': reward,
-      'dueAt': dueAt,
-      'isDone': isDone,
-      'category': category,
-    });
-    print(saved);
+    // var saved = await Backendless.data.of('goal').save({ //users/{userId}/
+    //   'objectId': objectId,
+    //   'name': name,
+    //   'details': details,
+    //   'reward': reward,
+    //   'dueAt': dueAt,
+    //   'isDone': isDone,
+    //   'category': category,
+    // });
+    // print(saved);
     // map(saved);
     // map($doc.$doc);
   }

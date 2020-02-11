@@ -6,25 +6,32 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
-import 'package:backendless_sdk/backendless_sdk.dart';
+import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 class tmp {
   List data = [];
 }
 class HomeScreen extends HookWidget {
 
+  HomeScreen() {
+    // Goal().getAll().then((val) => print(val.result));
+  }
+
   // EngageFirestore goalsService = EngageFirestore.getInstance('users/{userId}/goals');
 
   @override
   Widget build(BuildContext context) {
     // final goals = useFuture(Backendless.data.withClass<Goal>().find());
-    final goals = useFuture(useMemoized(() => Backendless.data.of('goal').find()));
     // Backendless.files.upload()
-    print(goals.data);
     // final goalsStream = useMemoized(() => goalsService.stream(wrapper: (doc) => GoalModel.fromFirestore(doc)));
     // final snapshot = useStream(goalsStream); //<List<GoalModel>>
+
+    // final goals = useFuture(useMemoized(() => Goal().getAll()));
+    // print(goals.data.result);
+    
+    // print(list);
     final snapshot = tmp();
-    final results = useState<List>(goals.data);
+    final results = useState<List>([]);
     print(results.value);
     final searchString = useState<String>('');
 

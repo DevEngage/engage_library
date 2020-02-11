@@ -5,44 +5,44 @@ import 'package:EarnIt/screens/login_screen.dart';
 import 'package:EarnIt/screens/profile_screen.dart';
 import 'package:EarnIt/screens/task_edit_screens.dart';
 import 'package:EarnIt/screens/world_screen.dart';
-import 'package:backendless_sdk/backendless_sdk.dart';
 import 'package:flutter/material.dart';
-import 'models/goal.dart';
-import 'models/task.dart';
 import 'screens/goal_edit_screens.dart';
-// import 'main.reflectable.dart';
+import 'package:parse_server_sdk/parse_server_sdk.dart';
+
+const String PARSE_APP_ID = 'hMsZzKYCmFZCGawSC1lx1onLIbeTT88dYBUFFGTa';
+const String PARSE_APP_URL = 'https://parseapi.back4app.com';
+const String MASTER_KEY = '1Sxm6pOWOESxt9UoSXAta7l9AyYcY3IPSyUiOra2';
+const String CLIENT_KEY = 'UN76vqVKNMPmpkD4DjOleR7tNHdnwMmhiHHdBCei';
+const String LIVE_QUERY_URL = 'wss://trongdth.back4app.io';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Provider.debugCheckInvalidValueType = null;
-  // await EngageFire.init(
-  //   name: 'EarnIt', 
-  //   iosGoogleAppID: '1:550663491461:ios:9d4265abf4c88ddd4ebeec', 
-  //   androidGoogleAppID: '1:550663491461:android:7a181164f7f41f504ebeec', 
-  //   gcmSenderID: '550663491461', 
-  //   apiKey: 'AIzaSyA5CJ1eP8Vs4A9jEFwcF-vN0bP9V4pmuOA', 
-  //   projectID: 'earnit-25464',
-  //   storageBucket: 'earnit-25464.appspot.com',
-  // );
-  // await EngageFirestore.getInstance('testworks').save({'test': 'test'});
-  // await EngageService.addServices([
-  //   GoalsService(),
-  // ]);
-  // initializeReflectable();
-  // Goal();
+  try {
+    await Parse().initialize(
+      PARSE_APP_ID,
+      PARSE_APP_URL,
+      masterKey: MASTER_KEY,
+      // clientKey: CLIENT_KEY,
+      liveQueryUrl: LIVE_QUERY_URL,
+      autoSendSessionId: true,
+      // debug: true,
+      coreStore: await CoreStoreSharedPrefsImp.getInstance(),
+    );
+    // print(parse.hasParseBeenInitialized());
+  } catch (error) {
+    print(error);
+  }
 
-  Backendless.setUrl('https://api.backendless.com');
-  await Backendless.initApp(
-    "890F6585-E5DD-4F98-FF79-FE04C6E19200",
-    "F03DC88F-A563-4D0F-9811-0CC49F286227",
-    "68405719-9074-4627-9D28-24DC25708F88"
-  );
-  // Backendless.data.mapTableToClass("Goal", Goal);
-  // Backendless.data.mapTableToClass("Task", Task);
-  runApp(MyApp());
+  var user = await ParseUser.currentUser();
+
+  runApp(MyApp(user));
 }
 
 class MyApp extends StatelessWidget {
+  final user;
+  MyApp(this.user);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -61,6 +61,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
       ),
       // home: MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: user != null ? '/home' : '/',
       routes: {
         '/': (context) => LoginScreen(),
         '/home': (context) => MyHomePage(title: 'Flutter Demo Home Page'),

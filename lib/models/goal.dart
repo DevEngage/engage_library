@@ -1,17 +1,20 @@
 
-import 'package:backendless_sdk/backendless_sdk.dart';
 
-@reflector // This annotation enables reflection on Person
-class Goal {
-  String objectId;
-  String name;
+import 'package:parse_server_sdk/parse_server_sdk.dart';
+
+class Goal extends ParseObject implements ParseCloneable {
   List tasks;
-  DateTime created;
-  DateTime updated;
-  BackendlessUser owner;
 
-  // Goal();
+  Goal() : super(_keyTableName);
+  Goal.clone(): this();
 
-   // We don't have to create no-arg constructor here, because if we don't specify a constructor,
-   // the default no-argument constructor will be created.
+  /// Looks strangely hacky but due to Flutter not using reflection, we have to
+  /// mimic a clone
+  @override clone(Map map) => Goal.clone()..fromJson(map);
+
+  static const String _keyTableName = 'Goal';
+  static const String keyName = 'Name';
+  
+  String get name => get<String>(keyName);
+  set name(String name) => set<String>(keyName, name);
 }
