@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
       initialRoute: user != null ? '/home' : '/',
       routes: {
         '/': (context) => LoginScreen(),
-        '/home': (context) => MyHomePage(title: 'Flutter Demo Home Page'),
+        '/home': (context) => MyHomePage(title: 'Flutter Demo Home Page', user: user),
         '/editGoals': (context) => GoalEdit(),
         '/viewGoal': (context) => GoalScreen(),
         '/editTask': (context) => TaskEdit(),
@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key key, this.title, this.user}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -86,6 +86,7 @@ class MyHomePage extends StatefulWidget {
   // always marked "final".
 
   final String title;
+  final user;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();

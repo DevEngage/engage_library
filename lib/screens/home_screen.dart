@@ -1,56 +1,36 @@
 
 import 'package:EarnIt/models/goal.dart';
-import 'package:EarnIt/models/goal_model.dart';
 import 'package:EarnIt/widgets/goal_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:intl/intl.dart';
-import 'package:parse_server_sdk/parse_server_sdk.dart';
 
-class tmp {
-  List data = [];
-}
 class HomeScreen extends HookWidget {
 
-  HomeScreen() {
-    // Goal().getAll().then((val) => print(val.result));
-  }
+  String searchString = '';
 
-  // EngageFirestore goalsService = EngageFirestore.getInstance('users/{userId}/goals');
+  List search(query, List list) {
+    if (list.length < 3) return list;
+    return list.where((goal) => goal.name.toLowerCase().contains(query.toLowerCase()) == true).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
-    // final goals = useFuture(Backendless.data.withClass<Goal>().find());
-    // Backendless.files.upload()
-    // final goalsStream = useMemoized(() => goalsService.stream(wrapper: (doc) => GoalModel.fromFirestore(doc)));
-    // final snapshot = useStream(goalsStream); //<List<GoalModel>>
-
-    // final goals = useFuture(useMemoized(() => Goal().getAll()));
-    // print(goals.data.result);
-    
-    // print(list);
-    final snapshot = tmp();
+    final goalsRes = Goal().getUserGoalsHook();
+    final goalsList = useState<List>(goalsRes.data ?? []);
     final results = useState<List>([]);
-    print(results.value);
     final searchString = useState<String>('');
-
-    void filterSearchResults(String query) async {
-      searchString.value = query;
-      if (query.length < 3) {
-        results.value = snapshot.data;
-        return;
-      }
-      print(snapshot.data);
-      results.value = (snapshot.data ?? []).where((goal) => goal.name.toLowerCase().contains(query.toLowerCase()) == true).toList();
-    }
-    filterSearchResults(searchString.value);
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-       backgroundColor: Colors.deepPurple, 
+       backgroundColor: Colors.deepPurple,
        child: Icon(Icons.add), 
-       onPressed: () => Navigator.pushNamed(context, '/editGoals', arguments: <String, dynamic> { 'id': null }) // _addEditGoal(context, currentDate, goalCategory),
+       onPressed: () async {
+          await Navigator.pushNamed(context, '/editGoals', arguments: <String, dynamic> { 'id': null }); // _addEditGoal(context, currentDate, goalCategory),
+          // Goal().getUserGoals();
+          goalsList.value = await Goal().getUserGoals();
+          // filterSearchResults(searchString.value);
+       }
      ),
       body: Container(
         decoration: BoxDecoration(
@@ -62,7 +42,9 @@ class HomeScreen extends HookWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: TextFormField(
-              onChanged: (value) => searchString.value = value,
+              onChanged: (value) { 
+                searchString.value = value;
+              },
               style: Theme.of(context)
                   .textTheme
                   .title
@@ -84,14 +66,10 @@ class HomeScreen extends HookWidget {
           )
         ),
 
-        if (snapshot.data != null && snapshot.data.isNotEmpty) 
-          ...(results.value ?? []).map((item) => GoalItem(goal: item,)).toList(),
+        if ((goalsRes.data != null && goalsRes.data.isNotEmpty))
+          ...(search(searchString.value, goalsRes.data) ?? []).map((item) => GoalItem(goal: item,)).toList(),
 
-        // GoalsAccordian(
-        //   list: ['teet']
-        // ),
-
-        if (snapshot.data == null || snapshot.data.isEmpty) Row(children: <Widget>[
+        if (goalsRes.data == null || goalsRes.data.isEmpty) Row(children: <Widget>[
           Expanded(child: Container(
           margin: const EdgeInsets.all(10),
           padding: const EdgeInsets.all(20),

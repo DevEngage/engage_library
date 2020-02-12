@@ -1,4 +1,5 @@
 
+import 'package:EarnIt/models/goal.dart';
 import 'package:EarnIt/models/goal_model.dart';
 import 'package:EarnIt/widgets/task_item.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +61,7 @@ class GoalsAccordian extends HookWidget {
 
 class GoalItem extends HookWidget {
   final bool changePage;
-  final GoalModel goal;
+  final Goal goal;
   GoalItem({this.changePage = true, this.goal});
 
   @override
@@ -69,7 +70,13 @@ class GoalItem extends HookWidget {
 
     if (goal == null) return Text('');
 
-    return GestureDetector(onTap: () => changePage ? Navigator.pushNamed(context, '/viewGoal', arguments: <String, dynamic> { 'id': null, 'goal': goal }) : null, child: Column(children: <Widget>[
+    return GestureDetector(
+      onTap: () async {
+        goal.getTask();
+        print(goal.tasks);
+        if (changePage) Navigator.pushNamed(context, '/viewGoal', arguments: <String, dynamic> { 'id': null, 'goal': goal });
+      },
+      child: Column(children: <Widget>[
       Row(children: <Widget>[
         Expanded(child: Container(
         margin: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 5),

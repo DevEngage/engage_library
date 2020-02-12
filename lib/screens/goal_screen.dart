@@ -1,8 +1,8 @@
+import 'package:EarnIt/models/goal.dart';
 import 'package:EarnIt/widgets/task_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
-import 'package:EarnIt/models/goal_model.dart';
 
 class GoalScreen extends HookWidget {
   final id;
@@ -16,7 +16,7 @@ class GoalScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final dynamic args = ModalRoute.of(context).settings.arguments;
-    GoalModel goal = args['goal'];
+    Goal goal = args['goal'];
     // goal = EngageFirestore.getInstanceItem('goals', id);
     final _formKey = GlobalKey<FormState>();
     final dateFormat = DateFormat("MMM d, yyyy hh:mm a");
@@ -24,9 +24,11 @@ class GoalScreen extends HookWidget {
     final currentDate = useState<DateTime>();
     final goalCategory = useState<String>();
 
+    // final tasks = goal.tasksHook();
+
 
     if (goal == null) return Text('Loading...');
-    print(goal.tasks);
+    // print(tasks);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.deepPurple, 
@@ -92,7 +94,7 @@ class GoalScreen extends HookWidget {
             ],)
           ),
         Container(child: Text('')),
-        ...goal.tasks.map((task) => TaskItem(task: task)),
+        // ...tasks.map((task) => TaskItem(task: task)),
         // TaskItem(),
         // TaskItem(),
         // TaskItem(),

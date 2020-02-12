@@ -1,10 +1,11 @@
+import 'package:EarnIt/models/goal.dart';
+import 'package:EarnIt/models/task.dart';
 import 'package:EarnIt/models/task_model.dart';
 import 'package:EarnIt/services/goals_services.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
-import 'package:EarnIt/models/goal_model.dart';
 
 class TaskEdit extends HookWidget {
   final id;
@@ -16,15 +17,15 @@ class TaskEdit extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final dynamic args = ModalRoute.of(context).settings.arguments;
-    GoalModel goal = args['goal'];
-    TaskModel task = args['task'] ?? TaskModel.blank();
+    Goal goal = args['goal'];
+    Task task = args['task'] ?? Task();
     final _formKey = GlobalKey<FormState>();
     final dateFormat = DateFormat("MMM d, yyyy hh:mm a");
 
     final currentDate = useState<DateTime>();
     final goalCategory = useState<String>();
 
-    final taskState = useState<TaskModel>(task);
+    final taskState = useState<Task>(task);
 
     return Scaffold(
       floatingActionButton: MaterialButton(
@@ -32,7 +33,7 @@ class TaskEdit extends HookWidget {
         padding: const EdgeInsets.all(12),
         child: Text('Save', style: TextStyle(color: Colors.white, fontSize: 20)), 
         onPressed: () {
-          goal.saveTask(taskState.value);
+          goal.addTask(taskState.value);
           Navigator.pop(context);
           // Navigator.pushNamed(context, '/editGoals', arguments: <String, dynamic> { 'id': null }) // _addEditGoal(context, currentDate, goalCategory),
         }
@@ -84,7 +85,7 @@ class TaskEdit extends HookWidget {
                   DateTimeField(
                     initialValue: currentDate.value,
                     format: dateFormat,
-                    onChanged: (DateTime value) => taskState.value.dueAt = value.millisecondsSinceEpoch,
+                    onChanged: (DateTime value) => taskState.value.dueAt = value,
                     onShowPicker: (context, currentValue) async {
                       final date = await showDatePicker(
                           context: context,

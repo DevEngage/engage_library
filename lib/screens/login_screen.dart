@@ -62,7 +62,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // _checkForUser(context);
     
     return Scaffold(
       body: FlutterLogin(

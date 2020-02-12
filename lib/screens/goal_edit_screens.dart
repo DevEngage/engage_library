@@ -1,3 +1,4 @@
+import 'package:EarnIt/models/goal.dart';
 import 'package:EarnIt/models/goal_model.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
@@ -6,14 +7,14 @@ import 'package:intl/intl.dart';
 
 class GoalEdit extends HookWidget {
   final id;
-  GoalModel goal;
+  Goal goal;
 
   GoalEdit({
     this.id,
     this.goal,
   }) {
     if (id == null) {
-      goal = GoalModel();
+      goal = Goal();
     }
   }
   
@@ -22,7 +23,7 @@ class GoalEdit extends HookWidget {
     final _formKey = GlobalKey<FormState>();
     final dateFormat = DateFormat("MMM d, yyyy hh:mm a");
 
-    final goalState = useState<GoalModel>(goal);
+    final goalState = useState<Goal>(goal);
     final currentDate = useState<DateTime>();
     final goalCategory = useState<String>();
 
@@ -48,7 +49,10 @@ class GoalEdit extends HookWidget {
         child: Text('Save', style: TextStyle(color: Colors.white, fontSize: 20)), 
         onPressed: () async {
           // Navigator.pushNamed(context, '/editGoals', arguments: <String, dynamic> { 'id': null }) // _addEditGoal(context, currentDate, goalCategory),
-          await goal.save();
+          print(goal);
+          
+          var res = await goal.save();
+          print(res.error);
           Navigator.pop(context);
         }
       ),
