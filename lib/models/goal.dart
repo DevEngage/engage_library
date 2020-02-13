@@ -48,7 +48,6 @@ class Goal extends ParseObject implements ParseCloneable {
   // set tasks(List name) => set<List>('tasks', name);
 
   Future getTask() async {
-    var queryBuilder = QueryBuilder<Task>(Task());
     ParseResponse response = await (get('tasks') as ParseRelation<ParseObject>).getQuery().query();
     if (response.success && response.results != null) {
       tasks = response.results; // .map((item) => Task().clone(item)).toList();

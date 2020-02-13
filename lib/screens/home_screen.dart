@@ -13,13 +13,13 @@ class HomeScreen extends HookWidget {
     if (list.length < 3) return list;
     return list.where((goal) => goal.name.toLowerCase().contains(query.toLowerCase()) == true).toList();
   }
-
+  s
   @override
   Widget build(BuildContext context) {
-    final goalsRes = Goal().getUserGoalsHook();
-    final goalsList = useState<List>(goalsRes.data ?? []);
-    final results = useState<List>([]);
-    final searchString = useState<String>('');
+    final search = searchHook();/
+    // final goalsRes = Goal().getUserGoalsHook();
+    // final goalsList = useState<List>(goalsRes.data ?? []);
+    // final results = useState<List>([]);
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(

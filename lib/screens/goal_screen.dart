@@ -96,14 +96,6 @@ class GoalScreen extends HookWidget {
         Container(child: Text('')),
         // ...tasks.map((task) => TaskItem(task: task)),
         // TaskItem(),
-        // TaskItem(),
-        // TaskItem(),
-        // TaskItem(),
-        // TaskItem(),
-        // TaskItem(),
-        // TaskItem(),
-        // TaskItem(),
-
       ],)));
   }
 }
