@@ -38,9 +38,9 @@ class LoginScreen extends StatelessWidget {
     // }
   }
 
-    // var apiResponse = await ParseObject('Goal').getAll();
-    // print(apiResponse.result);
-    // print(Parse().hasParseBeenInitialized());
+  // var apiResponse = await ParseObject('Goal').getAll();
+  // print(apiResponse.result);
+  // print(Parse().hasParseBeenInitialized());
   skipLogin(context) async {
     try {
       await ParseUser(null, null, null).loginAnonymous();
@@ -62,25 +62,33 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: FlutterLogin(
-      title: 'EarnIt',
-      logo: 'assets/icons/logo_gold.png',
-      onLogin: (LoginData data) async => await login(data.name.trim(), data.password),
-      onSignup: (LoginData data) async => await register(data.name.trim(), data.password),
-      onSubmitAnimationCompleted: () {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => HomeScreen(),
-        ));
-      },
-      onRecoverPassword: _recoverPassword,
-    ),
-    bottomNavigationBar: BottomAppBar(child: Container(
-      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-        FlatButton(onPressed: () => skipLogin(context), child: Text('Skip Login')),
-      ],)
-    ,),),
+        title: 'EarnIt',
+        logo: 'assets/icons/logo_gold.png',
+        onLogin: (LoginData data) async =>
+            await login(data.name.trim(), data.password),
+        onSignup: (LoginData data) async =>
+            await register(data.name.trim(), data.password),
+        onSubmitAnimationCompleted: () {
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => HomeScreen(),
+          ));
+        },
+        onRecoverPassword: _recoverPassword,
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              FlatButton(
+                  onPressed: () => skipLogin(context),
+                  child: Text('Skip Login')),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
