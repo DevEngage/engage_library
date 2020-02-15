@@ -36,7 +36,7 @@ class Goal extends ParseObject implements ParseCloneable {
   String get category => get<String>('category');
   set category(String name) => set<String>('category', name);
 
-  bool get isDone => get<bool>('isDone');
+  bool get isDone => get<bool>('isDone') ?? false;
   set isDone(bool name) => set<bool>('isDone', name);
 
   int get taskCount => get<int>('taskCount') ?? 0;
@@ -115,7 +115,8 @@ class Goal extends ParseObject implements ParseCloneable {
   }
 
   Future toggleTask(Task task) async {
-    task.isDone = !task.isDone;
-    await save();
+    task.toggleIsDone();
+    isDone = tasks.every((value) => value.isDone == true) && taskCount != 0;
+    save();
   }
 }

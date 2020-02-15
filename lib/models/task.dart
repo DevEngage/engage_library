@@ -43,4 +43,9 @@ class Task extends ParseObject implements ParseCloneable {
     setACL(parseACL);
     return await super.save();
   }
+
+  Future toggleIsDone() async {
+    isDone = !isDone;
+    await save();
+  }
 }

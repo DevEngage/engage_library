@@ -101,7 +101,7 @@ class GoalItem extends HookWidget {
                                   value: goal.isDone,
                                   groupValue: true,
                                   activeColor: Colors.deepPurple,
-                                  onChanged: (bool newVal) => true,
+                                  onChanged: (bool newVal) => null,
                                 ))),
                       ),
                       Expanded(
