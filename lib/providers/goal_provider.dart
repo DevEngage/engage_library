@@ -30,6 +30,11 @@ class Goals with ChangeNotifier {
     }
   }
 
+  refreshTasks(Goal goal) async {
+    await goal.getTask();
+    notifyListeners();
+  }
+
   List<Goal> get list =>
       searched.isEmpty && lastQuery == null ? goals : searched;
 }

@@ -46,9 +46,13 @@ class Goal extends ParseObject implements ParseCloneable {
   // set tasks(List name) => set<List>('tasks', name);
 
   Future getTask() async {
-    ParseResponse response =
-        await (get('tasks') as ParseRelation<ParseObject>).getQuery().query();
+    // ParseResponse response =
+    //     await (get('tasks') as ParseRelation<ParseObject>).getQuery().query();
+    QueryBuilder<Task> query = QueryBuilder<Task>(Task())
+      ..whereRelatedTo('tasks', 'Goal', objectId);
+    ParseResponse response = await query.query();
     if (response.success && response.results != null) {
+      print(response.results);
       tasks = response.results.cast<Task>();
     }
     tasks = [];
@@ -86,7 +90,7 @@ class Goal extends ParseObject implements ParseCloneable {
   }
 
   Future addTask(Task task) async {
-    if (task.objectId != null) {
+    if (task.objectId == null) {
       await task.save();
       var tasksRelation = getRelation('tasks');
       tasksRelation.add(task);
