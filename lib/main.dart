@@ -1,10 +1,12 @@
 // import 'package:EarnIt/models/goal.dart';
+import 'package:EarnIt/providers/goal_provider.dart';
 import 'package:EarnIt/screens/goal_screen.dart';
 import 'package:EarnIt/screens/home_screen.dart';
 import 'package:EarnIt/screens/login_screen.dart';
 import 'package:EarnIt/screens/profile_screen.dart';
 import 'package:EarnIt/screens/task_edit_screens.dart';
 import 'package:EarnIt/screens/world_screen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/goal_edit_screens.dart';
@@ -25,9 +27,9 @@ void main() async {
       PARSE_APP_URL,
       masterKey: MASTER_KEY,
       // clientKey: CLIENT_KEY,
-      liveQueryUrl: LIVE_QUERY_URL,
+      // liveQueryUrl: LIVE_QUERY_URL,
       autoSendSessionId: true,
-      // debug: true,
+      debug: true,
       coreStore: await CoreStoreSharedPrefsImp.getInstance(),
     );
     // print(parse.hasParseBeenInitialized());
@@ -35,7 +37,10 @@ void main() async {
     print(error);
   }
 
-  var user = await ParseUser.currentUser();
+  ParseUser user = await ParseUser.currentUser();
+  // print(user);
+
+  print(await (ParseObject('Goal')).getAll());
 
   runApp(MyApp(user));
 }
@@ -49,7 +54,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [],
+        providers: [
+          ChangeNotifierProvider(create: (_) => Goals()),
+        ],
         child: MaterialApp(
             title: 'EarnIt',
             theme: ThemeData(
