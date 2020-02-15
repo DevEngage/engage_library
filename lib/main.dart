@@ -29,7 +29,7 @@ void main() async {
       // clientKey: CLIENT_KEY,
       // liveQueryUrl: LIVE_QUERY_URL,
       autoSendSessionId: true,
-      debug: true,
+      // debug: true,
       coreStore: await CoreStoreSharedPrefsImp.getInstance(),
     );
     // print(parse.hasParseBeenInitialized());
@@ -38,9 +38,6 @@ void main() async {
   }
 
   ParseUser user = await ParseUser.currentUser();
-  // print(user);
-
-  print(await (ParseObject('Goal')).getAll());
 
   runApp(MyApp(user));
 }

@@ -61,9 +61,10 @@ class Goal extends ParseObject implements ParseCloneable {
       var queryBuilder = QueryBuilder<Goal>(Goal());
       queryBuilder.whereEqualTo('owner', user.objectId);
       // queryBuilder(['tasks']);
-      ParseResponse response = await getAll(); // await queryBuilder.query();
+      ParseResponse response = await queryBuilder.query();
+      print(response.success);
       if (response.success) {
-        return response.result;
+        return response.results.cast<Goal>();
       }
     } catch (error) {
       print(error);

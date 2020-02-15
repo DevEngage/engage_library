@@ -8,13 +8,12 @@ class Goals with ChangeNotifier {
   String lastQuery;
 
   Goals() {
-    print('hit');
     getList();
   }
 
   search([String query]) {
-    lastQuery ??= query;
-    if (goals.length < 3) searched = goals;
+    lastQuery = query ?? lastQuery;
+    if (lastQuery.length < 3) searched = goals;
     searched = goals
         .where((goal) =>
             goal.name.toLowerCase().contains(lastQuery.toLowerCase()) == true)
@@ -23,10 +22,7 @@ class Goals with ChangeNotifier {
   }
 
   Future getList() async {
-    print(await ParseObject('Task').getAll());
-    print('hit 3');
     goals = await Goal().getUserGoals();
-    print(goals);
     if (lastQuery != null) {
       search();
     } else {
