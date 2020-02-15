@@ -13,7 +13,7 @@ class HomeScreen extends HookWidget {
             backgroundColor: Colors.deepPurple,
             child: Icon(Icons.add),
             onPressed: () async {
-              await Navigator.pushNamed(context, '/editGoals',
+              await Navigator.pushNamed(context, '/editGoal',
                   arguments: <String, dynamic>{
                     'id': null
                   }); // _addEditGoal(context, currentDate, goalCategory),
@@ -35,6 +35,7 @@ class HomeScreen extends HookWidget {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 10),
                               child: TextFormField(
+                                initialValue: model.lastQuery,
                                 onChanged: (value) {
                                   Provider.of<Goals>(context, listen: false)
                                       .search(value);

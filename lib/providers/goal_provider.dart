@@ -1,4 +1,5 @@
 import 'package:EarnIt/models/goal.dart';
+import 'package:EarnIt/models/task.dart';
 import 'package:flutter/material.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
@@ -32,6 +33,27 @@ class Goals with ChangeNotifier {
 
   refreshTasks(Goal goal) async {
     await goal.getTask();
+    notifyListeners();
+  }
+
+  refresh() {
+    notifyListeners();
+  }
+
+  removeTask(Goal goal, Task task) async {
+    await goal.deleteTask(task);
+    notifyListeners();
+  }
+
+  removeGoal(Goal goal) async {
+    await goal.delete();
+    goals.remove(goal);
+    searched.remove(goal);
+    notifyListeners();
+  }
+
+  Future toggleTask(Goal goal, Task task) async {
+    await goal.toggleTask(task);
     notifyListeners();
   }
 

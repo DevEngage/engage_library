@@ -39,6 +39,9 @@ class Goal extends ParseObject implements ParseCloneable {
   bool get isDone => get<bool>('isDone');
   set isDone(bool name) => set<bool>('isDone', name);
 
+  int get taskCount => get<int>('taskCount') ?? 0;
+  set taskCount(int name) => set<int>('taskCount', name);
+
   String get owner => get<String>('owner');
   set owner(String name) => set<String>('owner', name);
 
@@ -92,10 +95,27 @@ class Goal extends ParseObject implements ParseCloneable {
     if (task.objectId == null) {
       await task.save();
       var tasksRelation = getRelation('tasks');
+      // addRelation('fruits', [ParseObject("Fruits")..set("objectId", "XGadzYxnac")]);
       tasksRelation.add(task);
       tasks.add(task);
+      setIncrement('taskCount', 1);
+      save();
     } else {
       await task.save();
     }
+  }
+
+  Future deleteTask(Task task) async {
+    var tasksRelation = getRelation('tasks');
+    tasksRelation.remove(task);
+    await task.delete();
+    tasks.remove(task);
+    setDecrement('taskCount', 1);
+    await save();
+  }
+
+  Future toggleTask(Task task) async {
+    task.isDone = !task.isDone;
+    await save();
   }
 }

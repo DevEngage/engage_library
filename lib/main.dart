@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
               '/': (context) => user == null ? LoginScreen() : MyHomePage(),
               '/home': (context) => MyHomePage(),
               '/login': (context) => LoginScreen(),
-              '/editGoals': (context) => GoalEdit(),
+              '/editGoal': (context) => GoalEdit(),
               '/viewGoal': (context) => GoalScreen(),
               '/editTask': (context) => TaskEdit(),
             }));

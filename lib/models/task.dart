@@ -26,7 +26,7 @@ class Task extends ParseObject implements ParseCloneable {
   String get category => get<String>('category');
   set category(String name) => set<String>('category', name);
 
-  bool get isDone => get<bool>('isDone');
+  bool get isDone => get<bool>('isDone') ?? false;
   set isDone(bool name) => set<bool>('isDone', name);
 
   String get owner => get<String>('owner');
