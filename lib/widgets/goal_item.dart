@@ -72,7 +72,6 @@ class GoalItem extends HookWidget {
     return GestureDetector(
         onTap: () async {
           await goal.getTask();
-          print(goal.tasks);
           if (changePage)
             Navigator.pushNamed(context, '/viewGoal',
                 arguments: <String, dynamic>{'id': null, 'goal': goal});
