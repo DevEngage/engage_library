@@ -1,33 +1,31 @@
-
-
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
-class Task  extends ParseObject implements ParseCloneable {
-
+class Task extends ParseObject implements ParseCloneable {
   Task() : super(_keyTableName);
-  Task.clone(): this();
+  Task.clone() : this();
 
   /// Looks strangely hacky but due to Flutter not using reflection, we have to
   /// mimic a clone
-  @override clone(Map map) => Task.clone()..fromJson(map);
+  @override
+  clone(Map map) => Task.clone()..fromJson(map);
 
   static const String _keyTableName = 'Task';
 
   String get objectId => get<String>('objectId');
   set objectId(String name) => set<String>('objectId', name);
-  
+
   String get name => get<String>('name');
   set name(String name) => set<String>('name', name);
-  
+
   String get details => get<String>('details');
   set details(String name) => set<String>('details', name);
-  
+
   DateTime get dueAt => get<DateTime>('dueAt');
   set dueAt(DateTime name) => set<DateTime>('dueAt', name);
-  
+
   String get category => get<String>('category');
   set category(String name) => set<String>('category', name);
-  
+
   bool get isDone => get<bool>('isDone');
   set isDone(bool name) => set<bool>('isDone', name);
 
@@ -45,7 +43,4 @@ class Task  extends ParseObject implements ParseCloneable {
     setACL(parseACL);
     return await super.save();
   }
-
-
-
 }

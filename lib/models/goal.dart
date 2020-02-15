@@ -49,7 +49,7 @@ class Goal extends ParseObject implements ParseCloneable {
     ParseResponse response =
         await (get('tasks') as ParseRelation<ParseObject>).getQuery().query();
     if (response.success && response.results != null) {
-      tasks = response.results; // .map((item) => Task().clone(item)).toList();
+      tasks = response.results.cast<Task>();
     }
     tasks = [];
     return tasks;
