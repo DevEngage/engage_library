@@ -54,7 +54,7 @@ class Goal extends ParseObject implements ParseCloneable {
     ParseResponse response = await query.query();
     if (response.success) {
       // print(response.results);
-      tasks = response.results.cast<Task>();
+      tasks = (response.results ?? []).cast<Task>();
     } else {
       tasks = [];
     }
@@ -70,7 +70,7 @@ class Goal extends ParseObject implements ParseCloneable {
       ParseResponse response = await queryBuilder.query();
       print(response.success);
       if (response.success) {
-        return response.results.cast<Goal>();
+        return (response.results ?? []).cast<Goal>();
       }
     } catch (error) {
       print(error);
