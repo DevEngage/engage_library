@@ -7,9 +7,12 @@ class Goals with ChangeNotifier {
   List<Goal> goals = [];
   List<Goal> searched = [];
   String lastQuery;
+  int goalsCompleted = 0;
+  int tasksCompleted = 0;
 
   Goals() {
     getList();
+    getCount();
   }
 
   search([String query]) {
@@ -54,7 +57,22 @@ class Goals with ChangeNotifier {
 
   Future toggleTask(Goal goal, Task task) async {
     await goal.toggleTask(task);
+    await getCount();
     notifyListeners();
+  }
+
+  getCount() async {
+    goalsCompleted = goals.where((val) => val.isDone == true).length;
+    ParseUser user = await ParseUser.currentUser() as ParseUser;
+    QueryBuilder<Task> query = QueryBuilder<Task>(Task())
+      ..whereEqualTo('owner', user.objectId)
+      ..whereEqualTo('isDone', true);
+    var results = await query.count();
+    tasksCompleted = results.success ? results.count : 0;
+
+    // query.
+    // taskssCompleted = goals.
+    // });
   }
 
   List<Goal> get list =>

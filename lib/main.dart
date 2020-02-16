@@ -1,5 +1,6 @@
 // import 'package:EarnIt/models/goal.dart';
 import 'package:EarnIt/providers/goal_provider.dart';
+import 'package:EarnIt/providers/user_provider.dart';
 import 'package:EarnIt/screens/goal_screen.dart';
 import 'package:EarnIt/screens/home_screen.dart';
 import 'package:EarnIt/screens/login_screen.dart';
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => Goals()),
+          ChangeNotifierProvider(create: (_) => User(user)),
         ],
         child: MaterialApp(
             title: 'EarnIt',

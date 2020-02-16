@@ -1,5 +1,8 @@
+import 'package:EarnIt/providers/goal_provider.dart';
+import 'package:EarnIt/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends HookWidget {
   @override
@@ -11,13 +14,26 @@ class ProfileScreen extends HookWidget {
                 fit: BoxFit.cover,
                 image: AssetImage(
                     'assets/imgs/green_background.jpg'))), // Image.asset('assets/imgs/background.png') ),
-        child: ListView(children: <Widget>[
-          numberRow(),
-          numberRow(),
-        ]));
+        child: Consumer<Goals>(
+            builder: (context, model, _) => ListView(children: <Widget>[
+                  numberRow('Goal', model.goalsCompleted),
+                  numberRow('Task', model.tasksCompleted),
+                  // Consumer<User>(
+                  //     builder: (context, model, _) =>
+                  FlatButton(
+                      padding: const EdgeInsets.only(top: 25, bottom: 25),
+                      child: Text(
+                        'Logut',
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                      onPressed: () async {
+                        Provider.of<User>(context, listen: false).logout();
+                        await Navigator.pushNamed(context, '/login');
+                      }),
+                ])));
   }
 
-  numberRow() {
+  numberRow(title, count) {
     return Row(children: <Widget>[
       Expanded(
           child: Container(
@@ -36,14 +52,14 @@ class ProfileScreen extends HookWidget {
                         borderRadius:
                             BorderRadius.all(const Radius.circular(5.0))),
                     child: Text(
-                      '10',
+                      '$count',
                       style: TextStyle(fontSize: 22, color: Colors.white),
                     ),
                   ),
                   Container(
                       padding: const EdgeInsets.all(4).copyWith(left: 20),
                       child: Text(
-                        'Compeleted Goals',
+                        '$title${count != 1 ? "s" : ""} compeleted',
                         style: TextStyle(fontSize: 22, color: Colors.black54),
                       ))
                 ],
