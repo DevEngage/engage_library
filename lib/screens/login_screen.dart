@@ -2,7 +2,6 @@ import 'package:EarnIt/providers/user_provider.dart';
 import 'package:EarnIt/screens/home_screen.dart';
 import 'package:EarnIt/widgets/confirm_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +10,6 @@ class LoginScreen extends StatelessWidget {
   Duration get loginTime => Duration(milliseconds: 2250);
 
   _checkForUser(context) async {
-    print(await ParseUser.currentUser());
     if (await ParseUser.currentUser() != null) {
       await Navigator.pushNamed(context, '/home');
     }

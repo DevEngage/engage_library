@@ -22,7 +22,6 @@ class GoalScreen extends HookWidget {
     Goal goal = args['goal'];
 
     if (goal == null) return Text('Loading...');
-    // print(tasks);
     return Scaffold(
         floatingActionButton: FloatingActionButton(
             backgroundColor: Colors.deepPurple,
@@ -33,7 +32,6 @@ class GoalScreen extends HookWidget {
               Provider.of<Goals>(context, listen: false).refreshTasks(goal);
             }),
         appBar: AppBar(
-          // backgroundColor: Colors.white,
           elevation: 0,
           title: Text(goal.name),
           actions: <Widget>[
