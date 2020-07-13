@@ -39,5 +39,33 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>This app uses your music in the background</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>This app uses your celendar to schedule events with friends</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app uses your camera to take profile photos</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This app uses your Contacts to help you connect with friends</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app uses your Location for finding multiplayer players nearby</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app uses your Location for finding multiplayer players nearby</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app uses your Microphone to record voice answers </string>
+	<key>NSMotionUsageDescription</key>
+	<string>This app uses your motion to answer questions</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This app uses your Photo Library to upload profile photos</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app uses your Photo Library to upload profile photos</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>This app uses your speach to answer questions</string>
+	<key>kTCCServiceMediaLibrary</key>
+	<string>This app uses your music in the background</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-9728605767178190~5432660700</string>
 </dict>
 </plist>

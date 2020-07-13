@@ -1,6 +1,7 @@
 // import 'package:EarnIt/models/goal.dart';
 import 'package:EarnIt/providers/goal_provider.dart';
 import 'package:EarnIt/providers/user_provider.dart';
+import 'package:EarnIt/router.dart';
 import 'package:EarnIt/screens/goal_screen.dart';
 import 'package:EarnIt/screens/home_screen.dart';
 import 'package:EarnIt/screens/login_screen.dart';
@@ -9,6 +10,7 @@ import 'package:EarnIt/screens/task_edit_screens.dart';
 import 'package:EarnIt/screens/world_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'screens/goal_edit_screens.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
@@ -52,23 +54,32 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => Goals()),
-          ChangeNotifierProvider(create: (_) => User(user)),
-        ],
-        child: MaterialApp(
-            title: 'EarnIt',
-            theme: ThemeData(
-              primarySwatch: Colors.deepPurple,
-            ),
-            routes: {
-              '/': (context) => user == null ? LoginScreen() : MyHomePage(),
-              '/home': (context) => MyHomePage(),
-              '/login': (context) => LoginScreen(),
-              '/editGoal': (context) => GoalEdit(),
-              '/viewGoal': (context) => GoalScreen(),
-              '/editTask': (context) => TaskEdit(),
-            }));
+      providers: [
+        ChangeNotifierProvider(create: (_) => Goals()),
+        ChangeNotifierProvider(create: (_) => User(user)),
+      ],
+      child: MaterialApp(
+        title: 'EarnIt',
+        navigatorKey: Get.key,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.deepPurple,
+        ),
+        onGenerateRoute: (RouteSettings settings) =>
+            Router.generateRoute(settings),
+        // navigatorObservers: [
+        //   FirebaseAnalyticsObserver(analytics: analytics),
+        // ],
+        // routes: {
+        //   '/': (context) => user == null ? LoginScreen() : MyHomePage(),
+        //   '/home': (context) => MyHomePage(),
+        //   '/login': (context) => LoginScreen(),
+        //   '/editGoal': (context) => GoalEdit(),
+        //   '/viewGoal': (context) => GoalScreen(),
+        //   '/editTask': (context) => TaskEdit(),
+        // },
+      ),
+    );
   }
 }
 
