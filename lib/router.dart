@@ -4,6 +4,7 @@ import 'package:EarnIt/screens/goal_edit_screens.dart';
 import 'package:EarnIt/screens/goal_screen.dart';
 import 'package:EarnIt/screens/login_screen.dart';
 import 'package:EarnIt/screens/task_edit_screens.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:universal_platform/universal_platform.dart';
@@ -37,7 +38,12 @@ class Router {
           settings: settings,
         );
       case '/viewGoal':
-        if (!UniversalPlatform.isWeb) Ads().loadBanner();
+        // if (!UniversalPlatform.isWeb)
+        //   Ads().loadBanner(
+        //     anchorType: AnchorType.bottom,
+        //     horizontalCenterOffset: -46.0,
+        //     anchorOffset: 0.0,
+        //   );
         return GetRoute(
           page: GoalScreen(),
           settings: settings,

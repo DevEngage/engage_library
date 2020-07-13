@@ -33,35 +33,62 @@ class Ads {
     await FirebaseAdMob.instance.initialize(appId: FirebaseAdMob.testAppId);
   }
 
-  loadInterstitial() async {
-    if (UniversalPlatform.isWeb || disableAds == true) return;
+  // loadNativeAd() async {
+  //   if (UniversalPlatform.isWeb || disableAds == true) return;
 
-    if (intialized == false) {
-      await init();
-      intialized = true;
-    }
-    myInterstitial = InterstitialAd(
-      adUnitId: UniversalPlatform.isAndroid
-          ? 'ca-app-pub-9728605767178190/1304863371'
-          : 'ca-app-pub-9728605767178190/1460776045',
-      targetingInfo: targetingInfo,
-      listener: (MobileAdEvent event) {
-        print("InterstitialAd event is $event");
-      },
-    );
-    myInterstitial
-      ..load()
-      ..show(
-        anchorType: AnchorType.bottom,
-        anchorOffset: 0.0,
-        horizontalCenterOffset: 0.0,
-      );
-  }
+  //   if (intialized == false) {
+  //     await init();
+  //     intialized = true;
+  //   }
+  //   // ca-app-pub-9728605767178190/8016136606
+  //   myInterstitial = NativeAd(
+  //     adUnitId: UniversalPlatform.isAndroid
+  //         ? 'ca-app-pub-9728605767178190/1304863371'
+  //         : 'ca-app-pub-9728605767178190/1460776045',
+  //     targetingInfo: targetingInfo,
+  //     factoryId: '',
+  //     listener: (MobileAdEvent event) {
+  //       print("InterstitialAd event is $event");
+  //     },
+  //   );
+  //   myInterstitial
+  //     ..load()
+  //     ..show(
+  //       anchorType: AnchorType.bottom,
+  //       anchorOffset: 0.0,
+  //       horizontalCenterOffset: 0.0,
+  //     );
+  // }
+
+  // loadInterstitial() async {
+  //   if (UniversalPlatform.isWeb || disableAds == true) return;
+
+  //   if (intialized == false) {
+  //     await init();
+  //     intialized = true;
+  //   }
+  //   myInterstitial = InterstitialAd(
+  //     adUnitId: UniversalPlatform.isAndroid
+  //         ? 'ca-app-pub-9728605767178190/1304863371'
+  //         : 'ca-app-pub-9728605767178190/1460776045',
+  //     targetingInfo: targetingInfo,
+  //     listener: (MobileAdEvent event) {
+  //       print("InterstitialAd event is $event");
+  //     },
+  //   );
+  //   myInterstitial
+  //     ..load()
+  //     ..show(
+  //       anchorType: AnchorType.bottom,
+  //       anchorOffset: 0.0,
+  //       horizontalCenterOffset: 0.0,
+  //     );
+  // }
 
   loadBanner({
-    anchorOffset = 60.0,
+    anchorOffset = 70.0,
     horizontalCenterOffset = 0.0,
-    AnchorType anchorType = AnchorType.bottom,
+    AnchorType anchorType = AnchorType.top,
   }) async {
     if (UniversalPlatform.isWeb || disableAds == true) return;
 
