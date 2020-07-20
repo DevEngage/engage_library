@@ -1,8 +1,8 @@
-import 'package:engage_parse_admin/classes/project.dart';
-import 'package:engage_parse_admin/modals/privacy_policy_modal.dart';
-import 'package:engage_parse_admin/project.dart';
-import 'package:engage_parse_admin/providers/user_provider.dart';
-import 'package:engage_parse_admin/router.dart';
+import 'package:engage_library/classes/project.dart';
+import 'package:engage_library/modals/privacy_policy_modal.dart';
+import 'package:engage_library/project.dart';
+// import 'package:engage_library/providers/user_provider.dart';
+// import 'package:engage_library/router.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_) => UserProvider(user)),
+          // ChangeNotifierProvider(create: (_) => UserProvider(user)),
         ],
         child: MaterialApp(
           //   onGenerateRoute: (RouteSettings settings) =>

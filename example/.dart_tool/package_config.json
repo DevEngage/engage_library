@@ -2,18 +2,6 @@
   "configVersion": 2,
   "packages": [
     {
-      "name": "archive",
-      "rootUri": "file:///Users/th3brink/development/flutter/.pub-cache/hosted/pub.dartlang.org/archive-2.0.13",
-      "packageUri": "lib/",
-      "languageVersion": "2.0"
-    },
-    {
-      "name": "args",
-      "rootUri": "file:///Users/th3brink/development/flutter/.pub-cache/hosted/pub.dartlang.org/args-1.6.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.3"
-    },
-    {
       "name": "async",
       "rootUri": "file:///Users/th3brink/development/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.4.1",
       "packageUri": "lib/",
@@ -34,6 +22,12 @@
     {
       "name": "charcode",
       "rootUri": "file:///Users/th3brink/development/flutter/.pub-cache/hosted/pub.dartlang.org/charcode-1.1.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "clock",
+      "rootUri": "file:///Users/th3brink/development/flutter/.pub-cache/hosted/pub.dartlang.org/clock-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.0"
     },
@@ -104,10 +98,16 @@
       "languageVersion": "2.1"
     },
     {
-      "name": "engage_parse_admin",
+      "name": "engage_library",
       "rootUri": "../../",
       "packageUri": "lib/",
       "languageVersion": "2.3"
+    },
+    {
+      "name": "fake_async",
+      "rootUri": "file:///Users/th3brink/development/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
     },
     {
       "name": "file_picker",
@@ -180,12 +180,6 @@
       "rootUri": "file:///Users/th3brink/development/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-3.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.3"
-    },
-    {
-      "name": "image",
-      "rootUri": "file:///Users/th3brink/development/flutter/.pub-cache/hosted/pub.dartlang.org/image-2.1.12",
-      "packageUri": "lib/",
-      "languageVersion": "2.0"
     },
     {
       "name": "image_picker",
@@ -261,7 +255,7 @@
     },
     {
       "name": "path",
-      "rootUri": "file:///Users/th3brink/development/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.6.4",
+      "rootUri": "file:///Users/th3brink/development/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.7.0",
       "packageUri": "lib/",
       "languageVersion": "2.0"
     },
@@ -288,12 +282,6 @@
       "rootUri": "file:///Users/th3brink/development/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.9.0",
       "packageUri": "lib/",
       "languageVersion": "2.1"
-    },
-    {
-      "name": "petitparser",
-      "rootUri": "file:///Users/th3brink/development/flutter/.pub-cache/hosted/pub.dartlang.org/petitparser-2.4.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.4"
     },
     {
       "name": "platform",
@@ -405,9 +393,9 @@
     },
     {
       "name": "test_api",
-      "rootUri": "file:///Users/th3brink/development/flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.2.15",
+      "rootUri": "file:///Users/th3brink/development/flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.2.16",
       "packageUri": "lib/",
-      "languageVersion": "2.4"
+      "languageVersion": "2.7"
     },
     {
       "name": "transformer_page_view",
@@ -464,12 +452,6 @@
       "languageVersion": "2.0"
     },
     {
-      "name": "xml",
-      "rootUri": "file:///Users/th3brink/development/flutter/.pub-cache/hosted/pub.dartlang.org/xml-3.6.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.6"
-    },
-    {
       "name": "xxtea",
       "rootUri": "file:///Users/th3brink/development/flutter/.pub-cache/hosted/pub.dartlang.org/xxtea-2.0.3",
       "packageUri": "lib/",
@@ -482,7 +464,7 @@
       "languageVersion": "2.1"
     }
   ],
-  "generated": "2020-05-20T03:40:06.854726Z",
+  "generated": "2020-07-20T21:40:56.754616Z",
   "generator": "pub",
-  "generatorVersion": "2.8.0-dev.18.0.flutter-eea9717938"
+  "generatorVersion": "2.9.0-14.1.beta"
 }

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 
-export 'package:engage_parse_admin/classes/quick_add.dart';
-export 'package:engage_parse_admin/classes/quick_add_parse.dart';
-export 'package:engage_parse_admin/classes/quick_add_segment.dart';
-export 'package:engage_parse_admin/classes/quick_add_tab.dart';
+export 'package:engage_library/classes/quick_add.dart';
 
 class EngageProject {
   final Color figmaPink = Color(0xFFFF565C);

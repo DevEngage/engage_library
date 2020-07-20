@@ -1,19 +1,12 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:engage_parse_admin/classes/engage_parse_file.dart';
 import 'package:file_picker/file_picker.dart';
-// import 'package:file_picker_cross/file_picker_cross.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:engage_parse_admin/admin_theme.dart';
-import 'package:get/get.dart';
-// import 'package:image_picker_web/image_picker_web.dart';
+import 'package:engage_library/admin_theme.dart';
 import 'package:intl/intl.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'package:smart_select/smart_select.dart';
 
 /* 
@@ -135,16 +128,16 @@ class EngageInputState<T> extends State<EngageInput> {
   }
 
   loadList() async {
-    QueryBuilder query = QueryBuilder(widget.collection);
-    ParseResponse response = await query.query();
-    setState(() {
-      if (response.success) {
-        _smartOptions = getSmartCategories(response.results ?? []);
-      } else {
-        _smartOptions = getSmartCategories([]);
-      }
-      isLoading = false;
-    });
+    // QueryBuilder query = QueryBuilder(widget.collection);
+    // ParseResponse response = await query.query();
+    // setState(() {
+    //   if (response.success) {
+    //     _smartOptions = getSmartCategories(response.results ?? []);
+    //   } else {
+    //     _smartOptions = getSmartCategories([]);
+    //   }
+    //   isLoading = false;
+    // });
   }
 
   void _handleFocusChange() {
@@ -380,39 +373,39 @@ class EngageInputState<T> extends State<EngageInput> {
         children: <Widget>[
           Text(widget.labelText,
               style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20)),
-          if (_value is ParseFile || _value is EngageParseFile)
-            GestureDetector(
-                onTap: () async {
-                  // FilePickerCross picker =
-                  //     FilePickerCross(type: FileType.image);
-                  // await picker.pick();
-                  // // EngageParseFile(bytes: picker.toUint8List(), ext: picker.fileExtension, name: picker.toString());
-                  // File file = File.fromRawPath(picker.toUint8List());
-                  // handleChanged(file);
-                  Get.defaultDialog(title: 'Feature Coming Soon!');
-                },
-                child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Image.network(_value.url)))
-          else
-            FlatButton(
-              child: Text('Upload Image'),
-              onPressed: () async {
-                // FilePickerCross picker = FilePickerCross(type: FileType.image);
-                // await picker.pick();
-                // print(picker.fileExtension);
-                // print(picker.toUint8List());
-                // var file = EngageParseFile(
-                //     bytes: picker.toUint8List(), ext: 'png', name: 'test');
+          // if (_value is ParseFile || _value is EngageParseFile)
+          //   GestureDetector(
+          //       onTap: () async {
+          //         // FilePickerCross picker =
+          //         //     FilePickerCross(type: FileType.image);
+          //         // await picker.pick();
+          //         // // EngageParseFile(bytes: picker.toUint8List(), ext: picker.fileExtension, name: picker.toString());
+          //         // File file = File.fromRawPath(picker.toUint8List());
+          //         // handleChanged(file);
+          //         Get.defaultDialog(title: 'Feature Coming Soon!');
+          //       },
+          //       child: Container(
+          //           padding: const EdgeInsets.symmetric(vertical: 16),
+          //           child: Image.network(_value.url)))
+          // else
+          //   FlatButton(
+          //     child: Text('Upload Image'),
+          //     onPressed: () async {
+          //       // FilePickerCross picker = FilePickerCross(type: FileType.image);
+          //       // await picker.pick();
+          //       // print(picker.fileExtension);
+          //       // print(picker.toUint8List());
+          //       // var file = EngageParseFile(
+          //       //     bytes: picker.toUint8List(), ext: 'png', name: 'test');
 
-                // var file =
-                //     await ImagePickerWeb.getImage(outputType: ImageType.bytes);
-                // file.getImageInfo
-                // print(file.toString());
-                // if (file != null) handleChanged(picker.toUint8List());
-                Get.defaultDialog(title: 'Feature Coming Soon!');
-              },
-            ),
+          //       // var file =
+          //       //     await ImagePickerWeb.getImage(outputType: ImageType.bytes);
+          //       // file.getImageInfo
+          //       // print(file.toString());
+          //       // if (file != null) handleChanged(picker.toUint8List());
+          //       Get.defaultDialog(title: 'Feature Coming Soon!');
+          //     },
+          //   ),
         ],
       ),
     );
@@ -425,31 +418,31 @@ class EngageInputState<T> extends State<EngageInput> {
         children: <Widget>[
           Text(widget.labelText,
               style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20)),
-          if (_value is ParseFile)
-            GestureDetector(
-              onTap: () async {
-                // FilePickerCross picker = FilePickerCross(type: widget.fileType);
-                // await picker.pick();
-                // File file = File.fromRawPath(picker.toUint8List());
-                // handleChanged(file);
-                Get.defaultDialog(title: 'Feature Coming Soon!');
-              },
-              child: Text(_value.url),
-            )
-          // child: Container(
-          //     padding: const EdgeInsets.symmetric(vertical: 16),
-          //     child: Image.network(_value.url)))
-          else
-            FlatButton(
-              child: Text('Upload File'),
-              onPressed: () async {
-                // FilePickerCross picker = FilePickerCross(type: widget.fileType);
-                // await picker.pick();
-                // File file = File.fromRawPath(picker.toUint8List());
-                // handleChanged(file);
-                Get.defaultDialog(title: 'Feature Coming Soon!');
-              },
-            ),
+          // if (_value is ParseFile)
+          //   GestureDetector(
+          //     onTap: () async {
+          //       // FilePickerCross picker = FilePickerCross(type: widget.fileType);
+          //       // await picker.pick();
+          //       // File file = File.fromRawPath(picker.toUint8List());
+          //       // handleChanged(file);
+          //       Get.defaultDialog(title: 'Feature Coming Soon!');
+          //     },
+          //     child: Text(_value.url),
+          //   )
+          // // child: Container(
+          // //     padding: const EdgeInsets.symmetric(vertical: 16),
+          // //     child: Image.network(_value.url)))
+          // else
+          //   FlatButton(
+          //     child: Text('Upload File'),
+          //     onPressed: () async {
+          //       // FilePickerCross picker = FilePickerCross(type: widget.fileType);
+          //       // await picker.pick();
+          //       // File file = File.fromRawPath(picker.toUint8List());
+          //       // handleChanged(file);
+          //       Get.defaultDialog(title: 'Feature Coming Soon!');
+          //     },
+          //   ),
         ],
       ),
     );
