@@ -17,7 +17,7 @@ dependencies:
   mask_text_input_formatter: ^1.0.6
   file_picker: ^1.4.3+2
   flutter_icons: ^1.0.0+1
-  get: 1.14.1-dev
+  get: ^3.13.2 #1.14.1-dev
   image_picker: ^0.6.3+4
   # image_picker_web: ^1.0.3
   dio: ^3.0.9
@@ -32,3 +32,4 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
