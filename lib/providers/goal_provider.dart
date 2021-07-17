@@ -1,5 +1,4 @@
-import 'package:EarnIt/models/goal.dart';
-import 'package:EarnIt/models/task.dart';
+import 'package:earn_it/models/goal.dart';
 import 'package:flutter/material.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 

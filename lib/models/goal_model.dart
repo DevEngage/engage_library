@@ -1,4 +1,4 @@
-import 'package:EarnIt/models/task_model.dart';
+import 'package:earn_it/models/task_model.dart';
 
 /* 
   TODO:
@@ -23,7 +23,7 @@ class GoalModel {
     if (data != null) map(data);
     // if (data != null) {
     //   $doc = EngageDoc.fromMap(data);
-    // } 
+    // }
     // else {
     //   $collection = EngageFirestore.getInstance('users/{userId}/goals');
     // }
@@ -82,15 +82,13 @@ class GoalModel {
     // await $doc.$save();
   }
 
-  Future toogleCheck() async { 
+  Future toogleCheck() async {
     isDone = !isDone;
     // await save();
     return isDone;
   }
 
-  cleanUp() {
-
-  }
+  cleanUp() {}
 
   Future getTasks() async {
     // $tasks = await $doc.$getSub('tasks').getList();
@@ -103,5 +101,4 @@ class GoalModel {
     // // EngageDoc savedTask = await $doc.$getSub('tasks').save(task);
     // if (isNew) $tasks.add(task);
   }
-
 }

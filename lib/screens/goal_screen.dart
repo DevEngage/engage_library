@@ -7,7 +7,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class GoalScreen extends HookWidget {
+class GoalScreen extends StatelessWidget {
   final id;
   // final GoalModel goal;
 

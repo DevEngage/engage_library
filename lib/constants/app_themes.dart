@@ -1,0 +1,292 @@
+import 'package:flutter/material.dart';
+
+class AppThemes {
+  AppThemes._();
+
+  static const Color primaryColor = Color(0xFF8d57ff);
+  static const Color secondaryColor = Color(0xFFff5757);
+  static const Color accentColor = Color(0xFF56FFE1);
+  static const Color backgroundColor = Color(0xFF3A4758);
+  static const Color topBarColor = Color(0xFF000000);
+  static const Color darkColor = Color(0xFF000000);
+
+  static const Color figmaPink = Color(0xFFFF565C);
+  static const Color figmaPurple = Color(0xFF8256FF);
+  static const Color figmaGreen = Color(0xFF56FFE1);
+  static const Color figmaGray = Color(0xFFDEE0EA);
+  static const Color figmaDark = Color(0xFF343A47);
+  static const Color figmaWhite = Color(0xFFFFFFFF);
+  static const Color figmaYellow = Color(0xFFFFCE51);
+  static const Color figmaLightGreen = Color(0xFF56FFE1);
+  static const Color figmaDarkPurple = Color(0xFF5621AB);
+  static const Color figmaDeepDarkPurple = Color(0xFF5621AB);
+  static const Color figmaMidDark = Color(0xFF424858);
+  static const Color figmaBlackDark = Color(0xFF282C36);
+  static const Color figmaBlack = Color(0xFF000000);
+
+  static const Color figmaBrightPurple = Color(0xFF6A3CCD);
+  static const Color colorBlackOpacity8 = Color.fromRGBO(0, 0, 0, .80);
+  static const Color colorBlackOpacity9 = Color.fromRGBO(0, 0, 0, .90);
+  static Color colorRedOpacity8 = Color(0xFFff5757).withOpacity(0.8);
+  static Color colorGreenOpacity8 = Colors.cyan[600]!.withOpacity(0.8);
+
+  static const Color colorPurple = Color.fromRGBO(106, 60, 205, 1);
+  static const Color colorOrange = Color.fromRGBO(242, 89, 3, 1);
+  static const Color colorRed = Color(0xFFff5757);
+
+  static const Color nearlyWhite = Color(0xFFFAFAFA);
+  static const Color white = figmaWhite;
+  static const Color background = figmaDark;
+  static const Color nearlyDarkBlue = Color(0xFF2633C5);
+
+  static const Color nearlyBlue = Color(0xFF00B6F0);
+  static const Color nearlyBlack = Color(0xFF213333);
+  static const Color grey = Color(0xFF3A5160);
+  static const Color dark_grey = Color(0xFF313A44);
+
+  static const Color darkText = Color(0xFF253840);
+  static const Color darkerText = Color(0xFF17262A);
+  static const Color lightText = Color(0xFF4A6572);
+  static const Color deactivatedText = Color(0xFF767676);
+  static const Color dismissibleBackground = Color(0xFF364A54);
+  static const Color spacer = Color(0xFFF2F2F2);
+  static const Color transparent = Colors.transparent;
+
+  // static const Color dodgerBlue = Color.fromRGBO(29, 161, 242, 1);
+  // static const Color whiteLilac = Color.fromRGBO(248, 250, 252, 1);
+  // static const Color blackPearl = Color.fromRGBO(30, 31, 43, 1);
+  // static const Color brinkPink = Color.fromRGBO(255, 97, 136, 1);
+  // static const Color juneBud = Color.fromRGBO(186, 215, 97, 1);
+  // static const Color white = Color.fromRGBO(255, 255, 255, 1);
+  // static const Color nevada = Color.fromRGBO(105, 109, 119, 1);
+  // static const Color ebonyClay = Color.fromRGBO(40, 42, 58, 1);
+
+  static String font1 = "ProductSans";
+  static String font2 = "Roboto";
+  //constants color range for light theme
+  //main color
+  static const Color _lightPrimaryColor = primaryColor;
+
+  //Background Colors
+  static const Color _lightBackgroundColor = nearlyWhite;
+  static const Color _lightBackgroundAppBarColor = _lightPrimaryColor;
+  static const Color _lightBackgroundSecondaryColor = white;
+  static const Color _lightBackgroundAlertColor = nearlyBlack;
+  static const Color _lightBackgroundActionTextColor = white;
+  static const Color _lightBackgroundErrorColor = figmaPink;
+  static const Color _lightBackgroundSuccessColor = figmaLightGreen;
+
+  //Text Colors
+  static const Color _lightTextColor = Colors.black;
+  static const Color _lightAlertTextColor = Colors.black;
+  static const Color _lightTextSecondaryColor = Colors.black;
+
+  //Border Color
+  static const Color _lightBorderColor = figmaDarkPurple;
+
+  //Icon Color
+  static const Color _lightIconColor = figmaDarkPurple;
+
+  //form input colors
+  static const Color _lightInputFillColor = _lightBackgroundSecondaryColor;
+  static const Color _lightBorderActiveColor = _lightPrimaryColor;
+  static const Color _lightBorderErrorColor = figmaPink;
+
+  //constants color range for dark theme
+  static const Color _darkPrimaryColor = primaryColor;
+
+  //Background Colors
+  static const Color _darkBackgroundColor = nearlyBlack;
+  static const Color _darkBackgroundAppBarColor = topBarColor;
+  static const Color _darkBackgroundSecondaryColor =
+      Color.fromRGBO(0, 0, 0, .6);
+  static const Color _darkBackgroundAlertColor = nearlyBlack;
+  static const Color _darkBackgroundActionTextColor = white;
+
+  static const Color _darkBackgroundErrorColor =
+      Color.fromRGBO(255, 97, 136, 1);
+  static const Color _darkBackgroundSuccessColor =
+      Color.fromRGBO(186, 215, 97, 1);
+
+  //Text Colors
+  static const Color _darkTextColor = Colors.white;
+  static const Color _darkAlertTextColor = Colors.black;
+  static const Color _darkTextSecondaryColor = Colors.black;
+
+  //Border Color
+  static const Color _darkBorderColor = figmaDarkPurple;
+
+  //Icon Color
+  static const Color _darkIconColor = secondaryColor;
+
+  static const Color _darkInputFillColor = _darkBackgroundSecondaryColor;
+  static const Color _darkBorderActiveColor = _darkPrimaryColor;
+  static const Color _darkBorderErrorColor = figmaPink;
+
+  //text theme for light theme
+  static final TextTheme _lightTextTheme = TextTheme(
+    headline1: TextStyle(fontSize: 20.0, color: _lightTextColor),
+    bodyText1: TextStyle(fontSize: 16.0, color: _lightTextColor),
+    bodyText2: TextStyle(fontSize: 14.0, color: Colors.grey),
+    button: TextStyle(
+        fontSize: 15.0, color: _lightTextColor, fontWeight: FontWeight.w600),
+    headline6: TextStyle(fontSize: 16.0, color: _lightTextColor),
+    subtitle1: TextStyle(fontSize: 16.0, color: _lightTextColor),
+    caption: TextStyle(fontSize: 12.0, color: _lightBackgroundAppBarColor),
+  );
+
+  //the light theme
+  static final ThemeData lightTheme = ThemeData(
+    brightness: Brightness.light,
+    fontFamily: font1,
+    scaffoldBackgroundColor: _lightBackgroundColor,
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: _lightPrimaryColor,
+    ),
+    appBarTheme: AppBarTheme(
+      color: _lightBackgroundAppBarColor,
+      iconTheme: IconThemeData(color: _lightTextColor),
+      textTheme: _lightTextTheme,
+    ),
+    colorScheme: ColorScheme.light(
+      primary: _lightPrimaryColor,
+      primaryVariant: _lightBackgroundColor,
+      // secondary: _lightSecondaryColor,
+    ),
+    snackBarTheme: SnackBarThemeData(
+        backgroundColor: _lightBackgroundAlertColor,
+        actionTextColor: _lightBackgroundActionTextColor),
+    iconTheme: IconThemeData(
+      color: _lightIconColor,
+    ),
+    popupMenuTheme: PopupMenuThemeData(color: _lightBackgroundAppBarColor),
+    textTheme: _lightTextTheme,
+    buttonTheme: ButtonThemeData(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        buttonColor: _lightPrimaryColor,
+        textTheme: ButtonTextTheme.primary),
+    unselectedWidgetColor: _lightPrimaryColor,
+    inputDecorationTheme: InputDecorationTheme(
+      //prefixStyle: TextStyle(color: _lightIconColor),
+      border: OutlineInputBorder(
+          borderSide: BorderSide(width: 1.0),
+          borderRadius: BorderRadius.all(
+            Radius.circular(8.0),
+          )),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: _lightBorderColor, width: 1.0),
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: _lightBorderActiveColor),
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: _lightBorderErrorColor),
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: _lightBorderErrorColor),
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+      ),
+      fillColor: _lightBackgroundSecondaryColor,
+      //focusColor: _lightBorderActiveColor,
+    ),
+  );
+
+//text theme for dark theme
+  /*static final TextStyle _darkScreenHeadingTextStyle =
+      _lightScreenHeadingTextStyle.copyWith(color: _darkTextColor);
+  static final TextStyle _darkScreenTaskNameTextStyle =
+      _lightScreenTaskNameTextStyle.copyWith(color: _darkTextColor);
+  static final TextStyle _darkScreenTaskDurationTextStyle =
+      _lightScreenTaskDurationTextStyle;
+  static final TextStyle _darkScreenButtonTextStyle = TextStyle(
+      fontSize: 14.0, color: _darkTextColor, fontWeight: FontWeight.w500);
+  static final TextStyle _darkScreenCaptionTextStyle = TextStyle(
+      fontSize: 12.0,
+      color: _darkBackgroundAppBarColor,
+      fontWeight: FontWeight.w100);*/
+
+  static final TextTheme _darkTextTheme = TextTheme(
+    headline1: TextStyle(fontSize: 20.0, color: _darkTextColor),
+    bodyText1: TextStyle(fontSize: 16.0, color: _darkTextColor),
+    bodyText2: TextStyle(fontSize: 14.0, color: Colors.grey),
+    button: TextStyle(
+        fontSize: 15.0, color: _darkTextColor, fontWeight: FontWeight.w600),
+    headline6: TextStyle(fontSize: 16.0, color: _darkTextColor),
+    subtitle1: TextStyle(fontSize: 16.0, color: _darkTextColor),
+    caption: TextStyle(fontSize: 12.0, color: _darkBackgroundAppBarColor),
+  );
+
+  //the dark theme
+  static final ThemeData darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    //primarySwatch: _darkPrimaryColor, //cant be Color on MaterialColor so it can compute different shades.
+    accentColor: _darkPrimaryColor, //prefix icon color form input on focus
+
+    fontFamily: font1,
+    scaffoldBackgroundColor: _darkBackgroundColor,
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: _darkPrimaryColor,
+    ),
+    appBarTheme: AppBarTheme(
+      color: _darkBackgroundAppBarColor,
+      iconTheme: IconThemeData(color: _darkTextColor),
+      textTheme: _darkTextTheme,
+    ),
+    colorScheme: ColorScheme.dark(
+      primary: _darkPrimaryColor,
+      primaryVariant: _darkBackgroundColor,
+
+      // secondary: _darkSecondaryColor,
+    ),
+    snackBarTheme: SnackBarThemeData(
+      contentTextStyle: TextStyle(color: Colors.white),
+      backgroundColor: _darkBackgroundAlertColor,
+      actionTextColor: _darkBackgroundActionTextColor,
+    ),
+    iconTheme: IconThemeData(
+      color: _darkIconColor, //_darkIconColor,
+    ),
+    popupMenuTheme: PopupMenuThemeData(color: _darkBackgroundAppBarColor),
+    textTheme: _darkTextTheme,
+    buttonTheme: ButtonThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      buttonColor: _darkPrimaryColor,
+      textTheme: ButtonTextTheme.primary,
+    ),
+    unselectedWidgetColor: _darkPrimaryColor,
+    inputDecorationTheme: InputDecorationTheme(
+      prefixStyle: TextStyle(color: _darkIconColor),
+      //labelStyle: TextStyle(color: nevada),
+      border: OutlineInputBorder(
+          borderSide: BorderSide(width: 1.0),
+          borderRadius: BorderRadius.all(
+            Radius.circular(8.0),
+          )),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: _darkBorderColor, width: 1.0),
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: _darkBorderActiveColor),
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: _darkBorderErrorColor),
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: _darkBorderErrorColor),
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+      ),
+      fillColor: _darkInputFillColor,
+      //focusColor: _darkBorderActiveColor,
+    ),
+  );
+}

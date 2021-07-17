@@ -1,47 +1,20 @@
-// import 'package:EarnIt/models/goal.dart';
-import 'package:EarnIt/providers/goal_provider.dart';
-import 'package:EarnIt/providers/user_provider.dart';
-import 'package:EarnIt/router.dart';
-import 'package:EarnIt/screens/goal_screen.dart';
-import 'package:EarnIt/screens/home_screen.dart';
-import 'package:EarnIt/screens/login_screen.dart';
-import 'package:EarnIt/screens/profile_screen.dart';
-import 'package:EarnIt/screens/task_edit_screens.dart';
-import 'package:EarnIt/screens/world_screen.dart';
+import 'package:earn_it/screens/home_screen.dart';
+import 'package:earn_it/screens/profile_screen.dart';
+import 'package:earn_it/screens/world_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-import 'screens/goal_edit_screens.dart';
-import 'package:parse_server_sdk/parse_server_sdk.dart';
-
-const String PARSE_APP_ID = 'hMsZzKYCmFZCGawSC1lx1onLIbeTT88dYBUFFGTa';
-const String PARSE_APP_URL = 'https://parseapi.back4app.com';
-const String MASTER_KEY = '1Sxm6pOWOESxt9UoSXAta7l9AyYcY3IPSyUiOra2';
-const String CLIENT_KEY = 'UN76vqVKNMPmpkD4DjOleR7tNHdnwMmhiHHdBCei';
-const String LIVE_QUERY_URL = 'wss://trongdth.back4app.io';
+import 'constants/constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Provider.debugCheckInvalidValueType = null;
-  try {
-    await Parse().initialize(
-      PARSE_APP_ID,
-      PARSE_APP_URL,
-      masterKey: MASTER_KEY,
-      // clientKey: CLIENT_KEY,
-      // liveQueryUrl: LIVE_QUERY_URL,
-      autoSendSessionId: true,
-      // debug: true,
-      coreStore: await CoreStoreSharedPrefsImp.getInstance(),
-    );
-    // print(parse.hasParseBeenInitialized());
-  } catch (error) {
-    print(error);
-  }
-
-  ParseUser user = await ParseUser.currentUser();
-
+  await Firebase.initializeApp();
+  // await GetStorage.init();
+  // await Analytics.init();
+  // if (GetPlatform.isAndroid || Analytics.isEnabled) {
+  //   await MobileAds.instance.initialize();
+  // }
   runApp(MyApp(user));
 }
 
@@ -50,41 +23,34 @@ class MyApp extends StatelessWidget {
   MyApp(
     this.user,
   );
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => Goals()),
-        ChangeNotifierProvider(create: (_) => User(user)),
-      ],
-      child: MaterialApp(
-        title: 'EarnIt',
-        navigatorKey: Get.key,
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
-        ),
-        onGenerateRoute: (RouteSettings settings) =>
-            Router.generateRoute(settings),
-        // navigatorObservers: [
-        //   FirebaseAnalyticsObserver(analytics: analytics),
-        // ],
-        // routes: {
-        //   '/': (context) => user == null ? LoginScreen() : MyHomePage(),
-        //   '/home': (context) => MyHomePage(),
-        //   '/login': (context) => LoginScreen(),
-        //   '/editGoal': (context) => GoalEdit(),
-        //   '/viewGoal': (context) => GoalScreen(),
-        //   '/editTask': (context) => TaskEdit(),
-        // },
+    return GetMaterialApp(
+      navigatorKey: Get.key,
+      title: 'EarnIt',
+      debugShowCheckedModeBanner: false,
+      defaultTransition: Transition.fade,
+      // theme: AppThemes.lightTheme,
+      // darkTheme: AppThemes.darkTheme,
+      // // themeMode: ThemeMode.system,
+      // themeMode: ThemeMode.dark,
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
       ),
+      getPages: AppRoutes.routes,
+      initialRoute: "/",
+      // navigatorObservers: [
+      //   BotToastNavigatorObserver(),
+      //   FirebaseAnalyticsObserver(analytics: Analytics.analytics)
+      // ],
+      // builder: BotToastInit(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();

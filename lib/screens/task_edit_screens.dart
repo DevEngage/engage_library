@@ -1,13 +1,8 @@
-import 'package:EarnIt/models/goal.dart';
-import 'package:EarnIt/models/task.dart';
-import 'package:EarnIt/models/task_model.dart';
-import 'package:EarnIt/services/goals_services.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
 
-class TaskEdit extends HookWidget {
+class TaskEdit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dynamic args = ModalRoute.of(context).settings.arguments;

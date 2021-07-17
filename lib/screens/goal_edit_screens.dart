@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
 
-class GoalEdit extends HookWidget {
+class GoalEdit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dynamic args = ModalRoute.of(context).settings.arguments;

@@ -1,5 +1,4 @@
-import 'package:EarnIt/models/task.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:earn_it/models/task.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 class Goal extends ParseObject implements ParseCloneable {
