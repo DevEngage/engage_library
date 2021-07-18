@@ -15,14 +15,11 @@ void main() async {
   // if (GetPlatform.isAndroid || Analytics.isEnabled) {
   //   await MobileAds.instance.initialize();
   // }
-  runApp(MyApp(user));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final user;
-  MyApp(
-    this.user,
-  );
+  MyApp();
 
   @override
   Widget build(BuildContext context) {

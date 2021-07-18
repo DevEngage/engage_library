@@ -1,20 +1,23 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:earn_it/controllers/goal_controller.dart';
+import 'package:earn_it/models/goal_model.dart';
+import 'package:earn_it/models/task_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class TaskEdit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final dynamic args = ModalRoute.of(context).settings.arguments;
-    Goal goal = args['goal'];
-    Task task = args['task'] ?? Task();
+    final dynamic args = Get.arguments;
+    GoalModel goal = args['goal'];
+    TaskModel task = args['task'] ?? TaskModel();
     final _formKey = GlobalKey<FormState>();
     final dateFormat = DateFormat("MMM d, yyyy hh:mm a");
 
-    final currentDate = useState<DateTime>();
-    final goalCategory = useState<String>();
-
-    final taskState = useState<Task>(task);
+    // final currentDate = useState<DateTime>();
+    // final goalCategory = useState<String>();
+    // final taskState = useState<TaskModel>(task);
 
     return Scaffold(
         floatingActionButton: MaterialButton(
@@ -23,12 +26,12 @@ class TaskEdit extends StatelessWidget {
             child: Text('Save',
                 style: TextStyle(color: Colors.white, fontSize: 20)),
             onPressed: () {
-              goal.addTask(taskState.value);
-              Navigator.pop(context);
-              // Navigator.pushNamed(context, '/editGoal', arguments: <String, dynamic> { 'id': null }) // _addEditGoal(context, currentDate, goalCategory),
+              goal.addTask(TaskModel());
+              // Navigator.pop(context);
+              Get.back();
             }),
         appBar: AppBar(
-          title: Text(task.objectId != null ? 'Edit ' : 'Create ' + 'Task'),
+          title: Text(task.id != null ? 'Edit ' : 'Create ' + 'TaskModel'),
         ),
         body: Column(
           children: <Widget>[
@@ -44,20 +47,20 @@ class TaskEdit extends StatelessWidget {
                           hintText: 'Name your task',
                         ),
                         validator: (value) {
-                          if (value.isEmpty) {
+                          if (value?.isEmpty == true) {
                             return 'Please enter some text';
                           }
                           return null;
                         },
                         initialValue: task.name,
-                        onChanged: (value) => taskState.value.name = value,
+                        onChanged: (value) => task.name = value,
                       ),
                       TextFormField(
                         decoration: const InputDecoration(
                           hintText: 'Details',
                         ),
                         initialValue: task.details,
-                        onChanged: (value) => taskState.value.details = value,
+                        onChanged: (value) => task.details = value,
                         // validator: (value) {
                         //   if (value.isEmpty) {
                         //     return 'Please enter some text';
@@ -72,10 +75,11 @@ class TaskEdit extends StatelessWidget {
                             children: <Widget>[
                               Text('Due', style: TextStyle(fontSize: 18)),
                               DateTimeField(
-                                initialValue: task.dueAt ?? currentDate.value,
+                                // initialValue: task.dueAt, // ?? DateTime.now(),
                                 format: dateFormat,
-                                onChanged: (DateTime value) =>
-                                    taskState.value.dueAt = value,
+                                // onChanged: (DateTime? value) => task.dueAt =
+                                //     value;
+                                // ?? DateTime.now().millisecondsSinceEpoch,
                                 onShowPicker: (context, currentValue) async {
                                   final date = await showDatePicker(
                                       context: context,
@@ -114,14 +118,14 @@ class TaskEdit extends StatelessWidget {
                                   //   height: 2,
                                   //   color: Colors.deepPurpleAccent,
                                   // ),
-                                  value: task.category ?? goalCategory.value,
-                                  onChanged: (dynamic newValue) {
-                                    taskState.value.category = newValue;
-                                  },
-                                  items: GoalsService.categories.map((item) {
-                                    return DropdownMenuItem<dynamic>(
-                                      value: item['value'],
-                                      child: Text(item['display']),
+                                  // value: task.category ?? goalCategory.value,
+                                  // onChanged: (dynamic newValue) {
+                                  //   taskState.value.category = newValue;
+                                  // },
+                                  items: GoalController.categories.map((item) {
+                                    return DropdownMenuItem<String>(
+                                      value: item,
+                                      child: Text(item),
                                     );
                                   }).toList(),
                                 ),
@@ -152,10 +156,10 @@ class TaskEdit extends StatelessWidget {
   }
 }
 
-ValueNotifier<T> useLoggedState<T>(BuildContext context, [T initialData]) {
-  final result = useState<T>(initialData);
-  useValueChanged(result.value, (_, __) {
-    print(result.value);
-  });
-  return result;
-}
+// ValueNotifier<T> useLoggedState<T>(BuildContext context, [T initialData]) {
+//   final result = useState<T>(initialData);
+//   useValueChanged(result.value, (_, __) {
+//     print(result.value);
+//   });
+//   return result;
+// }

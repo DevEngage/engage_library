@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:earn_it/models/task_model.dart';
 
 /* 
@@ -7,98 +8,71 @@ import 'package:earn_it/models/task_model.dart';
 
 class GoalModel {
   String name = '';
-  DateTime dueAt;
   String details = '';
   String reward = '';
+  String keyDetails = '';
+  String category = 'None';
+  String? owner;
+  String? id;
   bool isDone = false;
-  String category = '';
-  DateTime created;
-  DateTime updated;
-  String objectId;
+  num taskCount = 0;
+  DateTime? dueAt;
+  DateTime? created;
+  DateTime? updated;
+  List<TaskModel> tasks = [];
+  CollectionReference<TaskModel>? taskRef;
 
-  List tasks = [];
-  // List<TaskModel> $tasks = [];
+  GoalModel([Map? data]);
 
-  GoalModel([Map data]) {
-    if (data != null) map(data);
-    // if (data != null) {
-    //   $doc = EngageDoc.fromMap(data);
-    // }
-    // else {
-    //   $collection = EngageFirestore.getInstance('users/{userId}/goals');
-    // }
-  }
-
-  // GoalModel.fromId() {
-  //   createBlank()
-  // }
-
-  GoalModel.fromFirestore(doc) {
-    // $doc = EngageDoc.fromFirestore(doc);
-    // map($doc.$doc);
-  }
-
-  GoalModel.engage(Map doc) {
-    // $doc = doc;
-    // map($doc.$doc);
-  }
-
-  map(Map data) {
-    objectId = data['objectId'];
+  GoalModel.fromJson(Map data) {
+    id = data['\$id'];
     name = data['name'];
     details = data['details'];
     reward = data['reward'];
     dueAt = data['dueAt'];
-    isDone = data['isDone'];
+    isDone = data['isDone'] ?? false;
     category = data['category'];
+    taskRef = FirebaseFirestore.instance
+        .collection('goals')
+        .doc(id)
+        .collection('tasks')
+        .withConverter<TaskModel>(
+          fromFirestore: (snapshot, _) => TaskModel.fromJson(snapshot.data()!),
+          toFirestore: (doc, _) => doc.toJson(),
+        );
   }
 
-  Future createNew() async {
-    // var saved = await Backendless.data.of('goal').save({ //users/{userId}/
-    //   'objectId': objectId,
-    //   'name': name,
-    //   'details': details,
-    //   'reward': reward,
-    //   'dueAt': dueAt,
-    //   'isDone': isDone,
-    //   'category': category,
-    // });
-    // print(saved);
-    // map(saved);
-    // map($doc.$doc);
+  toJson() {
+    return {
+      // 'id': id,
+      'name': name,
+      'details': details,
+      'reward': reward,
+      'dueAt': dueAt,
+      'isDone': isDone,
+      'category': category,
+    };
   }
 
-  Future save() async {
-    if (objectId == null) {
-      await createNew();
-      return;
-    }
-    // $doc.$doc['\$id'] = $id;
-    // $doc.$doc['details'] = details;
-    // $doc.$doc['reward'] = reward;
-    // $doc.$doc['dueAt'] = dueAt;
-    // $doc.$doc['isDone'] = isDone;
-    // $doc.$doc['category'] = category;
-    // await $doc.$save();
+  getTasks() async {
+    tasks =
+        (await taskRef?.get())?.docs.map((item) => item.data()).toList() ?? [];
   }
 
-  Future toogleCheck() async {
-    isDone = !isDone;
-    // await save();
-    return isDone;
+  toggleTask(TaskModel task) async {
+    await taskRef?.doc(task.id).update({
+      ...task.toJson(),
+      'isDone': task.isDone,
+    });
   }
 
-  cleanUp() {}
-
-  Future getTasks() async {
-    // $tasks = await $doc.$getSub('tasks').getList();
-    return [];
+  addTask(TaskModel task) async {
+    await taskRef?.add(task.toJson());
   }
 
-  Future saveTask(TaskModel task) async {
-    // bool isNew = task.$id == null;
-    // await task.save();
-    // // EngageDoc savedTask = await $doc.$getSub('tasks').save(task);
-    // if (isNew) $tasks.add(task);
-  }
+  removeTask(TaskModel task) {}
+
+  save() {}
+
+  remove() {}
 }

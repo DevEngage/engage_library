@@ -1,9 +1,12 @@
+import 'package:earn_it/controllers/goal_controller.dart';
+import 'package:earn_it/controllers/user_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final GoalController goalController = GoalController.to;
     return Container(
       decoration: BoxDecoration(
           color: Colors.deepPurple.withOpacity(0.5),
@@ -11,11 +14,11 @@ class ProfileScreen extends StatelessWidget {
               fit: BoxFit.cover,
               image: AssetImage(
                   'assets/imgs/green_background.jpg'))), // Image.asset('assets/imgs/background.png') ),
-      child: Consumer<Goals>(
-        builder: (context, model, _) => ListView(
+      child: GetBuilder<GoalController>(
+        builder: (_) => ListView(
           children: <Widget>[
-            numberRow('Goal', model.goalsCompleted),
-            numberRow('Task', model.tasksCompleted),
+            numberRow('Goal', goalController.goalsCompleted),
+            numberRow('Task', goalController.tasksCompleted),
             // Consumer<User>(
             //     builder: (context, model, _) =>
             FlatButton(
@@ -25,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 onPressed: () async {
-                  Provider.of<User>(context, listen: false).logout();
+                  UserController.to.logout();
                   await Navigator.pushNamed(context, '/login');
                 }),
           ],

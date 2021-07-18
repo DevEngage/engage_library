@@ -1,24 +1,28 @@
-import 'package:EarnIt/models/goal.dart';
-import 'package:EarnIt/models/task.dart';
-import 'package:EarnIt/models/task_model.dart';
-import 'package:EarnIt/providers/goal_provider.dart';
-import 'package:EarnIt/widgets/confirm_widget.dart';
+import 'package:earn_it/models/goal_model.dart';
+import 'package:earn_it/models/task_model.dart';
+import 'package:earn_it/widgets/confirm_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:provider/provider.dart';
 
-class TaskItem extends HookWidget {
-  final Goal goal;
-  final Task task;
+class TaskItem extends StatefulWidget {
+  final GoalModel goal;
+  final TaskModel task;
+  TaskItem({Key? key, required this.goal, required this.task})
+      : super(key: key);
 
-  TaskItem({this.goal, this.task});
+  @override
+  _TaskItemState createState() => _TaskItemState();
+}
+
+class _TaskItemState extends State<TaskItem> {
+  bool checked = false;
+  _TaskItemState();
 
   @override
   Widget build(BuildContext context) {
-    final checked = useState<bool>(false);
+    // final checked = useState<bool>(false);
 
     return GestureDetector(
-        onTap: () => _showOptions(context, task, goal),
+        onTap: () => _showOptions(context, widget.task, widget.goal),
         // onLongPress: () => _showOptions(context),
         child: Column(
           children: <Widget>[
@@ -30,24 +34,27 @@ class TaskItem extends HookWidget {
                   padding: const EdgeInsets.all(10),
                   // color: Colors.green,
                   decoration: new BoxDecoration(
-                      color: Colors.white.withOpacity(0.9),
-                      borderRadius:
-                          new BorderRadius.all(const Radius.circular(2.0))),
+                    color: Colors.white.withOpacity(0.9),
+                    borderRadius: new BorderRadius.all(
+                      const Radius.circular(2.0),
+                    ),
+                  ),
                   child: Row(
                     children: <Widget>[
                       Container(
                         child: Transform.scale(
-                            scale: 1.3,
-                            child: Theme(
-                                data: ThemeData(
-                                    unselectedWidgetColor: Colors.deepPurple),
-                                child: Checkbox(
-                                    value: task.isDone,
-                                    tristate: false,
-                                    onChanged: (bool newVal) async =>
-                                        await Provider.of<Goals>(context,
-                                                listen: false)
-                                            .toggleTask(goal, task)))),
+                          scale: 1.3,
+                          child: Theme(
+                            data: ThemeData(
+                                unselectedWidgetColor: Colors.deepPurple),
+                            child: Checkbox(
+                              value: widget.task.isDone,
+                              tristate: false,
+                              onChanged: (bool? newVal) async =>
+                                  await widget.goal.toggleTask(widget.task),
+                            ),
+                          ),
+                        ),
                       ),
                       Expanded(
                           child: Row(
@@ -55,11 +62,12 @@ class TaskItem extends HookWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(task.name),
+                              Text(widget.task.name ?? ''),
                               Text(
-                                  'Due: ${task.dueAt == null ? 'Never' : task.dueAt}',
-                                  style: TextStyle(
-                                      fontSize: 12, color: Colors.black54)),
+                                'Due: ${widget.task.dueAt == null ? 'Never' : widget.task.dueAt}',
+                                style: TextStyle(
+                                    fontSize: 12, color: Colors.black54),
+                              ),
                             ],
                           ),
                         ],
@@ -69,14 +77,13 @@ class TaskItem extends HookWidget {
                 ),
               ),
             ]),
-
             // add subitems
           ],
         ));
     // ListView.builder()
   }
 
-  _showOptions(context, task, goal) {
+  _showOptions(context, TaskModel task, GoalModel goal) {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
@@ -101,8 +108,7 @@ class TaskItem extends HookWidget {
                     color: Colors.black,
                   ),
                   onTap: () async {
-                    await Provider.of<Goals>(context, listen: false)
-                        .toggleTask(goal, task);
+                    await goal.toggleTask(task);
                     Navigator.pop(context);
                   },
                 ),
@@ -139,8 +145,7 @@ class TaskItem extends HookWidget {
                         title: 'Delete Task',
                         message: 'Warning you are about to delete this task',
                         onAgreed: () async {
-                      await Provider.of<Goals>(context, listen: false)
-                          .removeTask(goal, task);
+                      await goal.removeTask(task);
                       Navigator.pop(context);
                     });
                   },
