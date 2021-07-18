@@ -81,10 +81,11 @@ class _GoalItemState extends State<GoalItem> {
 
     return GestureDetector(
         onTap: () async {
-          // await widget.goal.getTask();
-          if (widget.changePage)
+          await widget.goal.getTasks();
+          if (widget.changePage) {
             Navigator.pushNamed(context, '/viewGoal',
                 arguments: <String, dynamic>{'id': null, 'goal': widget.goal});
+          }
         },
         child: Column(
           children: <Widget>[
@@ -96,9 +97,11 @@ class _GoalItemState extends State<GoalItem> {
                   padding: const EdgeInsets.all(10),
                   // color: Colors.green,
                   decoration: new BoxDecoration(
-                      color: Colors.white.withOpacity(0.65),
-                      borderRadius:
-                          new BorderRadius.all(const Radius.circular(15.0))),
+                    color: Colors.white.withOpacity(0.65),
+                    borderRadius: new BorderRadius.all(
+                      const Radius.circular(15.0),
+                    ),
+                  ),
                   child: Row(
                     children: <Widget>[
                       Container(
@@ -140,38 +143,40 @@ class _GoalItemState extends State<GoalItem> {
                           // ],)),
 
                           Expanded(
-                              child: Container(
-                                  margin: const EdgeInsets.only(
-                                    right: 15,
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
+                            child: Container(
+                              margin: const EdgeInsets.only(
+                                right: 15,
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
+                                  Column(
                                     children: <Widget>[
-                                      Column(
-                                        children: <Widget>[
-                                          Text(
-                                            '${widget.goal.taskCount}',
-                                            style: TextStyle(
-                                              color: Colors.black45,
-                                              fontSize: 18,
-                                            ),
-                                          ),
-                                          Text(
-                                            'tasks',
-                                            style: TextStyle(
-                                              color: Colors.black87,
-                                              fontSize: 10,
-                                            ),
-                                          ),
-                                        ],
+                                      Text(
+                                        '${widget.goal.taskCount}',
+                                        style: TextStyle(
+                                          color: Colors.black45,
+                                          fontSize: 18,
+                                        ),
                                       ),
-                                      // IconButton(icon: Icon(Icons.calendar_today), onPressed: () => true,),
-
-                                      // IconButton(icon: Icon(Icons.notifications_none), color: Colors.black45, onPressed: () => true,),
-
-                                      // IconButton(icon: Icon(Icons.check_box_outline_blank), onPressed: () => true,),
+                                      Text(
+                                        'tasks',
+                                        style: TextStyle(
+                                          color: Colors.black87,
+                                          fontSize: 10,
+                                        ),
+                                      ),
                                     ],
-                                  ))),
+                                  ),
+                                  // IconButton(icon: Icon(Icons.calendar_today), onPressed: () => true,),
+
+                                  // IconButton(icon: Icon(Icons.notifications_none), color: Colors.black45, onPressed: () => true,),
+
+                                  // IconButton(icon: Icon(Icons.check_box_outline_blank), onPressed: () => true,),
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       )),
                     ],

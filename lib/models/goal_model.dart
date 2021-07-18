@@ -7,44 +7,58 @@ import 'package:earn_it/models/task_model.dart';
  */
 
 class GoalModel {
+  String? id;
   String name = '';
   String details = '';
   String reward = '';
   String keyDetails = '';
   String category = 'None';
   String? owner;
-  String? id;
   bool isDone = false;
   num taskCount = 0;
-  DateTime? dueAt;
-  DateTime? created;
-  DateTime? updated;
+  int? dueAt;
+  DateTime? createdAt;
+  DateTime? updatedAt;
   List<TaskModel> tasks = [];
+  CollectionReference<GoalModel>? ref;
   CollectionReference<TaskModel>? taskRef;
 
   GoalModel([Map? data]);
 
-  GoalModel.fromJson(Map data) {
-    id = data['\$id'];
+  GoalModel.fromJson(Map data, String? _id) {
+    print(id);
+    id = _id;
     name = data['name'];
-    details = data['details'];
-    reward = data['reward'];
+    details = data['details'] ?? '';
+    reward = data['reward'] ?? '';
     dueAt = data['dueAt'];
+    taskCount = data['taskCount'] ?? 0;
+    if (data['createdAt'] != null)
+      createdAt = DateTime.fromMillisecondsSinceEpoch(data['createdAt']);
+    if (data['updatedAt'] != null)
+      updatedAt = DateTime.fromMillisecondsSinceEpoch(data['updatedAt']);
     isDone = data['isDone'] ?? false;
-    category = data['category'];
+    category = data['category'] ?? 'None';
+    ref =
+        FirebaseFirestore.instance.collection('goals').withConverter<GoalModel>(
+              fromFirestore: (snapshot, _) =>
+                  GoalModel.fromJson(snapshot.data()!, snapshot.id),
+              toFirestore: (doc, _) => doc.toJson(),
+            );
     taskRef = FirebaseFirestore.instance
         .collection('goals')
         .doc(id)
         .collection('tasks')
         .withConverter<TaskModel>(
-          fromFirestore: (snapshot, _) => TaskModel.fromJson(snapshot.data()!),
+          fromFirestore: (snapshot, _) =>
+              TaskModel.fromJson(snapshot.data()!, snapshot.id),
           toFirestore: (doc, _) => doc.toJson(),
         );
   }
 
   toJson() {
     return {
-      // 'id': id,
+      '\$id': id,
       'name': name,
       'details': details,
       'reward': reward,
@@ -62,17 +76,58 @@ class GoalModel {
   toggleTask(TaskModel task) async {
     await taskRef?.doc(task.id).update({
       ...task.toJson(),
-      'isDone': task.isDone,
+      'isDone': !task.isDone,
     });
   }
 
   addTask(TaskModel task) async {
-    await taskRef?.add(task.toJson());
+    await task.save(this);
+    taskCount += 1;
+    await save();
   }
 
-  removeTask(TaskModel task) {}
+  removeTask(TaskModel task) async {
+    await ref?.doc(id).collection('tasks').doc(task.id).delete();
+    taskCount -= 1;
+    await save();
+  }
 
-  save() {}
+  save() async {
+    try {
+      if (id == null) {
+        FirebaseFirestore.instance.collection('goals').add(toJson());
+      }
+      return await ref?.doc(id).update({...toJson()});
+    } catch (error) {
+      print(error);
+      return null;
+    }
+  }
 
-  remove() {}
+  remove() async {
+    WriteBatch batch = FirebaseFirestore.instance.batch();
+    await ref?.doc(id).collection('tasks').get().then((querySnapshot) {
+      querySnapshot.docs.forEach((document) {
+        batch.delete(document.reference);
+      });
+      return batch.commit();
+    });
+    await ref?.doc(id).delete();
+  }
+
+  DateTime? get getDueAt {
+    if (dueAt == null) {
+      // return DateTime.now();
+      return null;
+    }
+    return DateTime.fromMillisecondsSinceEpoch(dueAt!);
+  }
+
+  set setDueAt(DateTime? _date) {
+    if (_date == null) {
+      dueAt = null;
+      return;
+    }
+    dueAt = _date.millisecondsSinceEpoch;
+  }
 }

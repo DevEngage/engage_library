@@ -5,7 +5,6 @@ import 'package:earn_it/widgets/confirm_widget.dart';
 import 'package:earn_it/widgets/task_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 class GoalScreen extends StatelessWidget {
   final id;
@@ -23,122 +22,131 @@ class GoalScreen extends StatelessWidget {
     GoalModel goal = args['goal'] ?? GoalModel();
 
     if (goal == null) return Text('Loading...');
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.deepPurple,
-          child: Icon(Icons.add),
-          onPressed: () async {
-            await Navigator.pushNamed(context, '/editTask',
-                arguments: <String, dynamic>{'id': null, 'goal': goal});
-            // Provider.of<Goals>(context, listen: false).refreshTasks(goal);
-          }),
-      appBar: AppBar(
-        elevation: 0,
-        title: Text(goal.name),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.more_horiz),
-            onPressed: () async {
-              await _showOptions(context, goal);
-            },
+    return StreamBuilder<DocumentSnapshot<GoalModel>>(
+      stream: goalController.ref.doc(goal.id).snapshots(),
+      builder: (BuildContext context,
+          AsyncSnapshot<DocumentSnapshot<GoalModel>> snapshot) {
+        if (snapshot.hasData) {
+          goal = snapshot.data!.data()!;
+        }
+        return Scaffold(
+          floatingActionButton: FloatingActionButton(
+              backgroundColor: Colors.deepPurple,
+              child: Icon(Icons.add),
+              onPressed: () async {
+                await Navigator.pushNamed(context, '/editTask',
+                    arguments: <String, dynamic>{'id': null, 'goal': goal});
+                await goal.getTasks();
+              }),
+          appBar: AppBar(
+            elevation: 0,
+            title: Text(goal.name),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.more_horiz),
+                onPressed: () async {
+                  await _showOptions(context, goal);
+                },
+              ),
+            ],
+            // leading: Text('Reward: Food'),
+            // title: Text('GoalModel Name'),
+            // bottom: PreferredSize(preferredSize: Size.fromHeight(30),
+            //   child: Container(
+            //     padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 76),
+            //     child: Row(children: <Widget>[
+            //       Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+            //         // Text('Reward: ${goal.reward}'),
+            //         Wrap(children: <Widget>[ Text('Reward: '), Text(goal.reward, style: TextStyle(color: Colors.yellowAccent),)],),
+            //         Text(goal.details),
+            //       ],)
+            //     ],)
+            //   )
+            // )
           ),
-        ],
-        // leading: Text('Reward: Food'),
-        // title: Text('GoalModel Name'),
-        // bottom: PreferredSize(preferredSize: Size.fromHeight(30),
-        //   child: Container(
-        //     padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 76),
-        //     child: Row(children: <Widget>[
-        //       Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-        //         // Text('Reward: ${goal.reward}'),
-        //         Wrap(children: <Widget>[ Text('Reward: '), Text(goal.reward, style: TextStyle(color: Colors.yellowAccent),)],),
-        //         Text(goal.details),
-        //       ],)
-        //     ],)
-        //   )
-        // )
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          color: Colors.deepPurple.withOpacity(0.5),
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage('assets/imgs/mountain_medium.jpg'),
-            colorFilter: ColorFilter.mode(
-              Colors.black45,
-              BlendMode.srcOver,
+          body: Container(
+            decoration: BoxDecoration(
+              color: Colors.deepPurple.withOpacity(0.5),
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('assets/imgs/mountain_medium.jpg'),
+                colorFilter: ColorFilter.mode(
+                  Colors.black45,
+                  BlendMode.srcOver,
+                ),
+              ),
+            ), // Image.asset('assets/imgs/background.png') ),
+            child: StreamBuilder<QuerySnapshot>(
+              stream: goal.taskRef?.snapshots(),
+              builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) =>
+                  ListView(
+                children: <Widget>[
+                  // GoalItem(),
+                  if (goal.reward != null)
+                    Container(
+                      color: Colors.black26,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 10),
+                      child: Row(
+                        children: <Widget>[
+                          Wrap(
+                            children: <Widget>[
+                              Text('Reward: ',
+                                  style: TextStyle(
+                                      fontSize: 18, color: Colors.white)),
+                              Text(
+                                goal.reward,
+                                style: TextStyle(
+                                    color: Colors.yellowAccent, fontSize: 18),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  if (goal.dueAt != null)
+                    Container(
+                      color: Colors.white60,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 10),
+                      child: Row(
+                        children: <Widget>[
+                          Wrap(
+                            children: <Widget>[
+                              Text(
+                                'Due: ${goal.dueAt}',
+                                style: TextStyle(),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  if (goal.details != null && goal.details != '')
+                    Container(
+                        color: Colors.white60,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 10),
+                        child: Row(
+                          children: <Widget>[
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                // Text('Reward: ${goal.reward}'),
+                                Text('Details: ${goal.details}'),
+                              ],
+                            )
+                          ],
+                        )),
+                  Container(child: Text('')),
+                  ...goal.tasks.map((task) => TaskItem(task: task, goal: goal)),
+                ],
+              ),
             ),
           ),
-        ), // Image.asset('assets/imgs/background.png') ),
-        child: StreamBuilder<QuerySnapshot>(
-          stream: goal.taskRef?.snapshots(),
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) =>
-                  ListView(
-            children: <Widget>[
-              // GoalItem(),
-              if (goal.reward != null)
-                Container(
-                  color: Colors.black26,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  child: Row(
-                    children: <Widget>[
-                      Wrap(
-                        children: <Widget>[
-                          Text('Reward: ',
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.white)),
-                          Text(
-                            goal.reward,
-                            style: TextStyle(
-                                color: Colors.yellowAccent, fontSize: 18),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              if (goal.dueAt != null)
-                Container(
-                  color: Colors.white60,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  child: Row(
-                    children: <Widget>[
-                      Wrap(
-                        children: <Widget>[
-                          Text(
-                            'Due: ${goal.dueAt}',
-                            style: TextStyle(),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              if (goal.details != null && goal.details != '')
-                Container(
-                    color: Colors.white60,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 10),
-                    child: Row(
-                      children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            // Text('Reward: ${goal.reward}'),
-                            Text('Details: ${goal.details}'),
-                          ],
-                        )
-                      ],
-                    )),
-              Container(child: Text('')),
-              ...goal.tasks.map((task) => TaskItem(task: task, goal: goal)),
-            ],
-          ),
-        ),
-      ),
+        );
+      },
     );
   }
 
@@ -204,7 +212,8 @@ class GoalScreen extends StatelessWidget {
                         message: 'Warning you are about to delete this goal',
                         onAgreed: () async {
                       await goal.remove();
-                      Navigator.pop(context);
+                      Get.back();
+                      Get.back();
                     });
                   },
                 ),

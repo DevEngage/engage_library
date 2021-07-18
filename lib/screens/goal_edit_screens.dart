@@ -12,20 +12,6 @@ class GoalEdit extends StatelessWidget {
     GoalModel goal = args['goal'] ?? GoalModel();
     final _formKey = GlobalKey<FormState>();
     final dateFormat = DateFormat("MMM d, yyyy hh:mm a");
-    List categories = [
-      {
-        "display": "Food",
-        "value": "Food",
-      },
-      {
-        "display": "Climbing",
-        "value": "Climbing",
-      },
-      {
-        "display": "Walking",
-        "value": "Walking",
-      },
-    ];
 
     return Scaffold(
         floatingActionButton: MaterialButton(
@@ -34,12 +20,9 @@ class GoalEdit extends StatelessWidget {
             child: Text('Save',
                 style: TextStyle(color: Colors.white, fontSize: 20)),
             onPressed: () async {
-              // Navigator.pushNamed(context, '/editGoal', arguments: <String, dynamic> { 'id': null }) // _addEditGoal(context, currentDate, goalCategory),
               print(goal);
-
-              var res = await goal.save();
-              print(res.error);
-              Navigator.pop(context);
+              await goal.save();
+              Get.back();
             }),
         appBar: AppBar(
           title: Text(goal.id != null ? 'Edit ' : 'Create ' + 'GoalModel'),
@@ -99,10 +82,10 @@ class GoalEdit extends StatelessWidget {
                           children: <Widget>[
                             Text('Due', style: TextStyle(fontSize: 18)),
                             DateTimeField(
-                              initialValue: goal.dueAt, // ?? currentDate.value,
+                              initialValue: goal.getDueAt,
                               format: dateFormat,
                               onChanged: (DateTime? value) =>
-                                  goal.dueAt = value,
+                                  goal.setDueAt = value,
                               onShowPicker: (context, currentValue) async {
                                 final date = await showDatePicker(
                                     context: context,

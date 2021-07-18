@@ -9,12 +9,12 @@ class GoalController extends GetxController {
   // String lastQuery;
   int goalsCompleted = 0;
   int tasksCompleted = 0;
-  final ref = FirebaseFirestore.instance
-      .collection('goals')
-      .withConverter<GoalModel>(
-        fromFirestore: (snapshot, _) => GoalModel.fromJson(snapshot.data()!),
-        toFirestore: (doc, _) => doc.toJson(),
-      );
+  final ref =
+      FirebaseFirestore.instance.collection('goals').withConverter<GoalModel>(
+            fromFirestore: (snapshot, _) =>
+                GoalModel.fromJson(snapshot.data()!, snapshot.id),
+            toFirestore: (doc, _) => doc.toJson(),
+          );
   static GoalController to = Get.find();
   static List categories = <String>["None", "Food", "Climbing", "Walking"];
 

@@ -14,11 +14,6 @@ class TaskEdit extends StatelessWidget {
     TaskModel task = args['task'] ?? TaskModel();
     final _formKey = GlobalKey<FormState>();
     final dateFormat = DateFormat("MMM d, yyyy hh:mm a");
-
-    // final currentDate = useState<DateTime>();
-    // final goalCategory = useState<String>();
-    // final taskState = useState<TaskModel>(task);
-
     return Scaffold(
         floatingActionButton: MaterialButton(
             color: Colors.deepPurple,
@@ -75,11 +70,10 @@ class TaskEdit extends StatelessWidget {
                             children: <Widget>[
                               Text('Due', style: TextStyle(fontSize: 18)),
                               DateTimeField(
-                                // initialValue: task.dueAt, // ?? DateTime.now(),
+                                initialValue: task.getDueAt,
                                 format: dateFormat,
-                                // onChanged: (DateTime? value) => task.dueAt =
-                                //     value;
-                                // ?? DateTime.now().millisecondsSinceEpoch,
+                                onChanged: (DateTime? value) =>
+                                    task.setDueAt = value,
                                 onShowPicker: (context, currentValue) async {
                                   final date = await showDatePicker(
                                       context: context,
@@ -118,10 +112,10 @@ class TaskEdit extends StatelessWidget {
                                   //   height: 2,
                                   //   color: Colors.deepPurpleAccent,
                                   // ),
-                                  // value: task.category ?? goalCategory.value,
-                                  // onChanged: (dynamic newValue) {
-                                  //   taskState.value.category = newValue;
-                                  // },
+                                  value: task.category,
+                                  onChanged: (dynamic newValue) {
+                                    task.category = newValue;
+                                  },
                                   items: GoalController.categories.map((item) {
                                     return DropdownMenuItem<String>(
                                       value: item,
