@@ -37,41 +37,41 @@ class HomeScreen extends StatelessWidget {
         child: GetBuilder<GoalController>(
           builder: (_) => ListView(
             children: <Widget>[
-              Container(
-                color: Colors.black38,
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  child: TextFormField(
-                    // initialValue: goalController.lastQuery,
-                    onChanged: (value) {
-                      goalController.search(value);
-                    },
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
-                        .copyWith(color: Colors.white, letterSpacing: 1.2),
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Search",
-                      focusColor: Colors.white,
-                      hintStyle: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .copyWith(color: Colors.white54),
-                      icon: Icon(
-                        Icons.search,
-                        color: Colors.greenAccent,
-                      ),
-                      contentPadding: EdgeInsets.zero,
-                    ),
-                    keyboardType: TextInputType.text,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 50,
-              ),
+              // Container(
+              //   color: Colors.black38,
+              //   child: Padding(
+              //     padding:
+              //         const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              //     child: TextFormField(
+              //       // initialValue: goalController.lastQuery,
+              //       onChanged: (value) {
+              //         goalController.search(value);
+              //       },
+              //       style: Theme.of(context)
+              //           .textTheme
+              //           .bodyText1!
+              //           .copyWith(color: Colors.white, letterSpacing: 1.2),
+              //       decoration: InputDecoration(
+              //         border: InputBorder.none,
+              //         hintText: "Search",
+              //         focusColor: Colors.white,
+              //         hintStyle: Theme.of(context)
+              //             .textTheme
+              //             .bodyText1!
+              //             .copyWith(color: Colors.white54),
+              //         icon: Icon(
+              //           Icons.search,
+              //           color: Colors.greenAccent,
+              //         ),
+              //         contentPadding: EdgeInsets.zero,
+              //       ),
+              //       keyboardType: TextInputType.text,
+              //     ),
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 50,
+              // ),
               StreamBuilder<QuerySnapshot>(
                   stream: goalController.ref.snapshots(),
                   builder: (BuildContext context,
