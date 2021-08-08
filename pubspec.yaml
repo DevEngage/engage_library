@@ -4,7 +4,7 @@ description: An easy way for you to achieve your goals
 version: 1.0.0
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
@@ -13,7 +13,7 @@ dependencies:
   font_awesome_flutter: ^9.1.0
   flutter_login: ^2.2.0
   intl: ^0.17.0
-  http: ">=0.13.3"
+  http: '>=0.13.3'
   provider: ^5.0.0
   firebase_core: ^1.4.0
   firebase_analytics: ^8.2.0
@@ -39,12 +39,12 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: "^0.9.0"
+  flutter_launcher_icons: '^0.9.0'
 
 flutter_icons:
-  android: "launcher_icon"
+  android: 'launcher_icon'
   ios: true
-  image_path: "assets/icon/icon.png"
+  image_path: 'assets/icon/icon.png'
 
 flutter:
   uses-material-design: true
