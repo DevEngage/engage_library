@@ -23,6 +23,7 @@ class TemplateModel {
   String? cost;
   List tags = [];
   List goals = [];
+  int goalCount = 0;
   DateTime? createdAt;
   DateTime? updatedAt;
   CollectionReference<TemplateModel>? ref;
