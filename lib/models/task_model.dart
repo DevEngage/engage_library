@@ -3,9 +3,11 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:earn_it/models/goal_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class TaskModel {
   String? id;
+  String? parentId;
   String? name;
   String? details;
   String? category = "None";
@@ -17,13 +19,15 @@ class TaskModel {
 
   TaskModel.blank();
 
-  TaskModel.fromJson(Map data, String? id) {
-    id = id;
+  TaskModel.fromJson(Map data, String? _id) {
+    id = _id ?? data['\$id'];
+    parentId = data['parentId'];
     name = data['name'];
     details = data['details'];
     dueAt = data['dueAt'];
     isDone = data['isDone'] ?? false;
     details = data['details'];
+    owner = data['owner'];
   }
 
   toJson() {
@@ -34,6 +38,8 @@ class TaskModel {
       'dueAt': dueAt,
       'isDone': isDone,
       'category': category,
+      'parentId': parentId,
+      'owner': owner,
     };
   }
 
@@ -54,9 +60,14 @@ class TaskModel {
   }
 
   save(GoalModel goal) async {
+    parentId = goal.id;
+    FirebaseAuth auth = FirebaseAuth.instance;
+    if (owner == null) {
+      owner = auth.currentUser?.uid;
+    }
     try {
       if (id == null) {
-        FirebaseFirestore.instance
+        return await FirebaseFirestore.instance
             .collection('goals')
             .doc(goal.id)
             .collection('tasks')

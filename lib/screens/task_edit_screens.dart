@@ -21,12 +21,12 @@ class TaskEdit extends StatelessWidget {
             child: Text('Save',
                 style: TextStyle(color: Colors.white, fontSize: 20)),
             onPressed: () {
-              goal.addTask(TaskModel());
+              goal.addTask(task);
               // Navigator.pop(context);
               Get.back();
             }),
         appBar: AppBar(
-          title: Text(task.id != null ? 'Edit ' : 'Create ' + 'TaskModel'),
+          title: Text(task.id != null ? 'Edit ' : 'Create ' + 'Task'),
         ),
         body: Column(
           children: <Widget>[
@@ -50,6 +50,9 @@ class TaskEdit extends StatelessWidget {
                         initialValue: task.name,
                         onChanged: (value) => task.name = value,
                       ),
+                      SizedBox(
+                        height: 16,
+                      ),
                       TextFormField(
                         decoration: const InputDecoration(
                           hintText: 'Details',
@@ -68,9 +71,12 @@ class TaskEdit extends StatelessWidget {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text('Due', style: TextStyle(fontSize: 18)),
+                              // Text('Due', style: TextStyle(fontSize: 18)),
                               DateTimeField(
                                 initialValue: task.getDueAt,
+                                decoration: const InputDecoration(
+                                  hintText: 'Due',
+                                ),
                                 format: dateFormat,
                                 onChanged: (DateTime? value) =>
                                     task.setDueAt = value,

@@ -1,10 +1,15 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:earn_it/constants/constants.dart';
 import 'package:earn_it/controllers/goal_controller.dart';
 import 'package:earn_it/models/goal_model.dart';
+import 'package:earn_it/models/task_model.dart';
 import 'package:earn_it/widgets/confirm_widget.dart';
 import 'package:earn_it/widgets/task_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+// import 'package:timeago/timeago.dart' as timeago;
+import 'package:intl/intl.dart';
 
 class GoalScreen extends StatelessWidget {
   final id;
@@ -91,14 +96,15 @@ class GoalScreen extends StatelessWidget {
                       child: Row(
                         children: <Widget>[
                           Wrap(
+                            direction: Axis.vertical,
                             children: <Widget>[
                               Text('Reward: ',
                                   style: TextStyle(
-                                      fontSize: 18, color: Colors.white)),
+                                      fontSize: 20, color: Colors.white)),
                               Text(
                                 goal.reward,
                                 style: TextStyle(
-                                    color: Colors.yellowAccent, fontSize: 18),
+                                    color: Colors.yellowAccent, fontSize: 20),
                               )
                             ],
                           ),
@@ -115,8 +121,11 @@ class GoalScreen extends StatelessWidget {
                           Wrap(
                             children: <Widget>[
                               Text(
-                                'Due: ${goal.dueAt}',
-                                style: TextStyle(),
+                                'Due on ${DateFormat('MMMM d, yyyy').format(goal.dueAtDate!)}',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: AppThemes.colorBlackOpacity8,
+                                ),
                               )
                             ],
                           ),
@@ -134,13 +143,57 @@ class GoalScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 // Text('Reward: ${goal.reward}'),
-                                Text('Details: ${goal.details}'),
+                                Text(
+                                  '${goal.details}',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: AppThemes.colorBlackOpacity8,
+                                  ),
+                                ),
                               ],
                             )
                           ],
                         )),
                   Container(child: Text('')),
-                  ...goal.tasks.map((task) => TaskItem(task: task, goal: goal)),
+                  // ...goal.tasks.map((task) => TaskItem(task: task, goal: goal)),
+                  StreamBuilder<QuerySnapshot>(
+                      stream: goal.taskRef?.snapshots(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<QuerySnapshot> snapshot) {
+                        if (!snapshot.hasData ||
+                            snapshot.data?.docs == null ||
+                            snapshot.data!.docs.length < 1)
+                          return Row(children: <Widget>[
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(20),
+                                // color: Colors.green,
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.65),
+                                  borderRadius: BorderRadius.all(
+                                    const Radius.circular(15.0),
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'You have no Tasks lined up. Add one!',
+                                    style: TextStyle(
+                                        fontSize: 18, color: Colors.black54),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ]);
+                        else
+                          return Column(
+                            children: [
+                              for (var item in snapshot.data?.docs ?? [])
+                                TaskItem(
+                                    task: item.data() as TaskModel, goal: goal)
+                            ],
+                          );
+                      }),
                 ],
               ),
             ),

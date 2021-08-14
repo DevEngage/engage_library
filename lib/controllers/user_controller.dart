@@ -72,12 +72,19 @@ class UserController extends GetxController {
   }
 
   Future<String?> signUp(email, password) async {
+    // FirebaseAuth.instance.
+    // linkWithCredential
     try {
-      // UserCredential userCredential =
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      if (user == null) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+      } else {
+        final AuthCredential emailcredentials =
+            EmailAuthProvider.credential(email: email, password: password);
+        await user!.linkWithCredential(emailcredentials);
+      }
       return null;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -90,6 +97,15 @@ class UserController extends GetxController {
     } catch (e) {
       print(e);
     }
+  }
+
+  loginAnonAccount() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    // auth.currentUser?.isAnonymous;
+    if (auth.currentUser == null) {
+      return await FirebaseAuth.instance.signInAnonymously();
+    }
+    return null;
   }
 
   // Future<ParseResponse> anonLogin() async {}

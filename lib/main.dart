@@ -1,11 +1,13 @@
 import 'package:earn_it/screens/home_screen.dart';
 import 'package:earn_it/screens/profile_screen.dart';
 import 'package:earn_it/screens/world_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'constants/constants.dart';
+import 'controllers/user_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +17,7 @@ void main() async {
   // if (GetPlatform.isAndroid || Analytics.isEnabled) {
   //   await MobileAds.instance.initialize();
   // }
+  // UserController.loginAnonAccount();
   runApp(MyApp());
 }
 
@@ -23,20 +26,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth auth = FirebaseAuth.instance;
     return GetMaterialApp(
       navigatorKey: Get.key,
       title: 'EarnIt',
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.fade,
-      // theme: AppThemes.lightTheme,
-      // darkTheme: AppThemes.darkTheme,
-      // // themeMode: ThemeMode.system,
-      // themeMode: ThemeMode.dark,
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-      ),
+      theme: AppThemes.lightTheme,
+      darkTheme: AppThemes.darkTheme,
+      // themeMode: ThemeMode.system,
+      themeMode: ThemeMode.dark,
+      // theme: ThemeData(
+      //   primarySwatch: Colors.deepPurple,
+      // ),
       getPages: AppRoutes.routes,
-      initialRoute: "/",
+      initialRoute: auth.currentUser != null ? "/" : "/login",
       // navigatorObservers: [
       //   BotToastNavigatorObserver(),
       //   FirebaseAnalyticsObserver(analytics: Analytics.analytics)

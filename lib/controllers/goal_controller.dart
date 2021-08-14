@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:earn_it/models/goal_model.dart';
 import 'package:earn_it/models/task_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class GoalController extends GetxController {
@@ -30,6 +31,18 @@ class GoalController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+  }
+
+  get ownerRef {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    return FirebaseFirestore.instance
+        .collection('goals')
+        .where('owner', isEqualTo: auth.currentUser?.uid)
+        .withConverter<GoalModel>(
+          fromFirestore: (snapshot, _) =>
+              GoalModel.fromJson(snapshot.data()!, snapshot.id),
+          toFirestore: (doc, _) => doc.toJson(),
+        );
   }
 
   search([String? query]) {

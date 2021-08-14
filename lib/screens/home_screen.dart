@@ -73,10 +73,13 @@ class HomeScreen extends StatelessWidget {
               //   height: 50,
               // ),
               StreamBuilder<QuerySnapshot>(
-                  stream: goalController.ref.snapshots(),
+                  stream: goalController.ownerRef.snapshots(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (!snapshot.hasData)
+                    print(snapshot);
+                    if (!snapshot.hasData ||
+                        snapshot.data?.docs == null ||
+                        snapshot.data!.docs.length < 1)
                       return Row(children: <Widget>[
                         Expanded(
                           child: Container(

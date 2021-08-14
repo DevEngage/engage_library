@@ -25,7 +25,7 @@ class GoalEdit extends StatelessWidget {
               Get.back();
             }),
         appBar: AppBar(
-          title: Text(goal.id != null ? 'Edit ' : 'Create ' + 'GoalModel'),
+          title: Text(goal.id != null ? 'Edit ' : 'Create ' + 'Goal'),
         ),
         body: Column(
           children: <Widget>[
@@ -49,6 +49,9 @@ class GoalEdit extends StatelessWidget {
                       initialValue: goal.name,
                       onChanged: (value) => goal.name = value,
                     ),
+                    SizedBox(
+                      height: 16,
+                    ),
                     TextFormField(
                       decoration: const InputDecoration(
                         hintText: 'What is your reward?',
@@ -61,6 +64,9 @@ class GoalEdit extends StatelessWidget {
                       },
                       initialValue: goal.reward,
                       onChanged: (value) => goal.reward = value,
+                    ),
+                    SizedBox(
+                      height: 16,
                     ),
                     TextFormField(
                       decoration: const InputDecoration(
@@ -80,8 +86,11 @@ class GoalEdit extends StatelessWidget {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text('Due', style: TextStyle(fontSize: 18)),
+                            // Text('Due', style: TextStyle(fontSize: 18)),
                             DateTimeField(
+                              decoration: const InputDecoration(
+                                hintText: 'Due',
+                              ),
                               initialValue: goal.getDueAt,
                               format: dateFormat,
                               onChanged: (DateTime? value) =>

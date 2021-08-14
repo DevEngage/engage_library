@@ -62,9 +62,14 @@ class _TaskItemState extends State<TaskItem> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(widget.task.name ?? ''),
                               Text(
-                                'Due: ${widget.task.dueAt == null ? 'Never' : widget.task.dueAt}',
+                                widget.task.name ?? '',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                              Text(
+                                'Due on ${widget.task.dueAt == null ? 'Never' : widget.task.dueAt}',
                                 style: TextStyle(
                                     fontSize: 12, color: Colors.black54),
                               ),

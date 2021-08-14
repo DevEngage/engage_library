@@ -125,14 +125,28 @@ class _GoalItemState extends State<GoalItem> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text('Goal: ${widget.goal.name}'),
+                              Text(
+                                '${widget.goal.name}', //Goal:
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
                               Wrap(
                                 children: <Widget>[
-                                  Text('Reward: '),
+                                  // Text(
+                                  //   'Reward: ',
+                                  //   style: TextStyle(
+                                  //     color: Colors.black,
+                                  //   ),
+                                  // ),
                                   Text(
-                                    widget.goal.reward,
-                                    style:
-                                        TextStyle(color: Colors.yellowAccent),
+                                    widget.goal.reward.isNotEmpty
+                                        ? widget.goal.reward
+                                        : 'No Reward Set',
+                                    style: TextStyle(
+                                        color: widget.goal.reward.isNotEmpty
+                                            ? Colors.yellowAccent
+                                            : Colors.red),
                                   )
                                 ],
                               ),

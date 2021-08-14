@@ -24,7 +24,7 @@ class ProfileScreen extends StatelessWidget {
             FlatButton(
                 padding: const EdgeInsets.only(top: 25, bottom: 25),
                 child: Text(
-                  'Logut',
+                  'Logout',
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 onPressed: () async {

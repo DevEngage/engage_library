@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
         message:
             'Your data will not be saved to an account and will be invalid after 1 year.',
         onAgreed: () async {
-      // await user.anonLogin();
+      await user.loginAnonAccount();
       await _checkForUser(context);
     });
   }

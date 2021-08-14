@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppThemes {
   AppThemes._();
 
-  static const Color primaryColor = Color(0xFF8d57ff);
+  static const Color primaryColor = Color(0xFF8d57ff); //deepPurple
   static const Color secondaryColor = Color(0xFFff5757);
   static const Color accentColor = Color(0xFF56FFE1);
   static const Color backgroundColor = Color(0xFF3A4758);
