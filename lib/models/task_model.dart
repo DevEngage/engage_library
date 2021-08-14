@@ -26,6 +26,7 @@ class TaskModel {
     details = data['details'];
     dueAt = data['dueAt'];
     isDone = data['isDone'] ?? false;
+    category = data['category'];
     details = data['details'];
     owner = data['owner'];
   }

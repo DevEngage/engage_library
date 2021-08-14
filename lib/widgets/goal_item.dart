@@ -1,3 +1,4 @@
+import 'package:earn_it/controllers/goal_controller.dart';
 import 'package:earn_it/models/goal_model.dart';
 import 'package:flutter/material.dart';
 
@@ -76,7 +77,6 @@ class _GoalItemState extends State<GoalItem> {
   @override
   Widget build(BuildContext context) {
     // final expended = useState(false);
-
     if (widget.goal == null) return Text('');
 
     return GestureDetector(

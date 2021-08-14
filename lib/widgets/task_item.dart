@@ -1,3 +1,4 @@
+import 'package:earn_it/controllers/goal_controller.dart';
 import 'package:earn_it/models/goal_model.dart';
 import 'package:earn_it/models/task_model.dart';
 import 'package:earn_it/widgets/confirm_widget.dart';
@@ -89,6 +90,7 @@ class _TaskItemState extends State<TaskItem> {
   }
 
   _showOptions(context, TaskModel task, GoalModel goal) {
+    final goalController = GoalController.to;
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
@@ -127,6 +129,8 @@ class _TaskItemState extends State<TaskItem> {
                     color: Colors.black,
                   ),
                   onTap: () async {
+                    goalController.goalEdit = goal;
+                    goalController.taskEdit = task;
                     await Navigator.pushNamed(context, '/editTask',
                         arguments: <String, dynamic>{
                           'id': null,

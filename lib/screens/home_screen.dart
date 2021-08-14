@@ -17,6 +17,7 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: Colors.deepPurple,
           child: Icon(Icons.add),
           onPressed: () async {
+            goalController.goalEdit = GoalModel();
             await Navigator.pushNamed(
               context,
               '/editGoal',

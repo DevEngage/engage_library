@@ -39,6 +39,8 @@ class GoalScreen extends StatelessWidget {
               backgroundColor: Colors.deepPurple,
               child: Icon(Icons.add),
               onPressed: () async {
+                goalController.goalEdit = goal;
+                goalController.taskEdit = null;
                 await Navigator.pushNamed(context, '/editTask',
                     arguments: <String, dynamic>{'id': null, 'goal': goal});
                 await goal.getTasks();
@@ -242,6 +244,7 @@ class GoalScreen extends StatelessWidget {
                     color: Colors.black,
                   ),
                   onTap: () async {
+                    goalController.goalEdit = goal;
                     await Navigator.pushNamed(context, '/editGoal',
                         arguments: <String, dynamic>{
                           'id': null,

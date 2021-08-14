@@ -9,7 +9,8 @@ class GoalEdit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dynamic args = Get.arguments;
-    GoalModel goal = args['goal'] ?? GoalModel();
+    final goalController = GoalController.to;
+    GoalModel goal = goalController.goalEdit!;
     final _formKey = GlobalKey<FormState>();
     final dateFormat = DateFormat("MMM d, yyyy hh:mm a");
 
@@ -20,8 +21,9 @@ class GoalEdit extends StatelessWidget {
             child: Text('Save',
                 style: TextStyle(color: Colors.white, fontSize: 20)),
             onPressed: () async {
-              print(goal);
               await goal.save();
+              goalController.goalEdit = null;
+              goalController.taskEdit = null;
               Get.back();
             }),
         appBar: AppBar(
@@ -115,7 +117,8 @@ class GoalEdit extends StatelessWidget {
                             ),
                           ]),
                     ),
-                    Container(
+                    GetBuilder<GoalController>(
+                      builder: (_) => Container(
                         padding: const EdgeInsets.only(top: 24.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -133,7 +136,8 @@ class GoalEdit extends StatelessWidget {
                                 // ),
                                 value: goal.category,
                                 onChanged: (dynamic newValue) {
-                                  // goalState.value.category = newValue;
+                                  goal.category = newValue;
+                                  goalController.update();
                                 },
                                 items: GoalController.categories.map((item) {
                                   return DropdownMenuItem<String>(
@@ -144,7 +148,9 @@ class GoalEdit extends StatelessWidget {
                               ),
                             )
                           ],
-                        )),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 class GoalController extends GetxController {
   List<GoalModel> goals = [];
   List<GoalModel> searched = [];
+  GoalModel? goalEdit;
+  TaskModel? taskEdit;
   // String lastQuery;
   int goalsCompleted = 0;
   int tasksCompleted = 0;

@@ -10,8 +10,9 @@ class TaskEdit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dynamic args = Get.arguments;
-    GoalModel goal = args['goal'];
-    TaskModel task = args['task'] ?? TaskModel();
+    final goalController = GoalController.to;
+    GoalModel goal = goalController.goalEdit!;
+    TaskModel task = goalController.taskEdit ?? TaskModel();
     final _formKey = GlobalKey<FormState>();
     final dateFormat = DateFormat("MMM d, yyyy hh:mm a");
     return Scaffold(
@@ -20,8 +21,10 @@ class TaskEdit extends StatelessWidget {
             padding: const EdgeInsets.all(12),
             child: Text('Save',
                 style: TextStyle(color: Colors.white, fontSize: 20)),
-            onPressed: () {
-              goal.addTask(task);
+            onPressed: () async {
+              await goal.addTask(task);
+              goalController.goalEdit = null;
+              goalController.taskEdit = null;
               // Navigator.pop(context);
               Get.back();
             }),
@@ -101,7 +104,8 @@ class TaskEdit extends StatelessWidget {
                               ),
                             ]),
                       ),
-                      Container(
+                      GetBuilder<GoalController>(
+                        builder: (_) => Container(
                           padding: const EdgeInsets.only(top: 24.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -121,6 +125,7 @@ class TaskEdit extends StatelessWidget {
                                   value: task.category,
                                   onChanged: (dynamic newValue) {
                                     task.category = newValue;
+                                    goalController.update();
                                   },
                                   items: GoalController.categories.map((item) {
                                     return DropdownMenuItem<String>(
@@ -131,7 +136,9 @@ class TaskEdit extends StatelessWidget {
                                 ),
                               )
                             ],
-                          )),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 )),

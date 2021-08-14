@@ -100,14 +100,18 @@ class GoalModel {
   }
 
   addTask(TaskModel task) async {
+    if (task.id == null) {
+      taskCount += 1;
+    }
     await task.save(this);
-    taskCount += 1;
     await save();
   }
 
   removeTask(TaskModel task) async {
+    if (task.id == null) {
+      taskCount -= 1;
+    }
     await ref?.doc(id).collection('tasks').doc(task.id).delete();
-    taskCount -= 1;
     await save();
   }
 
@@ -122,7 +126,9 @@ class GoalModel {
             .collection('goals')
             .add(toJson());
       }
+      await getTasks();
       isDone = tasks.every((element) => element.isDone);
+      taskCount = tasks.length;
       return await ref?.doc(id).update({...toJson()});
     } catch (error) {
       print(error);
