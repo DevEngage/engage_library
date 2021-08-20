@@ -60,7 +60,7 @@ class GoalController extends GetxController {
   watchList() {
     // final Stream<QuerySnapshot> stream = ref.snapshots();
     // stream.listen((snapshot) {
-    //   goals
+    //   snapshot.docs.
     // });
   }
 
@@ -112,17 +112,15 @@ class GoalController extends GetxController {
   }
 
   getCount() async {
-    goalsCompleted = goals.where((val) => val.isDone == true).length;
-    // ParseUser user = await ParseUser.currentUser() as ParseUser;
-    // QueryBuilder<Task> query = QueryBuilder<Task>(Task())
-    //   ..whereEqualTo('owner', user.objectId)
-    //   ..whereEqualTo('isDone', true);
-    // var results = await query.count();
-    // tasksCompleted = results.success ? results.count : 0;
-
-    // query.
-    // taskssCompleted = goals.
-    // });
+    FirebaseAuth auth = FirebaseAuth.instance;
+    goalsCompleted =
+        (await ownerRef.where('isDone', isEqualTo: true).get()).size ?? 0;
+    tasksCompleted = (await FirebaseFirestore.instance
+            .collectionGroup('tasks')
+            .where('owner', isEqualTo: auth.currentUser?.uid)
+            .where('isDone', isEqualTo: true)
+            .get())
+        .size;
   }
 
   // List<Goal> get list =>
