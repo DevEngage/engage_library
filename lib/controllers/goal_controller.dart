@@ -12,6 +12,8 @@ class GoalController extends GetxController {
   // String lastQuery;
   int goalsCompleted = 0;
   int tasksCompleted = 0;
+  List<String> filterList = ['All', 'Uncompleted', 'Completed'];
+  String selectedFilter = 'All';
   final ref =
       FirebaseFirestore.instance.collection('goals').withConverter<GoalModel>(
             fromFirestore: (snapshot, _) =>
@@ -35,11 +37,21 @@ class GoalController extends GetxController {
     super.onClose();
   }
 
+  getFilterState() {
+    if (selectedFilter == filterList[1]) {
+      return false;
+    } else if (selectedFilter == filterList[2]) {
+      return true;
+    }
+    return null;
+  }
+
   get ownerRef {
     FirebaseAuth auth = FirebaseAuth.instance;
     return FirebaseFirestore.instance
         .collection('goals')
         .where('owner', isEqualTo: auth.currentUser?.uid)
+        .where('isDone', isEqualTo: getFilterState())
         .withConverter<GoalModel>(
           fromFirestore: (snapshot, _) =>
               GoalModel.fromJson(snapshot.data()!, snapshot.id),

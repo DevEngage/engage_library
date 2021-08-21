@@ -73,6 +73,44 @@ class HomeScreen extends StatelessWidget {
               // SizedBox(
               //   height: 50,
               // ),
+              Container(
+                padding: const EdgeInsets.all(4),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.only(right: 6),
+                      child: Text(
+                        'Filter',
+                        style: TextStyle(fontSize: 14),
+                      ),
+                    ),
+                    DropdownButtonHideUnderline(
+                      child: DropdownButton<dynamic>(
+                        hint: Text(
+                          ' ',
+                          style: TextStyle(color: Colors.grey.shade500),
+                        ),
+                        // underline: Container(
+                        //   height: 2,
+                        //   color: Colors.deepPurpleAccent,
+                        // ),
+                        value: goalController.selectedFilter,
+                        onChanged: (dynamic newValue) {
+                          goalController.selectedFilter = newValue;
+                          goalController.update();
+                        },
+                        items: goalController.filterList.map((item) {
+                          return DropdownMenuItem(
+                            value: item,
+                            child: Text(item),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               StreamBuilder<QuerySnapshot>(
                   stream: goalController.ownerRef.snapshots(),
                   builder: (BuildContext context,

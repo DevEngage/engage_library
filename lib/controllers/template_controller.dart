@@ -12,6 +12,8 @@ class TemplateController extends GetxController {
   int goalsCompleted = 0;
   int tasksCompleted = 0;
   TemplateModel? templateEdit;
+  List<String> filterList = ['All', 'Mine', 'Premium'];
+  String selectedFilter = 'All';
   final ref = FirebaseFirestore.instance
       .collection('templates')
       .withConverter<TemplateModel>(
@@ -35,6 +37,15 @@ class TemplateController extends GetxController {
   void onClose() {
     super.onClose();
   }
+
+  // getFilterState() {
+  //   if (selectedFilter == filterList[1]) {
+  //     return false;
+  //   } else if (selectedFilter == filterList[2]) {
+  //     return true;
+  //   }
+  //   return null;
+  // }
 
   get ownerRef {
     FirebaseAuth auth = FirebaseAuth.instance;
