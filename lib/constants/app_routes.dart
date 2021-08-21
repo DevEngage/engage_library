@@ -4,6 +4,7 @@ import 'package:earn_it/screens/goal_edit_screens.dart';
 import 'package:earn_it/screens/goal_screen.dart';
 import 'package:earn_it/screens/login_screen.dart';
 import 'package:earn_it/screens/task_edit_screens.dart';
+import 'package:earn_it/screens/template_edit_screens.dart';
 import 'package:get/get.dart';
 
 class AppRoutes {
@@ -23,6 +24,7 @@ class AppRoutes {
     GetPage(name: '/viewGoal', page: () => GoalScreen()),
     GetPage(name: '/editGoal', page: () => GoalEdit()),
     GetPage(name: '/editTask', page: () => TaskEdit()),
+    GetPage(name: '/editTemplate', page: () => TemplateEdit()),
     GetPage(name: '/login', page: () => LoginScreen()),
   ];
 }

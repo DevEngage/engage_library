@@ -264,7 +264,7 @@ class GoalScreen extends StatelessWidget {
                   ),
                   onTap: () async {
                     confirmWidget(context,
-                        title: 'Delete GoalModel',
+                        title: 'Delete Goal',
                         message: 'Warning you are about to delete this goal',
                         onAgreed: () async {
                       await goal.remove();

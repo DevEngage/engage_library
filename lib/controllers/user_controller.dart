@@ -108,6 +108,12 @@ class UserController extends GetxController {
     return null;
   }
 
+  isAdmin() {
+    return FirebaseAuth.instance.currentUser?.email
+            ?.contains("bunnystrike.com") ==
+        true;
+  }
+
   // Future<ParseResponse> anonLogin() async {}
 
   // Future<ParseResponse> requestPasswordReset(email) async {}

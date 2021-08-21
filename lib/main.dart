@@ -79,16 +79,15 @@ class _MyHomePageState extends State<MyHomePage> {
         onTap: onTabTapped, // new
         currentIndex: _currentIndex, // new
         items: [
-          new BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text('Goals'),
+            label: 'Goals',
           ),
-          new BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.content_copy),
-            title: Text('Templates'),
+            label: 'Templates',
           ),
-          new BottomNavigationBarItem(
-              icon: Icon(Icons.person), title: Text('Profile'))
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile')
         ],
       ),
     );

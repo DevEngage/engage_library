@@ -11,6 +11,7 @@ class TemplateController extends GetxController {
   // String lastQuery;
   int goalsCompleted = 0;
   int tasksCompleted = 0;
+  TemplateModel? templateEdit;
   final ref = FirebaseFirestore.instance
       .collection('templates')
       .withConverter<TemplateModel>(
