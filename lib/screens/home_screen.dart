@@ -1,14 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:earn_it/controllers/goal_controller.dart';
-import 'package:earn_it/models/goal_model.dart';
-import 'package:earn_it/widgets/goal_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
-  final GoalController goalController = Get.put(GoalController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +13,6 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: Colors.deepPurple,
           child: Icon(Icons.add),
           onPressed: () async {
-            goalController.goalEdit = GoalModel();
             await Navigator.pushNamed(
               context,
               '/editGoal',
