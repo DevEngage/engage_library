@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Future<void> confirmWidget(BuildContext context,
+Future<void> engagedConfirmWidget(BuildContext context,
     {onAgreed, onCancled, title = '', message = '', confirmText = 'Confirm'}) {
   return showDialog<void>(
     context: context,

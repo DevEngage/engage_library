@@ -1,6 +1,5 @@
-import 'package:earn_it/controllers/user_controller.dart';
-import 'package:earn_it/screens/home_screen.dart';
-import 'package:earn_it/widgets/confirm_widget.dart';
+import 'package:engaged/screens/home_screen.dart';
+import 'package:engaged/widgets/confirm_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
@@ -25,7 +24,7 @@ class LoginScreen extends StatelessWidget {
   }
 
   skipLogin(context, UserController user) async {
-    confirmWidget(context,
+    engagedConfirmWidget(context,
         title: 'Warning!',
         message:
             'Your data will not be saved to an account and will be invalid after 1 year.',
@@ -54,7 +53,7 @@ class LoginScreen extends StatelessWidget {
             await register(usersController, data.name.trim(), data.password),
         onSubmitAnimationCompleted: () {
           Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => HomeScreen(),
+            builder: (context) => EngagedHomeScreen(),
           ));
         },
         onRecoverPassword: (String name) =>
