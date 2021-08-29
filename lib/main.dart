@@ -1,13 +1,10 @@
-import 'package:earn_it/screens/home_screen.dart';
-import 'package:earn_it/screens/profile_screen.dart';
-import 'package:earn_it/screens/world_screen.dart';
+import 'package:engage_library/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'constants/constants.dart';
-import 'controllers/user_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,9 +57,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-    HomeScreen(),
-    WorldScreen(),
-    ProfileScreen(),
+    EngageHomeScreen(),
   ];
 
   void onTabTapped(int index) {

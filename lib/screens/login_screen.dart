@@ -1,12 +1,13 @@
-import 'package:engaged/screens/home_screen.dart';
-import 'package:engaged/widgets/confirm_widget.dart';
+import 'package:engage_library/controllers/user_controller.dart';
+import 'package:engage_library/screens/home_screen.dart';
+import 'package:engage_library/widgets/confirm_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatelessWidget {
+class EngagedLoginScreen extends StatelessWidget {
   Duration get loginTime => Duration(milliseconds: 2250);
 
   _checkForUser(context) async {
@@ -15,15 +16,15 @@ class LoginScreen extends StatelessWidget {
     }
   }
 
-  Future<String?> register(UserController user, email, password) async {
+  Future<String?> register(EngageUserController user, email, password) async {
     return await user.signUp(email, password);
   }
 
-  Future<String?> login(UserController user, email, password) async {
+  Future<String?> login(EngageUserController user, email, password) async {
     return await user.login(email, password);
   }
 
-  skipLogin(context, UserController user) async {
+  skipLogin(context, EngageUserController user) async {
     engagedConfirmWidget(context,
         title: 'Warning!',
         message:
@@ -34,7 +35,8 @@ class LoginScreen extends StatelessWidget {
     });
   }
 
-  Future<String?> _recoverPassword(UserController user, String name) async {
+  Future<String?> _recoverPassword(
+      EngageUserController user, String name) async {
     // final res = await user.requestPasswordReset(name);
     // if (!res.success) return res.error.message;
     return null;
@@ -42,7 +44,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UserController usersController = Get.put(UserController());
+    final EngageUserController usersController =
+        Get.put(EngageUserController());
     return Scaffold(
       body: FlutterLogin(
         title: 'EarnIt',
@@ -53,7 +56,7 @@ class LoginScreen extends StatelessWidget {
             await register(usersController, data.name.trim(), data.password),
         onSubmitAnimationCompleted: () {
           Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => EngagedHomeScreen(),
+            builder: (context) => EngageHomeScreen(),
           ));
         },
         onRecoverPassword: (String name) =>

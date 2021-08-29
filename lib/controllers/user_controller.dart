@@ -1,20 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:earn_it/models/profile_model.dart';
+import 'package:engage_library/models/profile_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-class UserController extends GetxController {
+class EngageUserController extends GetxController {
   User? user;
-  ProfileModel? profile;
+  EngageProfileModel? profile;
   final ref = FirebaseFirestore.instance
       .collection('profiles')
-      .withConverter<ProfileModel>(
-        fromFirestore: (snapshot, _) => ProfileModel.fromJson(snapshot.data()!),
+      .withConverter<EngageProfileModel>(
+        fromFirestore: (snapshot, _) =>
+            EngageProfileModel.fromJson(snapshot.data()!),
         toFirestore: (doc, _) => doc.toJson(),
       );
-  static UserController to = Get.find();
+  static EngageUserController to = Get.find();
 
-  UserController();
+  EngageUserController();
   @override
   void onReady() async {
     super.onReady();

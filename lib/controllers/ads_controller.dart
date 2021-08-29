@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-class AdsController extends GetxController {
+class EngageAdsController extends GetxController {
   static bool disableAds = false;
   static int adLoads = 0;
   bool intialized = false;
@@ -20,9 +20,9 @@ class AdsController extends GetxController {
 //   InterstitialAd myInterstitial;
 //   RewardedVideoAd rewardAd;
   InterstitialAd? _interstitialAd;
-  static AdsController to = Get.find();
+  static EngageAdsController to = Get.find();
 
-  AdsController();
+  EngageAdsController();
 
   @override
   void onReady() async {
@@ -108,10 +108,10 @@ class AdsController extends GetxController {
   }
 
   loadInterstitialOnTurn([justLoad = false]) {
-    AdsController.adLoads++;
+    EngageAdsController.adLoads++;
     if (justLoad) {
       loadInterstitial();
-    } else if ((AdsController.adLoads % 2) == 1) {
+    } else if ((EngageAdsController.adLoads % 2) == 1) {
       loadInterstitial();
     }
   }

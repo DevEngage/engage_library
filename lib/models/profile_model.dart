@@ -1,13 +1,13 @@
-class ProfileModel {
+class EngageProfileModel {
   String? id;
   String? name;
   String? email;
 
-  ProfileModel();
+  EngageProfileModel();
 
-  ProfileModel.blank();
+  EngageProfileModel.blank();
 
-  ProfileModel.fromJson(Map data) {
+  EngageProfileModel.fromJson(Map data) {
     id = data['id'];
     name = data['name'];
     email = data['email'];
