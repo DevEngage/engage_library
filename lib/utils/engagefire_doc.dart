@@ -3,7 +3,7 @@ import 'package:engage_library/utils/engagefire.dart';
 
 class EngagefireDoc<T> {
   Engagefire parent;
-  T doc;
+  late T doc;
   EngagefireDoc({
     required this.parent,
     required this.doc,
@@ -18,11 +18,18 @@ class EngagefireDoc<T> {
     }
   }
 
-  save({doc}) {
-    if (doc?.id) {
+  save() {
+    if ((doc as EngagefireDocModel).$id != null) {
       // update
+
     } else {
       // add
+    }
+  }
+
+  refresh() {
+    if ((doc as EngagefireDocModel).$id != null) {
+      parent.getDoc((doc as EngagefireDocModel).$id);
     }
   }
 }

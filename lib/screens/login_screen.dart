@@ -7,7 +7,7 @@ import 'package:flutter_login/flutter_login.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-class EngagedLoginScreen extends StatelessWidget {
+class EngageLoginScreen extends StatelessWidget {
   Duration get loginTime => Duration(milliseconds: 2250);
 
   _checkForUser(context) async {
