@@ -1,19 +1,22 @@
+// import 'package:engage_library/utils/engagefire_collection.dart';
 // import 'package:engage_library/widgets/quick_list.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 
-// class CollectionsList extends StatefulWidget {
-//   final List collections;
-//   CollectionsList({
-//     Key key,
-//     this.collections,
+// class EngagefireList extends StatefulWidget {
+//   final String path;
+//   EngagefireList({
+//     Key? key,
+//     required this.path,
 //   }) : super(key: key);
 
 //   @override
-//   _CollectionsListState createState() => _CollectionsListState();
+//   _EngagefireListState createState() => _EngagefireListState();
 // }
 
-// class _CollectionsListState extends State<CollectionsList> {
+// class _EngagefireListState extends State<EngagefireList> {
+//   final EngagefireCollection collection;
+
 //   @override
 //   Widget build(BuildContext context) {
 //     return Container(

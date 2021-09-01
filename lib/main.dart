@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
     FirebaseAuth auth = FirebaseAuth.instance;
     return GetMaterialApp(
       navigatorKey: Get.key,
-      title: 'EarnIt',
+      title: 'EngageLibrary',
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.fade,
       theme: AppThemes.lightTheme,
@@ -37,54 +37,12 @@ class MyApp extends StatelessWidget {
       //   primarySwatch: Colors.deepPurple,
       // ),
       getPages: AppRoutes.routes,
-      // initialRoute: auth.currentUser != null ? "/" : "/login",
+      initialRoute: auth.currentUser != null ? "/" : "/admin",
       // navigatorObservers: [
       //   BotToastNavigatorObserver(),
       //   FirebaseAnalyticsObserver(analytics: Analytics.analytics)
       // ],
       // builder: BotToastInit(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _currentIndex = 0;
-  final List<Widget> _children = [
-    EngageHomeScreen(),
-  ];
-
-  void onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: onTabTapped, // new
-        currentIndex: _currentIndex, // new
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Goals',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.content_copy),
-            label: 'Templates',
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile')
-        ],
-      ),
     );
   }
 }

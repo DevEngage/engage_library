@@ -1,25 +1,24 @@
-// import 'package:engage_library/classes/engage_parse_object.dart';
-// import 'package:engage_library/classes/project.dart';
+// // import 'package:engage_library/classes/engage_parse_object.dart';
+// // import 'package:engage_library/classes/project.dart';
 // import 'package:engage_library/screens/quick_add_screen.dart';
+// import 'package:engage_library/utils/engagefire.dart';
+// import 'package:engage_library/utils/engagefire_collection.dart';
 // import 'package:flutter/material.dart';
-// import 'package:engage_library/widgets/input.dart';
+// // import 'package:engage_library/widgets/input.dart';
 // import 'package:get/get.dart';
-// import 'package:loading_overlay/loading_overlay.dart';
-// import 'package:parse_server_sdk/parse_server_sdk.dart';
+// // import 'package:loading_overlay/loading_overlay.dart';
 
 // class QuickList extends StatefulWidget {
-//   final List<EngageParseObject> list;
-//   final EngageParseObject collection;
-//   final EngageParseObject parent;
+//   final List<dynamic> list;
+//   final EngagefireCollection collection;
 //   final Function onTap;
 //   final onLongPress;
 //   final addRoute;
 //   final appBar;
-//   final EngageProject project;
+//   // final EngageProject project;
 //   QuickList({
-//     Key key,
+//     Key? key,
 //     this.list = const [],
-//     this.onTap,
 //     this.onLongPress,
 //     this.collection,
 //     this.parent,
