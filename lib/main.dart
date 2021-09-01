@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       //   primarySwatch: Colors.deepPurple,
       // ),
       getPages: AppRoutes.routes,
-      initialRoute: auth.currentUser != null ? "/" : "/login",
+      // initialRoute: auth.currentUser != null ? "/" : "/login",
       // navigatorObservers: [
       //   BotToastNavigatorObserver(),
       //   FirebaseAnalyticsObserver(analytics: Analytics.analytics)
