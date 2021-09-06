@@ -1,13 +1,36 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engage_library/models/engagefire_doc_model.dart';
 import 'package:engage_library/utils/engagefire.dart';
+import 'package:flutter/material.dart';
 
 class EngagefireDoc<T> {
   Engagefire parent;
+  String? $id;
   late T doc;
   EngagefireDoc({
     required this.parent,
     required this.doc,
   });
+
+  get ref {
+    FirebaseFirestore.instance.collection('').doc($id).withConverter<T>(
+          fromFirestore: (snapshot, _) =>
+              (T as EngagefireDocModel).fromJson(snapshot.data()!),
+          toFirestore: (doc, _) => (doc as EngagefireDocModel).toJson(),
+        );
+  }
+
+  stream() {
+    return StreamBuilder<DocumentSnapshot<T>>(
+        stream: ref.snapshots(),
+        builder: (BuildContext context,
+            AsyncSnapshot<DocumentSnapshot<T>> snapshot) {
+          if (snapshot.hasData) {
+            final item = snapshot.data!.data()!;
+          }
+          return Container();
+        });
+  }
 
   addMeta() {
     if (doc is EngagefireDocModel) {
@@ -28,7 +51,7 @@ class EngagefireDoc<T> {
     }
   }
 
-   toggle(String field) async {
+  toggle(String field) async {
     // await parent?.doc(task.id).update({
     //   ...task.toJson(),
     //   'isDone': !task.isDone,
@@ -36,9 +59,7 @@ class EngagefireDoc<T> {
     await save();
   }
 
-  count(field) {
-    
-  }
+  count(field) {}
 
   refresh() {
     if ((doc as EngagefireDocModel).$id != null) {
