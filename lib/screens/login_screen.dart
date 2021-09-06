@@ -25,7 +25,7 @@ class EngageLoginScreen extends StatelessWidget {
   }
 
   skipLogin(context, EngageUserController user) async {
-    engagedConfirmWidget(context,
+    engageConfirmWidget(context,
         title: 'Warning!',
         message:
             'Your data will not be saved to an account and will be invalid after 1 year.',
