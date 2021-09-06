@@ -43,21 +43,26 @@ class EngageAdminScreen extends StatelessWidget {
             ),
           ), // Image.asset('assets/imgs/background.png') ),
           child: _children[adminContonroller.currentIndex]),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: adminContonroller.onTabTapped, // new
-        currentIndex: adminContonroller.currentIndex, // new
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Collections',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.content_copy),
-            label: 'Models',
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Screens'),
-          BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Users')
-        ],
+      bottomNavigationBar: GetBuilder<EngageAdminController>(
+          builder: (_) =>  BottomNavigationBar(
+          onTap: adminContonroller.onTabTapped, // new
+          currentIndex: adminContonroller.currentIndex, // new
+          backgroundColor: Colors.black,
+          fixedColor: Colors.black,
+          unselectedItemColor: Colors.grey,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Collections',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.content_copy),
+              label: 'Models',
+            ),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Screens'),
+            BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Users')
+          ],
+        ),
       ),
     ); // ListView.builder()
   }

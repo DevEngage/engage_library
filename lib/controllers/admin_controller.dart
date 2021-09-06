@@ -19,5 +19,6 @@ class EngageAdminController extends GetxController {
 
   void onTabTapped(int index) {
     currentIndex = index;
+    update();
   }
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>201535327358-il1u2kj2ca5u4dt4k38e75u0s0tsgo23.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.201535327358-il1u2kj2ca5u4dt4k38e75u0s0tsgo23</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBiFsVIkuhmXcKxDyHo6hc1VVB-n6uR8ZQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>201535327358</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>io.devengage.engageflutter</string>
+	<key>PROJECT_ID</key>
+	<string>engage-flutter</string>
+	<key>STORAGE_BUCKET</key>
+	<string>engage-flutter.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:201535327358:ios:be69213da103b9c2fddc2f</string>
+	<key>DATABASE_URL</key>
+	<string>https://engage-flutter.firebaseio.com</string>
+</dict>
+</plist>

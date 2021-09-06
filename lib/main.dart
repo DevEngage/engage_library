@@ -1,3 +1,4 @@
+import 'package:engage_library/engage.dart';
 import 'package:engage_library/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -9,12 +10,7 @@ import 'constants/constants.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // await GetStorage.init();
-  // await Analytics.init();
-  // if (GetPlatform.isAndroid || Analytics.isEnabled) {
-  //   await MobileAds.instance.initialize();
-  // }
-  // UserController.loginAnonAccount();
+  // await Engage.init();
   runApp(MyApp());
 }
 
@@ -29,10 +25,10 @@ class MyApp extends StatelessWidget {
       title: 'EngageLibrary',
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.fade,
-      theme: AppThemes.lightTheme,
-      darkTheme: AppThemes.darkTheme,
+      // theme: AppThemes.lightTheme,
+      // darkTheme: AppThemes.darkTheme,
       // themeMode: ThemeMode.system,
-      themeMode: ThemeMode.dark,
+      // themeMode: ThemeMode.dark,
       // theme: ThemeData(
       //   primarySwatch: Colors.deepPurple,
       // ),

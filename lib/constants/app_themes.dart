@@ -230,7 +230,7 @@ class AppThemes {
     fontFamily: font1,
     scaffoldBackgroundColor: _darkBackgroundColor,
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: _darkPrimaryColor,
+      backgroundColor: Colors.amber,
     ),
     appBarTheme: AppBarTheme(
       color: _darkBackgroundAppBarColor,

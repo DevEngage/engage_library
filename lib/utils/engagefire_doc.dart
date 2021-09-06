@@ -18,13 +18,26 @@ class EngagefireDoc<T> {
     }
   }
 
-  save() {
+  save() async {
     if ((doc as EngagefireDocModel).$id != null) {
       // update
-
+      await parent.ref.update(doc);
     } else {
       // add
+      await parent.ref.set(doc);
     }
+  }
+
+   toggle(String field) async {
+    // await parent?.doc(task.id).update({
+    //   ...task.toJson(),
+    //   'isDone': !task.isDone,
+    // });
+    await save();
+  }
+
+  count(field) {
+    
   }
 
   refresh() {

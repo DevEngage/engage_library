@@ -1,35 +1,36 @@
-// import 'package:engage_library/classes/engage_parse_object.dart';
-// import 'package:engage_library/classes/project.dart';
-// import 'package:engage_library/classes/quick_add.dart';
-// import 'package:engage_library/classes/quick_add_segment.dart';
-// import 'package:engage_library/classes/quick_add_tab.dart';
+// // import 'package:engage_library/classes/engage_parse_object.dart';
+// // import 'package:engage_library/classes/project.dart';
+// // import 'package:engage_library/classes/quick_add.dart';
+// // import 'package:engage_library/classes/quick_add_segment.dart';
+// // import 'package:engage_library/classes/quick_add_tab.dart';
+// import 'package:engage_library/utils/engagefire_collection.dart';
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter/material.dart';
-// import 'package:engage_library/admin_theme.dart';
+// // import 'package:engage_library/admin_theme.dart';
 // import 'package:engage_library/widgets/confirm_widget.dart';
 // import 'package:engage_library/widgets/input.dart';
 // import 'package:engage_library/widgets/quick_list.dart';
 // import 'package:get/get.dart';
-// import 'package:loading_overlay/loading_overlay.dart';
-// import 'package:parse_server_sdk/parse_server_sdk.dart';
+// // import 'package:loading_overlay/loading_overlay.dart';
+// // import 'package:parse_server_sdk/parse_server_sdk.dart';
 
 // class QuickAddScreen extends StatefulWidget {
-//   final EngageParseObject collection;
+//   final EngagefireCollection collection;
 //   final bool showAppBar;
 //   final String addRoute;
-//   final EngageProject project;
+//   // final EngageProject project;
 //   final dynamic model;
-//   final EngageParseObject parent;
+//   // final EngageParseObject parent;
 //   final String arrayToSave;
 
 //   QuickAddScreen({
-//     Key key,
-//     this.collection,
+//     Key? key,
+//     required this.collection,
 //     this.showAppBar = true,
 //     this.addRoute = '/quickAdd',
-//     this.project,
+//     // this.project,
 //     this.model,
-//     this.parent,
+//     // this.parent,
 //     this.arrayToSave,
 //   }) : super(key: key);
 
@@ -38,9 +39,9 @@
 // }
 
 // class _QuickAddScreenState extends State<QuickAddScreen> {
-//   EngageParseObject collection;
-//   EngageParseObject parent;
-//   String arrayToSave;
+//   late EngagefireCollection collection;
+//   // EngageParseObject parent;
+//   // late String arrayToSave;
 //   dynamic model;
 //   bool showAppBar;
 //   String addRoute;
@@ -54,10 +55,10 @@
 //     collection = widget.collection;
 //     showAppBar = widget.showAppBar;
 //     addRoute = widget.addRoute;
-//     project = widget.project ?? EngageProject();
+//     // project = widget.project ?? EngageProject();
 //     model = widget.model;
-//     parent = widget.parent;
-//     arrayToSave = widget.arrayToSave;
+//     // parent = widget.parent;
+//     // arrayToSave = widget.arrayToSave;
 //   }
 
 //   @override
@@ -395,7 +396,7 @@
 //       error: qa.error,
 //       inputType: qa.inputType,
 //       inputAction: qa.inputAction,
-//       fileType: qa.fileType,
+//       // fileType: qa.fileType,
 //       autofocus: qa.autofocus,
 //       correct: qa.correct,
 //       readOnly: qa.readOnly,
@@ -406,7 +407,7 @@
 //       mask: qa.mask,
 //       collection: qa.collection,
 //       items: qa.items,
-//       smartOptions: qa.smartOptions,
+//       // smartOptions: qa.smartOptions,
 //       onChanged: qa.onChanged,
 //       onSubmitted: qa.onSubmitted,
 //     );
