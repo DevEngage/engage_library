@@ -4,7 +4,7 @@ import 'package:engage_library/utils/engagefire.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class EngagefireCollection<T> extends GetxController {
+class EngagefireCollection<T> { //  extends GetxController
   static Map<String, EngagefireCollection> instances = {};
   late String path;
   List list = [];
@@ -12,24 +12,25 @@ class EngagefireCollection<T> extends GetxController {
     required this.path,
   });
 
-  static to(String pathName) {
+  static EngagefireCollection to(String pathName) {
     final col = EngagefireCollection.instances[pathName];
     if (col != null) {
       return col;
     } else {
       instances[pathName] = EngagefireCollection(path: pathName);
-      return instances[pathName];
+      return instances[pathName]!;
     }
     // final userContonroller = Get.put(EngageUserController());
   }
 
-  stream() {
-    return StreamBuilder<DocumentSnapshot<T>>(
+  stream({dynamic child}) {
+    return StreamBuilder<QuerySnapshot<T>>(
         stream: ref.snapshots(),
         builder: (BuildContext context,
-            AsyncSnapshot<DocumentSnapshot<T>> snapshot) {
+            AsyncSnapshot<QuerySnapshot<T>> snapshot) {
           if (snapshot.hasData) {
-            final item = snapshot.data!.data()!;
+            final item = snapshot.data!.docs;
+            return child(item);
           }
           return Container();
         });
@@ -41,7 +42,11 @@ class EngagefireCollection<T> extends GetxController {
   }
 
   get ref {
-    FirebaseFirestore.instance.collection(path).withConverter<T>(
+    return FirebaseFirestore.instance.collection(path);
+  }
+
+  get refWithModel {
+    return FirebaseFirestore.instance.collection(path).withConverter<T>(
           fromFirestore: (snapshot, _) =>
               (T as EngagefireDocModel).fromJson(snapshot.data()!),
           toFirestore: (doc, _) => (doc as EngagefireDocModel).toJson(),
