@@ -1,6 +1,7 @@
 import 'package:engage_library/utils/engagefire_collection.dart';
 import 'package:engage_library/widgets/input.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class EngageAddScreen extends StatefulWidget {
   final String path;
@@ -45,4 +46,16 @@ class _EngageAddScreenState extends State<EngageAddScreen> {
        ],),
     );
   }
+}
+
+
+showFilterModal({String path = ''}) async {
+  MediaQueryData queryData = MediaQuery.of(Get.context!);
+  return Get.bottomSheet(
+    Container(
+      height: queryData.size.height / 2,
+      child: EngageAddScreen(path: path,),
+    ),
+    isScrollControlled: true,
+  );
 }
