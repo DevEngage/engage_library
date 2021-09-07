@@ -1,3 +1,4 @@
+import 'package:engage_library/screens/add_screen.dart';
 import 'package:engage_library/screens/admin_screen.dart';
 import 'package:engage_library/screens/home_screen.dart';
 import 'package:engage_library/screens/login_screen.dart';
@@ -12,5 +13,11 @@ class AppRoutes {
     GetPage(name: '/login', page: () => EngageLoginScreen()),
     GetPage(name: '/admin', page: () => EngageAdminScreen()),
     GetPage(name: '/admin-manage-model', page: () => EngageModelManageScreen()),
+    GetPage(
+        name: '/admin-add-models',
+        page: () => EngageAddScreen(path: 'engageModels')),
+    GetPage(
+        name: '/admin-add-collections',
+        page: () => EngageAddScreen(path: 'engageCollections')),
   ];
 }

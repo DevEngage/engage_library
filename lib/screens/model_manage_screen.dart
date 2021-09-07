@@ -15,15 +15,13 @@ class EngageModelManageScreen extends StatelessWidget {
           onPressed: () async {
             await Navigator.pushNamed(
               context,
-              '/editGoal',
+              '/admin-add-models',
               arguments: <String, dynamic>{'id': null},
             ); // _addEditGoal(context, currentDate, goalCategory),
             // Provider.of<Goals>(context, listen: false).getList();
           }),
       body: ListView(
-        children: [
-          models.stream(child: () => Text('test'))
-        ],
+        children: [models.stream(child: () => Text('test'))],
       ),
     );
   }
