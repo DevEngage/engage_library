@@ -33,6 +33,7 @@ dependencies:
   shared_preferences: ^2.0.6
   universal_platform: ^1.0.0+1
   get: ^4.1.4
+  getwidget: ^2.0.4
   flushbar: ^1.10.4
   app_tracking_transparency: ^2.0.1
   timeago: ^3.1.0
