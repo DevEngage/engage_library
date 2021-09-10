@@ -1,3 +1,4 @@
+import 'package:engage_library/models/field_model.dart';
 import 'package:engage_library/utils/engagefire_collection.dart';
 import 'package:engage_library/widgets/input.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,9 @@ import 'package:get/get.dart';
 
 class EngageAddScreen extends StatefulWidget {
   final String path;
-  EngageAddScreen({Key? key, required this.path}) : super(key: key);
+  final List? fields;
+  EngageAddScreen({Key? key, required this.path, this.fields})
+      : super(key: key);
 
   @override
   _EngageAddScreenState createState() => _EngageAddScreenState();
@@ -14,38 +17,43 @@ class EngageAddScreen extends StatefulWidget {
 class _EngageAddScreenState extends State<EngageAddScreen> {
   @override
   Widget build(BuildContext context) {
-    final collection = EngagefireCollection(path: widget.path);
+    final collection = EngagefireCollection<FieldModel>(path: widget.path);
     return Scaffold(
       body: Container(
+        padding: const EdgeInsets.all(16),
+        color: Colors.black38,
         child: ListView(
           children: [
             Text(widget.path),
-            for (var item in collection.list)
+            SizedBox(
+              height: 16,
+            ),
+            for (var item in widget.fields ?? collection.list)
               EngageInput(
-                  // margin: qa.margin,
-                  // hintText: qa.hintText,
-                  // labelText: qa.labelText,
-                  // helperText: qa.helperText,
-                  // type: qa.type,
-                  // initialValue: qa.initialValue,
-                  // error: qa.error,
-                  // inputType: qa.inputType,
-                  // inputAction: qa.inputAction,
-                  // // fileType: qa.fileType,
-                  // autofocus: qa.autofocus,
-                  // correct: qa.correct,
-                  // readOnly: qa.readOnly,
-                  // maxLines: qa.maxLines,
-                  // dateFormat: qa.dateFormat,
-                  // node: qa.node,
-                  // smartLeading: qa.smartLeading,
-                  // mask: qa.mask,
-                  // collection: qa.collection,
-                  // items: qa.items,
-                  // // smartOptions: qa.smartOptions,
-                  // onChanged: qa.onChanged,
-                  // onSubmitted: qa.onSubmitted,
-                  )
+                // margin: qa.margin,
+                // hintText: qa.hintText,
+                labelText: item.name,
+                // helperText: qa.helperText,
+                // type: qa.type,
+                initialValue: item.value,
+                // error: qa.error,
+                type: 'text',
+                // inputAction: qa.inputAction,
+                // // fileType: qa.fileType,
+                // autofocus: qa.autofocus,
+                // correct: qa.correct,
+                // readOnly: qa.readOnly,
+                // maxLines: qa.maxLines,
+                // dateFormat: qa.dateFormat,
+                // node: qa.node,
+                // smartLeading: qa.smartLeading,
+                // mask: qa.mask,
+                // collection: qa.collection,
+                // items: qa.items,
+                // // smartOptions: qa.smartOptions,
+                // onChanged: qa.onChanged,
+                // onSubmitted: qa.onSubmitted,
+              )
           ],
         ),
       ),

@@ -12,6 +12,8 @@ TODO:
  */
 class EngagefireFile {
   String? ref;
+  String? name;
+
   EngagefireFile.fromField(Map doc) {}
 
   generatePath() {}

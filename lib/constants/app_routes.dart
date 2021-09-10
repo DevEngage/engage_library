@@ -1,3 +1,4 @@
+import 'package:engage_library/models/field_model.dart';
 import 'package:engage_library/screens/add_screen.dart';
 import 'package:engage_library/screens/admin_screen.dart';
 import 'package:engage_library/screens/home_screen.dart';
@@ -15,7 +16,10 @@ class AppRoutes {
     GetPage(name: '/admin-manage-model', page: () => EngageModelManageScreen()),
     GetPage(
         name: '/admin-add-models',
-        page: () => EngageAddScreen(path: 'engageModels')),
+        page: () => EngageAddScreen(path: 'engageModels', fields: [
+              FieldModel(name: 'Field Name'),
+              FieldModel(name: 'Default Value'),
+            ])),
     GetPage(
         name: '/admin-add-collections',
         page: () => EngageAddScreen(path: 'engageCollections')),
