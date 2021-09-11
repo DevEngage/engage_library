@@ -16,6 +16,12 @@ class EngageAddScreen extends StatefulWidget {
 }
 
 class _EngageAddScreenState extends State<EngageAddScreen> {
+  String? error;
+
+  validate() {}
+
+  add() {}
+
   @override
   Widget build(BuildContext context) {
     final collection = EngagefireCollection<FieldModel>(path: widget.path);
@@ -29,38 +35,14 @@ class _EngageAddScreenState extends State<EngageAddScreen> {
             SizedBox(
               height: 16,
             ),
-            for (var item in widget.fields ?? collection.list)
-              EngageInput(
-                // margin: qa.margin,
-                // hintText: qa.hintText,
-                labelText: item.name,
-                // helperText: qa.helperText,
-                // type: qa.type,
-                initialValue: item.value,
-                // error: qa.error,
-                type: 'text',
-                // inputAction: qa.inputAction,
-                // // fileType: qa.fileType,
-                // autofocus: qa.autofocus,
-                // correct: qa.correct,
-                // readOnly: qa.readOnly,
-                // maxLines: qa.maxLines,
-                // dateFormat: qa.dateFormat,
-                // node: qa.node,
-                // smartLeading: qa.smartLeading,
-                // mask: qa.mask,
-                // collection: qa.collection,
-                // items: qa.items,
-                // // smartOptions: qa.smartOptions,
-                // onChanged: qa.onChanged,
-                // onSubmitted: (val) => item.value = val,
-                onChanged: (val) => item.value = val,
-              ),
+            for (FieldModel item in widget.fields ?? collection.list)
+              item.toInputWidget(),
             GFButton(
-                onPressed: () {
-                  print(widget.fields);
-                },
-                text: "Save"),
+              onPressed: () {
+                print(widget.fields);
+              },
+              text: "Save",
+            ),
           ],
         ),
       ),

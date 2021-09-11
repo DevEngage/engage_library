@@ -1,11 +1,14 @@
 import 'dart:io';
 
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:engage_library/enum/types.dart';
+import 'package:engage_library/models/field_list_model.dart';
 // import 'package:file_picker/file_picker.dart';
 // import 'package:file_picker_cross/file_picker_cross.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:engage_library/constants/constants.dart';
+import 'package:getwidget/getwidget.dart';
 // import 'package:games_revealed/theme.dart';
 import 'package:intl/intl.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -18,11 +21,11 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
  */
 
 class EngageInput<T> extends StatefulWidget {
-  final EdgeInsets margin;
-  final String hintText;
-  final String labelText;
-  final String helperText;
-  final String type;
+  final EdgeInsets? margin;
+  final String? hintText;
+  final String? labelText;
+  final String? helperText;
+  final FieldType? type;
   final dynamic initialValue;
   final String? error;
   final TextInputType inputType;
@@ -36,10 +39,10 @@ class EngageInput<T> extends StatefulWidget {
   final int? maxLines;
   final DateFormat? dateFormat;
   final FocusNode? node;
-  final Widget? smartLeading;
+  // final Widget? smartLeading;
   final MaskTextInputFormatter? mask;
   final T? collection;
-  final List<Map<String, String>>? items;
+  final List<FieldListModel>? items;
   // final List<SmartSelectOption<String>> smartOptions;
   final ValueChanged<dynamic>? onChanged;
   final ValueChanged<dynamic>? onSubmitted;
@@ -55,7 +58,7 @@ class EngageInput<T> extends StatefulWidget {
     this.inputType = TextInputType.text,
     this.inputAction = TextInputAction.done,
     // this.fileType = FileType.any,
-    this.type = 'text',
+    this.type = FieldType.text,
     this.initialValue,
     this.autofocus = false,
     this.correct = false,
@@ -64,7 +67,7 @@ class EngageInput<T> extends StatefulWidget {
     this.noBottom = false,
     this.maxLines,
     this.dateFormat,
-    this.smartLeading,
+    // this.smartLeading,
     this.mask,
     this.collection,
     this.items,
@@ -153,7 +156,7 @@ class EngageInputState<T> extends State<EngageInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(margin: widget.margin, child: getInputType(widget.type));
+    return Container(margin: widget.margin, child: getInputType(widget.type!));
   }
 
   getSmartCategories(list) {
@@ -163,24 +166,24 @@ class EngageInputState<T> extends State<EngageInput> {
     //     title: (val, dynamic game) => game.name);
   }
 
-  getInputType(String type) {
+  getInputType(FieldType type) {
     switch (type) {
-      case 'smartsingle':
+      case FieldType.select:
         return smartsingle();
-      case 'smartmulti':
+      case FieldType.multiselect:
         return smartmulti();
-      case 'date':
+      case FieldType.date:
         return dateInput();
-      case 'file':
+      case FieldType.file:
         return fileInput();
-      case 'image':
+      case FieldType.image:
         return imageInput();
-      case 'youtube':
+      case FieldType.youtube:
         return youtubeInput();
-      case 'checkbox':
+      case FieldType.checkbox:
         return checkboxInput();
-      case 'list':
-        return listInput();
+      // case 'list':
+      //   return listInput();
       default:
         return textInput();
     }
@@ -238,7 +241,7 @@ class EngageInputState<T> extends State<EngageInput> {
         size: 60.0,
         padding: null,
         child: CheckboxListTile(
-          title: Text(widget.labelText,
+          title: Text(widget.labelText ?? '',
               style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20)),
           onChanged: (value) => handleChanged(value),
           value: _value,
@@ -312,33 +315,65 @@ class EngageInputState<T> extends State<EngageInput> {
   }
 
   smartsingle() {
-    return decorationBox(
-      size: 60,
-      padding: null,
-      // child: SmartSelect<String>.single(
-      //     enabled: !widget.readOnly,
-      //     isLoading: isLoading,
-      //     leading: widget.collection != null &&
-      //             widget.collection.getForm != null &&
-      //             widget.readOnly == false
-      //         ? IconButton(
-      //             icon: Icon(Icons.add),
-      //             onPressed: goToQuickAdd,
-      //           )
-      //         : widget.smartLeading,
-      //     title: widget.labelText,
-      //     value: _value,
-      //     options: _smartOptions,
-      //     choiceType: SmartSelectChoiceType.chips,
-      //     modalType: SmartSelectModalType.bottomSheet,
-      //     onChange: (val) => handleChanged(val)),
+    return Container(
+      height: 50,
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.all(20),
+      child: DropdownButtonHideUnderline(
+        child: GFDropdown(
+          padding: const EdgeInsets.all(15),
+          borderRadius: BorderRadius.circular(10),
+          border: const BorderSide(color: Colors.black12, width: 1),
+          dropdownButtonColor: Colors.grey[300],
+          value: widget.initialValue,
+          onChanged: (newValue) {
+            handleChanged(newValue);
+          },
+          items: (widget.items?.map((item) => item.name).toList() ?? [])
+              .map((value) => DropdownMenuItem(
+                    value: value,
+                    child: Text(value ?? ''),
+                  ))
+              .toList(),
+        ),
+      ),
     );
   }
 
   smartmulti() {
-    return decorationBox(
-      size: 70,
-      padding: null,
+    return Container(
+      child: GFMultiSelect(
+        items: widget.items?.map((item) => item.name).toList() ?? [],
+        onSelect: (value) {
+          print('selected $value ');
+        },
+        dropdownTitleTileText:
+            widget.labelText ?? '', // 'Messi, Griezmann, Coutinho ',
+        dropdownTitleTileColor: Colors.grey[200],
+        dropdownTitleTileMargin:
+            EdgeInsets.only(top: 22, left: 18, right: 18, bottom: 5),
+        dropdownTitleTilePadding: EdgeInsets.all(10),
+        dropdownUnderlineBorder:
+            const BorderSide(color: Colors.transparent, width: 2),
+        dropdownTitleTileBorder: Border.all(color: Colors.grey, width: 1),
+        dropdownTitleTileBorderRadius: BorderRadius.circular(5),
+        expandedIcon: const Icon(
+          Icons.keyboard_arrow_down,
+          color: Colors.black54,
+        ),
+        collapsedIcon: const Icon(
+          Icons.keyboard_arrow_up,
+          color: Colors.black54,
+        ),
+        submitButton: Text('OK'),
+        dropdownTitleTileTextStyle:
+            const TextStyle(fontSize: 14, color: Colors.black54),
+        padding: const EdgeInsets.all(6),
+        margin: const EdgeInsets.all(6),
+        type: GFCheckboxType.basic,
+        activeBgColor: Colors.green.withOpacity(0.5),
+        inactiveBorderColor: Colors.grey,
+      ),
       // child: SmartSelect<String>.multiple(
       //     enabled: !widget.readOnly,
       //     isLoading: isLoading,
@@ -366,7 +401,7 @@ class EngageInputState<T> extends State<EngageInput> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(widget.labelText,
+          Text(widget.labelText ?? '',
               style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20)),
           // if (_value is ParseFile)
           //   GestureDetector(
@@ -401,7 +436,7 @@ class EngageInputState<T> extends State<EngageInput> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(widget.labelText,
+          Text(widget.labelText ?? '',
               style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20)),
           // if (_value is ParseFile)
           //   GestureDetector(

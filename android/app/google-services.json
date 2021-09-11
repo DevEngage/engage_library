@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "201535327358",
+    "firebase_url": "https://engage-flutter.firebaseio.com",
+    "project_id": "engage-flutter",
+    "storage_bucket": "engage-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:201535327358:android:70bfcb06a2e13d4ffddc2f",
+        "android_client_info": {
+          "package_name": "io.devengage.engageflutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "201535327358-orq4gpli7vluv2m1gl7ug8ba6d8iisep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSor1a7fuCTw02dD80xNwl8fIRY3vTEAM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "201535327358-orq4gpli7vluv2m1gl7ug8ba6d8iisep.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "201535327358-il1u2kj2ca5u4dt4k38e75u0s0tsgo23.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.devengage.engageflutter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

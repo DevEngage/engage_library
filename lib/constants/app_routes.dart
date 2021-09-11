@@ -1,3 +1,5 @@
+import 'package:engage_library/enum/types.dart';
+import 'package:engage_library/models/field_list_model.dart';
 import 'package:engage_library/models/field_model.dart';
 import 'package:engage_library/screens/add_screen.dart';
 import 'package:engage_library/screens/admin_screen.dart';
@@ -19,6 +21,11 @@ class AppRoutes {
         page: () => EngageAddScreen(path: 'engageModels', fields: [
               FieldModel(name: 'Field Name'),
               FieldModel(name: 'Default Value'),
+              FieldModel(
+                name: 'multiselect',
+                type: FieldType.multiselect,
+                list: FieldListModel.inputFieldList,
+              ),
             ])),
     GetPage(
         name: '/admin-add-collections',

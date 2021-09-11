@@ -1,4 +1,4 @@
-package io.devengage.earn_it_app
+package io.devengage.engageflutter
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
