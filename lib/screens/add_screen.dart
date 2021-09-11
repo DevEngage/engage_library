@@ -3,6 +3,7 @@ import 'package:engage_library/utils/engagefire_collection.dart';
 import 'package:engage_library/widgets/input.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getwidget/getwidget.dart';
 
 class EngageAddScreen extends StatefulWidget {
   final String path;
@@ -52,8 +53,14 @@ class _EngageAddScreenState extends State<EngageAddScreen> {
                 // items: qa.items,
                 // // smartOptions: qa.smartOptions,
                 // onChanged: qa.onChanged,
-                // onSubmitted: qa.onSubmitted,
-              )
+                // onSubmitted: (val) => item.value = val,
+                onChanged: (val) => item.value = val,
+              ),
+            GFButton(
+                onPressed: () {
+                  print(widget.fields);
+                },
+                text: "Save"),
           ],
         ),
       ),

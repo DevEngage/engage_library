@@ -82,5 +82,9 @@ class EngagefireCollection<T> {
         );
   }
 
+  // add() {
+  //   return refWithModel.
+  // }
+
   refresh() {}
 }
