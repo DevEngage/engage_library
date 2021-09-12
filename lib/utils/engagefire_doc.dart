@@ -51,6 +51,10 @@ class EngagefireDoc<T> {
     }
   }
 
+  updateSearchCache() {
+    // cache
+  }
+
   toggle(String field) async {
     // await parent?.doc(task.id).update({
     //   ...task.toJson(),

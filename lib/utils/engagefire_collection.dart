@@ -82,9 +82,11 @@ class EngagefireCollection<T> {
         );
   }
 
-  // add() {
-  //   return refWithModel.
-  // }
+  addBulk(List models) {
+    // return refWithModel.
+    // model.save();
+    // add search cache
+  }
 
   refresh() {}
 }
