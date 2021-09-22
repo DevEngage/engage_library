@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 // import 'package:image_cropper/image_cropper.dart';
 // import 'package:image_picker/image_picker.dart';
@@ -74,4 +75,7 @@ class Utils {
     }
     return 'snack';
   }
+
+  isDev() => !kReleaseMode;
+  isProd() => kReleaseMode;
 }
