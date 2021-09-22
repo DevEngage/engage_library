@@ -11,7 +11,7 @@ class Engagefire {
   Engagefire();
 
   static init({useEmulatorOnLocal = true}) {
-    if (!kReleaseMode) {
+    if (!kReleaseMode && useEmulatorOnLocal) {
       FirebaseFunctions.instance.useFunctionsEmulator('localhost', 5001);
       FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
       FirebaseStorage.instance.useStorageEmulator('localhost', 9199);

@@ -29,9 +29,10 @@ class Engage {
     analyticsEnabled = enableAnalytics;
     firestoreEnabled = enableFirestore;
     autoLoginAnonEnabled = enableAutoLoginAnon;
+    emulatorOnLocal = enableEmulatorOnLocal;
 
     await Firebase.initializeApp();
-    await Engagefire.init();
+    await Engagefire.init(useEmulatorOnLocal: emulatorOnLocal);
     await GetStorage.init();
     await EngageAnalytics.init();
     if (GetPlatform.isAndroid || EngageAnalytics.isEnabled) {
