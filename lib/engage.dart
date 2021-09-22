@@ -7,6 +7,7 @@ import 'package:engage_library/controllers/user_controller.dart';
 import 'package:engage_library/utils/engagefire.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class Engage {
@@ -31,9 +32,9 @@ class Engage {
 
     await Firebase.initializeApp();
     await Engagefire.init();
-    // await GetStorage.init();
-    await Analytics.init();
-    if (GetPlatform.isAndroid || Analytics.isEnabled) {
+    await GetStorage.init();
+    await EngageAnalytics.init();
+    if (GetPlatform.isAndroid || EngageAnalytics.isEnabled) {
       await MobileAds.instance.initialize();
     }
     await EngageUserController().loginAnonAccount();

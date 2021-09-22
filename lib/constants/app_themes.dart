@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AppThemes {
-  AppThemes._();
+class EngageThemes {
+  EngageThemes._();
 
   static const Color primaryColor = Color(0xFF8d57ff); //deepPurple
   static const Color secondaryColor = Color(0xFFff5757);

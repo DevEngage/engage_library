@@ -192,10 +192,10 @@ class EngageInputState<T> extends State<EngageInput> {
   textInput() {
     var style = widget.isDarkBackground
         ? TextStyle(
-            color: AppThemes.figmaWhite,
+            color: EngageThemes.figmaWhite,
           )
         : TextStyle(
-            color: AppThemes.figmaBlackDark,
+            color: EngageThemes.figmaBlackDark,
           );
     if (_controller == null)
       return TextFormField(
@@ -209,7 +209,7 @@ class EngageInputState<T> extends State<EngageInput> {
           initialValue: _value,
           onFieldSubmitted: widget.onSubmitted,
           inputFormatters: getMask(),
-          cursorColor: AppThemes.colorOrange,
+          cursorColor: EngageThemes.colorOrange,
           style: style,
           decoration: getInputDecoration());
     else
@@ -224,7 +224,7 @@ class EngageInputState<T> extends State<EngageInput> {
           initialValue: _value,
           onFieldSubmitted: widget.onSubmitted,
           inputFormatters: getMask(),
-          cursorColor: AppThemes.colorOrange,
+          cursorColor: EngageThemes.colorOrange,
           controller: _controller,
           style: style,
           decoration: getInputDecoration());
@@ -494,11 +494,11 @@ class EngageInputState<T> extends State<EngageInput> {
 
   getDecoration() {
     return BoxDecoration(
-      color: widget.isDarkBackground ? AppThemes.colorOrange : null,
+      color: widget.isDarkBackground ? EngageThemes.colorOrange : null,
       borderRadius: BorderRadius.all(Radius.circular(6)),
       border: Border.all(
           color: widget.isDarkBackground
-              ? AppThemes.colorOrange
+              ? EngageThemes.colorOrange
               : Colors.grey.withOpacity(.6)),
     );
     // hintText: widget.hintText,
@@ -513,14 +513,14 @@ class EngageInputState<T> extends State<EngageInput> {
   getInputDecoration() {
     var style = widget.isDarkBackground
         ? TextStyle(
-            color: AppThemes.figmaWhite,
+            color: EngageThemes.figmaWhite,
           )
         : TextStyle(
-            color: AppThemes.figmaBlackDark,
+            color: EngageThemes.figmaBlackDark,
           );
     var outline = widget.isDarkBackground
         ? OutlineInputBorder()
-            .copyWith(borderSide: BorderSide(color: AppThemes.colorOrange))
+            .copyWith(borderSide: BorderSide(color: EngageThemes.colorOrange))
         : OutlineInputBorder();
     return InputDecoration(
         hintText: widget.hintText,
@@ -528,7 +528,7 @@ class EngageInputState<T> extends State<EngageInput> {
         hintStyle: style,
         helperStyle: style,
         labelStyle: style,
-        fillColor: AppThemes.figmaWhite,
+        fillColor: EngageThemes.figmaWhite,
         enabledBorder: outline,
         border: outline,
         helperText: helperText(),
