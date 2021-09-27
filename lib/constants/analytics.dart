@@ -1,16 +1,16 @@
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 
-class Analytics {
+class EngageAnalytics {
   static FirebaseAnalytics analytics = FirebaseAnalytics();
   static bool isEnabled = true;
-  Analytics._();
+  EngageAnalytics._();
 
   static init() async {
     final status = await AppTrackingTransparency.requestTrackingAuthorization();
-    Analytics.isEnabled = status == TrackingStatus.authorized;
-    if (Analytics.isEnabled) {
-      await Analytics.analytics.logAppOpen();
+    EngageAnalytics.isEnabled = status == TrackingStatus.authorized;
+    if (EngageAnalytics.isEnabled) {
+      await EngageAnalytics.analytics.logAppOpen();
     }
   }
 
@@ -18,15 +18,15 @@ class Analytics {
     required String name,
     Map<String, dynamic>? params,
   }) async {
-    if (Analytics.isEnabled == false) return;
-    await Analytics.analytics.logEvent(
+    if (EngageAnalytics.isEnabled == false) return;
+    await EngageAnalytics.analytics.logEvent(
       name: name,
       parameters: params,
     );
   }
 
   static setUser(String? userId) async {
-    if (userId == null || Analytics.isEnabled == false) return;
+    if (userId == null || EngageAnalytics.isEnabled == false) return;
     return await analytics.setUserId(userId);
   }
 }

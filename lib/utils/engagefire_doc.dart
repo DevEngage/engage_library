@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engage_library/models/engagefire_doc_model.dart';
 import 'package:engage_library/utils/engagefire.dart';
+import 'package:engage_library/utils/engagefire_collection.dart';
 import 'package:flutter/material.dart';
 
 class EngagefireDoc<T> {
-  Engagefire parent;
+  EngagefireCollection parent;
   String? $id;
   late T doc;
   EngagefireDoc({

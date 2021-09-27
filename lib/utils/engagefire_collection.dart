@@ -89,4 +89,8 @@ class EngagefireCollection<T> {
   }
 
   refresh() {}
+
+  Future getDoc(id) {
+    return ref.doc(id).get();
+  }
 }
