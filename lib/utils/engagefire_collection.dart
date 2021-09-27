@@ -93,4 +93,6 @@ class EngagefireCollection<T> {
   Future getDoc(id) {
     return ref.doc(id).get();
   }
+
+  findAndSave() {}
 }
