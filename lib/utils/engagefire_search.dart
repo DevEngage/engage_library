@@ -2,6 +2,7 @@
   TODO:
   [ ] Search by local (whole collection)
   [ ] Search by Algolia (requires backend trigger)
+  [ ] or Typesense 
  */
 
 import 'package:engage_library/utils/engagefire_collection.dart';

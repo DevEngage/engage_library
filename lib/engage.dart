@@ -4,6 +4,7 @@ export './widgets/widgets.dart';
 
 import 'package:engage_library/constants/constants.dart';
 import 'package:engage_library/controllers/user_controller.dart';
+import 'package:engage_library/engage_config.dart';
 import 'package:engage_library/utils/engagefire.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
@@ -18,18 +19,19 @@ class Engage {
   static bool emulatorOnLocal = true;
   Engage();
 
-  static init({
-    enableAds = true,
-    enableAnalytics = true,
-    enableFirestore = true,
-    enableAutoLoginAnon = true,
-    enableEmulatorOnLocal = true,
-  }) async {
+  static init(
+      {enableAds = true,
+      enableAnalytics = true,
+      enableFirestore = true,
+      enableAutoLoginAnon = true,
+      enableEmulatorOnLocal = true,
+      EngageConfig? engageConfig}) async {
     adsEnabled = enableAds;
     analyticsEnabled = enableAnalytics;
     firestoreEnabled = enableFirestore;
     autoLoginAnonEnabled = enableAutoLoginAnon;
     emulatorOnLocal = enableEmulatorOnLocal;
+    EngageConfig.instance = engageConfig ?? EngageConfig();
 
     await Firebase.initializeApp();
     await Engagefire.init(useEmulatorOnLocal: emulatorOnLocal);

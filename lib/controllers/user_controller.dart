@@ -73,8 +73,6 @@ class EngageUserController extends GetxController {
   }
 
   Future<String?> signUp(email, password) async {
-    // FirebaseAuth.instance.
-    // linkWithCredential
     try {
       if (user == null) {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -115,9 +113,10 @@ class EngageUserController extends GetxController {
         true;
   }
 
-  // Future<ParseResponse> anonLogin() async {}
-
-  // Future<ParseResponse> requestPasswordReset(email) async {}
+  Future requestPasswordReset(email) async {
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    Get.snackbar('Success', 'Password has been reset');
+  }
 
   convertAnon() {}
 
