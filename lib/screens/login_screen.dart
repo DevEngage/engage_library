@@ -64,8 +64,8 @@ class EngageLoginScreen extends StatelessWidget {
         logo: logo,
         onLogin: (LoginData data) async =>
             await login(usersController, data.name.trim(), data.password),
-        onSignup: (LoginData data) async =>
-            await register(usersController, data.name.trim(), data.password),
+        onSignup: (SignupData data) async =>
+            await register(usersController, data.name?.trim(), data.password),
         onSubmitAnimationCompleted: () {
           if (isLogin) {
             return Get.offAllNamed(loginRoute);
