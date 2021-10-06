@@ -1,5 +1,6 @@
 import 'package:engage_library/utils/engagefire_collection.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/getwidget.dart';
 
 class EngageModelManageScreen extends StatelessWidget {
   const EngageModelManageScreen({Key? key}) : super(key: key);
@@ -21,7 +22,9 @@ class EngageModelManageScreen extends StatelessWidget {
             // Provider.of<Goals>(context, listen: false).getList();
           }),
       body: ListView(
-        children: [models.stream(child: () => Text('test'))],
+        children: [
+          models.stream(child: () => Text('test')),
+        ],
       ),
     );
   }

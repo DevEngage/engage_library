@@ -329,10 +329,10 @@ class EngageInputState<T> extends State<EngageInput> {
           onChanged: (newValue) {
             handleChanged(newValue);
           },
-          items: (widget.items?.map((item) => item.name).toList() ?? [])
-              .map((value) => DropdownMenuItem(
-                    value: value,
-                    child: Text(value ?? ''),
+          items: widget.items
+              ?.map((FieldListModel value) => DropdownMenuItem(
+                    value: value.value ?? value.name,
+                    child: Text(value.name ?? ''),
                   ))
               .toList(),
         ),
