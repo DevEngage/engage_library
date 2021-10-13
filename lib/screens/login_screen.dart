@@ -10,10 +10,14 @@ class EngageLoginScreen extends StatelessWidget {
   final String? logo;
   final String loginRoute;
   final String signupRoute;
+  final bool allowSkip;
+  final bool skipAndAnon;
   bool isLogin = true;
   EngageLoginScreen({
     this.title,
     this.logo,
+    this.skipAndAnon = true,
+    this.allowSkip = true,
     this.loginRoute = '/',
     this.signupRoute = '/',
   });
@@ -37,14 +41,18 @@ class EngageLoginScreen extends StatelessWidget {
   }
 
   skipLogin(context, EngageUserController user) async {
-    engageConfirmWidget(context,
-        title: 'Warning!',
-        message:
-            'Your data will not be saved to an account and will be invalid after 90 days.',
-        onAgreed: () async {
-      await user.loginAnonAccount();
+    if (skipAndAnon) {
+      engageConfirmWidget(context,
+          title: 'Warning!',
+          message:
+              'Your data will not be saved to an account and will be invalid after 90 days.',
+          onAgreed: () async {
+        await user.loginAnonAccount();
+        await _checkForUser(context);
+      });
+    } else {
       await _checkForUser(context);
-    });
+    }
   }
 
   Future<String?> _recoverPassword(
@@ -81,9 +89,10 @@ class EngageLoginScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              FlatButton(
-                  onPressed: () => skipLogin(context, usersController),
-                  child: Text('Skip Login')),
+              if (allowSkip)
+                FlatButton(
+                    onPressed: () => skipLogin(context, usersController),
+                    child: Text('Skip Login')),
             ],
           ),
         ),
