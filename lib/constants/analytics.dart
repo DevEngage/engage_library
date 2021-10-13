@@ -1,5 +1,6 @@
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:get/utils.dart';
 
 class EngageAnalytics {
   static FirebaseAnalytics analytics = FirebaseAnalytics();
@@ -7,8 +8,11 @@ class EngageAnalytics {
   EngageAnalytics._();
 
   static init() async {
-    final status = await AppTrackingTransparency.requestTrackingAuthorization();
-    EngageAnalytics.isEnabled = status == TrackingStatus.authorized;
+    if (GetPlatform.isIOS) {
+      final status =
+          await AppTrackingTransparency.requestTrackingAuthorization();
+      EngageAnalytics.isEnabled = status == TrackingStatus.authorized;
+    }
     if (EngageAnalytics.isEnabled) {
       await EngageAnalytics.analytics.logAppOpen();
     }
