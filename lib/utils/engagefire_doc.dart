@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class EngagefireDoc<T> {
   EngagefireCollection parent;
-  String? $id;
+  String? id;
   late T doc;
   EngagefireDoc({
     required this.parent,
@@ -14,7 +14,7 @@ class EngagefireDoc<T> {
   });
 
   get ref {
-    FirebaseFirestore.instance.collection('').doc($id).withConverter<T>(
+    FirebaseFirestore.instance.collection('').doc(id).withConverter<T>(
           fromFirestore: (snapshot, _) =>
               (T as EngagefireDocModel).fromJson(snapshot.data()!),
           toFirestore: (doc, _) => (doc as EngagefireDocModel).toJson(),
@@ -43,7 +43,7 @@ class EngagefireDoc<T> {
   }
 
   save() async {
-    if ((doc as EngagefireDocModel).$id != null) {
+    if ((doc as EngagefireDocModel).id != null) {
       // update
       await parent.ref.update(doc);
     } else {
@@ -67,8 +67,17 @@ class EngagefireDoc<T> {
   count(field) {}
 
   refresh() {
-    if ((doc as EngagefireDocModel).$id != null) {
-      parent.getDoc((doc as EngagefireDocModel).$id);
+    if ((doc as EngagefireDocModel).id != null) {
+      parent.getDoc((doc as EngagefireDocModel).id);
     }
   }
+
+  incField([value = 1]) {}
+
+  // getFireImage() async {
+  //   final ref =
+  //       firebase_storage.FirebaseStorage.instance.ref('${widget.imageRef}');
+  //   final imageBytes = await ref.getData(10000000);
+  //   return Image.memory(imageBytes!);
+  // }
 }

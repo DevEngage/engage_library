@@ -1,5 +1,5 @@
 class EngagefireDocModel {
-  int? $id;
+  int? id;
   String? parent;
   int? updatedAt;
   int? createdAt;
