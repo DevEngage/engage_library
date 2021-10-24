@@ -22,7 +22,7 @@ class EngageModelManageScreen extends StatelessWidget {
             test.id = 'test';
             test.name = 'test';
             test.test = 'test';
-            // test.save();
+            test.save();
             // await Navigator.pushNamed(
             //   context,
             //   '/admin-add-models',

@@ -8,6 +8,7 @@ import 'package:dart_json_mapper/dart_json_mapper.dart'
 
 @jsonSerializable
 class EngagefireDoc {
+  @JsonProperty(ignoreForSerialization: true)
   late EngagefireCollection parent;
 
   @JsonProperty(name: 'id')
@@ -70,7 +71,7 @@ class EngagefireDoc {
     // await parent?.doc(task.id).update({
     //   ...task.toJson(),
     //   'isDone': !task.isDone,
-    // });
+    // });=
     await save();
   }
 
