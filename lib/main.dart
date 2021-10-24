@@ -7,8 +7,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'constants/constants.dart';
+import 'main.mapper.g.dart' show initializeJsonMapper;
 
 void main() async {
+  initializeJsonMapper();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   // await Engage.init();

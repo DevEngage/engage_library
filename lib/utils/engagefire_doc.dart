@@ -3,29 +3,33 @@ import 'package:engage_library/models/engagefire_doc_model.dart';
 import 'package:engage_library/utils/engagefire.dart';
 import 'package:engage_library/utils/engagefire_collection.dart';
 import 'package:flutter/material.dart';
+import 'package:dart_json_mapper/dart_json_mapper.dart'
+    show JsonMapper, jsonSerializable, JsonProperty;
 
-class EngagefireDoc<T> {
+@jsonSerializable
+class EngagefireDoc {
   EngagefireCollection parent;
+
+  @JsonProperty(name: 'id')
   String? id;
-  late T doc;
+
   EngagefireDoc({
     required this.parent,
-    required this.doc,
   });
 
   get ref {
     FirebaseFirestore.instance.collection('').doc(id).withConverter<T>(
           fromFirestore: (snapshot, _) =>
-              (T as EngagefireDocModel).fromJson(snapshot.data()!),
-          toFirestore: (doc, _) => (doc as EngagefireDocModel).toJson(),
+              fromJson(snapshot.data()!, snapshot.id),
+          toFirestore: (doc, _) => toJson(),
         );
   }
 
   stream() {
-    return StreamBuilder<DocumentSnapshot<T>>(
+    return StreamBuilder<DocumentSnapshot>(
         stream: ref.snapshots(),
-        builder: (BuildContext context,
-            AsyncSnapshot<DocumentSnapshot<T>> snapshot) {
+        builder:
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.hasData) {
             final item = snapshot.data!.data()!;
           }
@@ -34,21 +38,21 @@ class EngagefireDoc<T> {
   }
 
   addMeta() {
-    if (doc is EngagefireDocModel) {
-      (doc as EngagefireDocModel).updatedAt =
+    if (this is EngagefireDocModel) {
+      (this as EngagefireDocModel).updatedAt =
           DateTime.now().millisecondsSinceEpoch;
-      (doc as EngagefireDocModel).createdAt =
+      (this as EngagefireDocModel).createdAt =
           DateTime.now().millisecondsSinceEpoch;
     }
   }
 
   save() async {
-    if ((doc as EngagefireDocModel).id != null) {
+    if ((this as EngagefireDocModel).id != null) {
       // update
-      await parent.ref.update(doc);
+      await parent.ref.update(toJson());
     } else {
       // add
-      await parent.ref.set(doc);
+      await parent.ref.set(toJson());
     }
   }
 
@@ -67,12 +71,23 @@ class EngagefireDoc<T> {
   count(field) {}
 
   refresh() {
-    if ((doc as EngagefireDocModel).id != null) {
-      parent.getDoc((doc as EngagefireDocModel).id);
+    if ((this as EngagefireDocModel).id != null) {
+      parent.getDoc((this as EngagefireDocModel).id);
     }
   }
 
   incField([value = 1]) {}
+
+  toJson() {
+    return JsonMapper.serialize(this);
+  }
+
+  fromJson(data, [id]) {
+    if (id != null) {
+      data['id'] = id;
+    }
+    return JsonMapper.deserialize(data);
+  }
 
   // getFireImage() async {
   //   final ref =
