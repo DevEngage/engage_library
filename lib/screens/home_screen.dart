@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engage_library/controllers/user_controller.dart';
+import 'package:engage_library/models/test_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,11 +16,11 @@ class EngageHomeScreen extends StatelessWidget {
           backgroundColor: Colors.deepPurple,
           child: Icon(Icons.add),
           onPressed: () async {
-            await Navigator.pushNamed(
-              context,
-              '/editGoal',
-              arguments: <String, dynamic>{'id': null},
-            ); // _addEditGoal(context, currentDate, goalCategory),
+            // await Navigator.pushNamed(
+            //   context,
+            //   '/editGoal',
+            //   arguments: <String, dynamic>{'id': null},
+            // ); // _addEditGoal(context, currentDate, goalCategory),
             // Provider.of<Goals>(context, listen: false).getList();
           }),
       body: Container(

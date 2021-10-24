@@ -8,17 +8,23 @@ import 'package:dart_json_mapper/dart_json_mapper.dart'
 
 @jsonSerializable
 class EngagefireDoc {
-  EngagefireCollection parent;
+  late EngagefireCollection parent;
 
   @JsonProperty(name: 'id')
   String? id;
 
   EngagefireDoc({
-    required this.parent,
-  });
+    required dynamic path,
+  }) {
+    if (path is String) {
+      this.parent = EngagefireCollection(path: path);
+    } else {
+      this.parent = path;
+    }
+  }
 
   get ref {
-    FirebaseFirestore.instance.collection('').doc(id).withConverter<T>(
+    FirebaseFirestore.instance.collection('').doc(id).withConverter(
           fromFirestore: (snapshot, _) =>
               fromJson(snapshot.data()!, snapshot.id),
           toFirestore: (doc, _) => toJson(),
@@ -47,7 +53,7 @@ class EngagefireDoc {
   }
 
   save() async {
-    if ((this as EngagefireDocModel).id != null) {
+    if (id != null) {
       // update
       await parent.ref.update(toJson());
     } else {
@@ -79,7 +85,10 @@ class EngagefireDoc {
   incField([value = 1]) {}
 
   toJson() {
-    return JsonMapper.serialize(this);
+    print(this);
+    Object m = JsonMapper.serialize(this);
+    print(m);
+    return m;
   }
 
   fromJson(data, [id]) {

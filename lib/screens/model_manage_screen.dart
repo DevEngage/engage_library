@@ -1,4 +1,6 @@
+import 'package:engage_library/models/test_model.dart';
 import 'package:engage_library/utils/engagefire_collection.dart';
+import 'package:engage_library/utils/engagefire_doc.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 
@@ -14,11 +16,18 @@ class EngageModelManageScreen extends StatelessWidget {
           backgroundColor: Colors.deepPurple,
           child: Icon(Icons.add),
           onPressed: () async {
-            await Navigator.pushNamed(
-              context,
-              '/admin-add-models',
-              arguments: <String, dynamic>{'id': null},
-            ); // _addEditGoal(context, currentDate, goalCategory),
+            print('test');
+            // var test = EngagefireDoc(path: 'test');
+            var test = new TestModel();
+            test.id = 'test';
+            test.name = 'test';
+            test.test = 'test';
+            // test.save();
+            // await Navigator.pushNamed(
+            //   context,
+            //   '/admin-add-models',
+            //   arguments: <String, dynamic>{'id': null},
+            // ); // _addEditGoal(context, currentDate, goalCategory),
             // Provider.of<Goals>(context, listen: false).getList();
           }),
       body: ListView(
