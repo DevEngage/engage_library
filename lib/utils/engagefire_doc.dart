@@ -20,6 +20,7 @@ class EngagefireDoc {
 
   EngagefireDoc({
     required dynamic path,
+    this.id,
   }) {
     if (path is String) {
       this.$parent = EngagefireCollection(path: path);
@@ -29,7 +30,11 @@ class EngagefireDoc {
   }
 
   @JsonProperty(ignoreForSerialization: true)
-  get $ref => $parent.$ref.doc(id);
+  get $ref => $parent.$ref.doc(id).withConverter(
+        fromFirestore: (snapshot, _) =>
+            $fromFirestore(snapshot.data()!, snapshot.id),
+        toFirestore: (doc, _) => $toMap(),
+      );
 
   // .withConverter(
   //       fromFirestore: (snapshot, _) =>
@@ -98,19 +103,29 @@ class EngagefireDoc {
     return jsonDecode($toJson());
   }
 
-  $fromMap() {
-    return jsonDecode($toJson());
+  $fromMap(data, [id]) {
+    if (id != null) {
+      id = data['id'];
+    }
+    return data; // JsonMapper.deserialize(data);
   }
 
   $toJson() {
     return JsonMapper.serialize(this);
   }
 
-  $fromJson(data, [id]) {
+  $fromJson<T>(data, [id]) {
     if (id != null) {
       data['id'] = id;
     }
-    return JsonMapper.deserialize(data);
+    return JsonMapper.deserialize<T>(jsonEncode(data));
+  }
+
+  $fromFirestore<T>(data, [id]) {
+    if (id != null) {
+      data['id'] = id;
+    }
+    return JsonMapper.deserialize<T>(jsonEncode(data));
   }
 
   // getFireImage() async {

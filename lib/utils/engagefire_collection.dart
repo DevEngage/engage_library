@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engage_library/models/engagefire_doc_model.dart';
 import 'package:engage_library/utils/engagefire.dart';
+import 'package:engage_library/utils/engagefire_doc.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -77,8 +78,8 @@ class EngagefireCollection<T> {
   get refWithModel {
     return FirebaseFirestore.instance.collection(path).withConverter<T>(
           fromFirestore: (snapshot, _) =>
-              (T as EngagefireDocModel).fromJson(snapshot.data()!),
-          toFirestore: (doc, _) => (doc as EngagefireDocModel).toJson(),
+              (T as EngagefireDoc).$fromMap(snapshot.data()!, snapshot.id),
+          toFirestore: (doc, _) => (doc as EngagefireDoc).$toMap(),
         );
   }
 

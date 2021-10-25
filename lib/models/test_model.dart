@@ -9,5 +9,5 @@ class TestModel extends EngagefireDoc {
   @JsonProperty(name: 'test')
   String? test;
 
-  TestModel() : super(path: 'Test');
+  TestModel({this.name, this.test}) : super(path: 'Test');
 }
