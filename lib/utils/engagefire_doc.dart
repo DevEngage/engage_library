@@ -5,6 +5,7 @@ import 'package:engage_library/utils/engagefire_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:dart_json_mapper/dart_json_mapper.dart'
     show JsonMapper, jsonSerializable, JsonProperty;
+import 'dart:convert';
 
 @jsonSerializable
 class EngagefireDoc {
@@ -28,13 +29,13 @@ class EngagefireDoc {
   }
 
   @JsonProperty(ignoreForSerialization: true)
-  get $ref {
-    $parent.$ref.doc(id).withConverter(
-          fromFirestore: (snapshot, _) =>
-              $fromJson(snapshot.data()!, snapshot.id),
-          toFirestore: (doc, _) => $toJson(),
-        );
-  }
+  get $ref => $parent.$ref.doc(id);
+
+  // .withConverter(
+  //       fromFirestore: (snapshot, _) =>
+  //           $fromJson(snapshot.data()!, snapshot.id),
+  //       toFirestore: (doc, _) => $toJson(),
+  //     )
 
   $stream() {
     return StreamBuilder<DocumentSnapshot>(
@@ -61,11 +62,13 @@ class EngagefireDoc {
     // $toJson();
     // if (id != null) {
     // update
-    // await $ref.update($toJson());
+    // await $ref.update($toMap());
     // } else {
     // add
-    $toJson();
-    // await $ref.set($toJson());
+    // print($parent.$ref.doc(id).set($toJson()));
+    // print($ref);
+    // 'createdAt': DateTime.now(),
+    await $ref.set($toMap(), SetOptions(merge: true));
     // }
   }
 
@@ -91,11 +94,16 @@ class EngagefireDoc {
 
   $incField([value = 1]) {}
 
+  $toMap() {
+    return jsonDecode($toJson());
+  }
+
+  $fromMap() {
+    return jsonDecode($toJson());
+  }
+
   $toJson() {
-    print(this);
-    Object m = JsonMapper.serialize(this);
-    print(m);
-    return m;
+    return JsonMapper.serialize(this);
   }
 
   $fromJson(data, [id]) {
