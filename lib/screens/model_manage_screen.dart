@@ -16,13 +16,11 @@ class EngageModelManageScreen extends StatelessWidget {
           backgroundColor: Colors.deepPurple,
           child: Icon(Icons.add),
           onPressed: () async {
-            print('test');
-            // var test = EngagefireDoc(path: 'test');
             var test = new TestModel();
             test.id = 'test';
-            test.name = 'test';
+            test.name = 'test3';
             test.test = 'test';
-            test.$toJson();
+            await test.$save();
             // await Navigator.pushNamed(
             //   context,
             //   '/admin-add-models',
