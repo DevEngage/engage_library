@@ -9,7 +9,10 @@ import 'package:dart_json_mapper/dart_json_mapper.dart'
 @jsonSerializable
 class EngagefireDoc {
   @JsonProperty(ignoreForSerialization: true)
-  late EngagefireCollection parent;
+  late EngagefireCollection $parent;
+
+  // @JsonProperty(name: 'path')
+  // late String $path;
 
   @JsonProperty(name: 'id')
   String? id;
@@ -18,23 +21,24 @@ class EngagefireDoc {
     required dynamic path,
   }) {
     if (path is String) {
-      this.parent = EngagefireCollection(path: path);
+      this.$parent = EngagefireCollection(path: path);
     } else {
-      this.parent = path;
+      this.$parent = path;
     }
   }
 
-  get ref {
-    FirebaseFirestore.instance.collection('').doc(id).withConverter(
+  @JsonProperty(ignoreForSerialization: true)
+  get $ref {
+    $parent.$ref.doc(id).withConverter(
           fromFirestore: (snapshot, _) =>
-              fromJson(snapshot.data()!, snapshot.id),
-          toFirestore: (doc, _) => toJson(),
+              $fromJson(snapshot.data()!, snapshot.id),
+          toFirestore: (doc, _) => $toJson(),
         );
   }
 
-  stream() {
+  $stream() {
     return StreamBuilder<DocumentSnapshot>(
-        stream: ref.snapshots(),
+        stream: $ref.snapshots(),
         builder:
             (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.hasData) {
@@ -44,7 +48,7 @@ class EngagefireDoc {
         });
   }
 
-  addMeta() {
+  $addMeta() {
     if (this is EngagefireDocModel) {
       (this as EngagefireDocModel).updatedAt =
           DateTime.now().millisecondsSinceEpoch;
@@ -53,46 +57,48 @@ class EngagefireDoc {
     }
   }
 
-  save() async {
-    if (id != null) {
-      // update
-      await parent.ref.update(toJson());
-    } else {
-      // add
-      await parent.ref.set(toJson());
-    }
+  $save() async {
+    // $toJson();
+    // if (id != null) {
+    // update
+    // await $ref.update($toJson());
+    // } else {
+    // add
+    $toJson();
+    // await $ref.set($toJson());
+    // }
   }
 
-  updateSearchCache() {
+  $updateSearchCache() {
     // cache
   }
 
-  toggle(String field) async {
+  $toggle(String field) async {
     // await parent?.doc(task.id).update({
     //   ...task.toJson(),
     //   'isDone': !task.isDone,
     // });=
-    await save();
+    await $save();
   }
 
-  count(field) {}
+  $count(field) {}
 
-  refresh() {
+  $refresh() {
     if ((this as EngagefireDocModel).id != null) {
-      parent.getDoc((this as EngagefireDocModel).id);
+      $parent.getDoc((this as EngagefireDocModel).id);
     }
   }
 
-  incField([value = 1]) {}
+  $incField([value = 1]) {}
 
-  toJson() {
+  $toJson() {
     print(this);
     Object m = JsonMapper.serialize(this);
     print(m);
     return m;
   }
 
-  fromJson(data, [id]) {
+  $fromJson(data, [id]) {
     if (id != null) {
       data['id'] = id;
     }

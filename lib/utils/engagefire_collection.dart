@@ -26,7 +26,7 @@ class EngagefireCollection<T> {
 
   stream({dynamic child, String emptyState = 'There is nothing in this list'}) {
     return StreamBuilder<QuerySnapshot<T>>(
-        stream: ref.snapshots(),
+        stream: $ref.snapshots(),
         builder:
             (BuildContext context, AsyncSnapshot<QuerySnapshot<T>> snapshot) {
           if (!snapshot.hasData ||
@@ -70,7 +70,7 @@ class EngagefireCollection<T> {
     //       builder: (_) =>
   }
 
-  get ref {
+  get $ref {
     return FirebaseFirestore.instance.collection(path);
   }
 
@@ -91,7 +91,7 @@ class EngagefireCollection<T> {
   refresh() {}
 
   Future getDoc(id) {
-    return ref.doc(id).get();
+    return $ref.doc(id).get();
   }
 
   findAndSave() {}
