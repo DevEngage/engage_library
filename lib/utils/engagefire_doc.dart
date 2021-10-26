@@ -30,11 +30,13 @@ class EngagefireDoc {
   }
 
   @JsonProperty(ignoreForSerialization: true)
-  get $ref => $parent.$ref.doc(id).withConverter(
-        fromFirestore: (snapshot, _) =>
-            $fromFirestore(snapshot.data()!, snapshot.id),
-        toFirestore: (doc, _) => $toMap(),
-      );
+  get $ref => $parent.$ref.doc(id);
+
+  // .withConverter(
+  //       fromFirestore: (snapshot, _) =>
+  //           $fromFirestore(snapshot.data()!, snapshot.id),
+  //       toFirestore: (doc, _) => $toMap(),
+  //     );
 
   // .withConverter(
   //       fromFirestore: (snapshot, _) =>
@@ -73,8 +75,14 @@ class EngagefireDoc {
     // print($parent.$ref.doc(id).set($toJson()));
     // print($ref);
     // 'createdAt': DateTime.now(),
+    // $toMap();
+    print($toMap());
     await $ref.set($toMap(), SetOptions(merge: true));
     // }
+  }
+
+  $delete() async {
+    return await $ref.delete();
   }
 
   $updateSearchCache() {
