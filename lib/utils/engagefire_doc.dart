@@ -77,7 +77,7 @@ class EngagefireDoc {
     // 'createdAt': DateTime.now(),
     // $toMap();
     print($toMap());
-    await $ref.set($toMap(), SetOptions(merge: true));
+    return await $ref.set($toMap(), SetOptions(merge: true));
     // }
   }
 
