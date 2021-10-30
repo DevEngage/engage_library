@@ -8,7 +8,7 @@ import 'package:dart_json_mapper/dart_json_mapper.dart'
 import 'dart:convert';
 
 @jsonSerializable
-class EngagefireDoc {
+class EngagefireDoc<T> {
   @JsonProperty(ignoreForSerialization: true)
   late EngagefireCollection $parent;
 
@@ -30,7 +30,7 @@ class EngagefireDoc {
   }
 
   @JsonProperty(ignoreForSerialization: true)
-  get $ref => $parent.$ref.doc(id);
+  DocumentReference<dynamic> get $ref => $parent.$ref.doc(id);
 
   // .withConverter(
   //       fromFirestore: (snapshot, _) =>
@@ -65,20 +65,11 @@ class EngagefireDoc {
     }
   }
 
-  $save() async {
-    // $toJson();
-    // if (id != null) {
-    // update
-    // await $ref.update($toMap());
-    // } else {
-    // add
-    // print($parent.$ref.doc(id).set($toJson()));
-    // print($ref);
-    // 'createdAt': DateTime.now(),
-    // $toMap();
-    print($toMap());
-    return await $ref.set($toMap(), SetOptions(merge: true));
-    // }
+  Future<void> $save() async {
+    if (id == null) {
+      id = $ref.id;
+    }
+    await $ref.set($toMap(), SetOptions(merge: true));
   }
 
   $delete() async {
@@ -89,19 +80,22 @@ class EngagefireDoc {
     // cache
   }
 
-  $toggle(String field) async {
+  Future<bool> $toggle(String field) async {
     // await parent?.doc(task.id).update({
     //   ...task.toJson(),
     //   'isDone': !task.isDone,
-    // });=
+    // });
+    // $toJson();
     await $save();
+    return true;
   }
 
   $count(field) {}
 
+  // doc = doc.$refres();
   $refresh() {
-    if ((this as EngagefireDocModel).id != null) {
-      $parent.getDoc((this as EngagefireDocModel).id);
+    if (id != null) {
+      $parent.getDoc(id);
     }
   }
 
@@ -122,14 +116,14 @@ class EngagefireDoc {
     return JsonMapper.serialize(this);
   }
 
-  $fromJson<T>(data, [id]) {
+  $fromJson(data, [id]) {
     if (id != null) {
       data['id'] = id;
     }
     return JsonMapper.deserialize<T>(jsonEncode(data));
   }
 
-  $fromFirestore<T>(data, [id]) {
+  $fromFirestore(data, [id]) {
     if (id != null) {
       data['id'] = id;
     }

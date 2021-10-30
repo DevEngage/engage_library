@@ -71,8 +71,9 @@ class EngagefireCollection<T> {
     //       builder: (_) =>
   }
 
-  get $ref {
-    return FirebaseFirestore.instance.collection(path);
+  CollectionReference<T> get $ref {
+    return FirebaseFirestore.instance.collection(path)
+        as CollectionReference<T>;
   }
 
   get refWithModel {
