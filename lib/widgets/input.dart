@@ -8,6 +8,7 @@ import 'package:engage_library/models/field_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:engage_library/constants/constants.dart';
+import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 // import 'package:games_revealed/theme.dart';
 import 'package:intl/intl.dart';
@@ -190,13 +191,9 @@ class EngageInputState<T> extends State<EngageInput> {
   }
 
   textInput() {
-    var style = widget.isDarkBackground
-        ? TextStyle(
-            color: EngageThemes.figmaWhite,
-          )
-        : TextStyle(
-            color: EngageThemes.figmaBlackDark,
-          );
+    final style = widget.isDarkBackground
+        ? Theme.of(Get.context!).textTheme
+        : Theme.of(Get.context!).textTheme;
     if (_controller == null)
       return TextFormField(
           focusNode: _node,
@@ -209,8 +206,8 @@ class EngageInputState<T> extends State<EngageInput> {
           initialValue: _value,
           onFieldSubmitted: widget.onSubmitted,
           inputFormatters: getMask(),
-          cursorColor: EngageThemes.colorOrange,
-          style: style,
+          cursorColor: Theme.of(Get.context!).primaryColor,
+          // style: style,
           decoration: getInputDecoration());
     else
       return TextFormField(
@@ -224,9 +221,9 @@ class EngageInputState<T> extends State<EngageInput> {
           initialValue: _value,
           onFieldSubmitted: widget.onSubmitted,
           inputFormatters: getMask(),
-          cursorColor: EngageThemes.colorOrange,
+          cursorColor: Theme.of(Get.context!).primaryColor,
           controller: _controller,
-          style: style,
+          // style: style,
           decoration: getInputDecoration());
   }
 
@@ -494,11 +491,12 @@ class EngageInputState<T> extends State<EngageInput> {
 
   getDecoration() {
     return BoxDecoration(
-      color: widget.isDarkBackground ? EngageThemes.colorOrange : null,
+      color:
+          widget.isDarkBackground ? Theme.of(Get.context!).primaryColor : null,
       borderRadius: BorderRadius.all(Radius.circular(6)),
       border: Border.all(
           color: widget.isDarkBackground
-              ? EngageThemes.colorOrange
+              ? Theme.of(Get.context!).primaryColor
               : Colors.grey.withOpacity(.6)),
     );
     // hintText: widget.hintText,
@@ -513,22 +511,22 @@ class EngageInputState<T> extends State<EngageInput> {
   getInputDecoration() {
     var style = widget.isDarkBackground
         ? TextStyle(
-            color: EngageThemes.figmaWhite,
+            color: Theme.of(Get.context!).primaryColor,
           )
         : TextStyle(
-            color: EngageThemes.figmaBlackDark,
+            color: Theme.of(Get.context!).primaryColor,
           );
     var outline = widget.isDarkBackground
-        ? OutlineInputBorder()
-            .copyWith(borderSide: BorderSide(color: EngageThemes.colorOrange))
+        ? OutlineInputBorder().copyWith(
+            borderSide: BorderSide(color: Theme.of(Get.context!).primaryColor))
         : OutlineInputBorder();
     return InputDecoration(
         hintText: widget.hintText,
         labelText: widget.labelText,
         hintStyle: style,
-        helperStyle: style,
-        labelStyle: style,
-        fillColor: EngageThemes.figmaWhite,
+        // helperStyle: style,
+        // labelStyle: style,
+        // fillColor: EngageThemes.figmaWhite,
         enabledBorder: outline,
         border: outline,
         helperText: helperText(),
