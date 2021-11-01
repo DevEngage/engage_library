@@ -1,11 +1,11 @@
 import 'package:engage_library/widgets/cards/card.dart';
 import 'package:flutter/material.dart';
 
-class ValueCard extends StatelessWidget {
+class EngageCardValue extends StatelessWidget {
   final String title;
   final String value;
   final bool isLoading;
-  const ValueCard({
+  const EngageCardValue({
     Key? key,
     required this.title,
     required this.value,

@@ -12,8 +12,8 @@ class EngagefireDoc<T> {
   @JsonProperty(ignoreForSerialization: true)
   late EngagefireCollection $parent;
 
-  // @JsonProperty(name: 'path')
-  // late String $path;
+  @JsonProperty(name: '_path')
+  late String $path;
 
   @JsonProperty(name: 'id')
   String? id;

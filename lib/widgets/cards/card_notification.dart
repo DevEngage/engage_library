@@ -1,10 +1,10 @@
 import 'package:engage_library/widgets/cards/card.dart';
 import 'package:flutter/material.dart';
 
-class NotificationCard extends StatelessWidget {
+class EngageCardNotification extends StatelessWidget {
   final String title;
   final String description;
-  const NotificationCard(
+  const EngageCardNotification(
       {Key? key, required this.title, required this.description})
       : super(key: key);
 
