@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engage_library/controllers/admin_controller.dart';
 import 'package:engage_library/controllers/user_controller.dart';
 import 'package:engage_library/screens/model_manage_screen.dart';
+import 'package:engage_library/widgets/app_bar.dart';
+import 'package:engage_library/widgets/menus/menu_drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,6 +34,8 @@ class EngageAdminScreen extends StatelessWidget {
       //       ); // _addEditGoal(context, currentDate, goalCategory),
       //       // Provider.of<Goals>(context, listen: false).getList();
       //     }),
+      drawer: TaxbitMenuDrawer(),
+      appBar: EngageAppBar(),
       body: Container(
           decoration: BoxDecoration(
             color: Colors.deepPurple.withOpacity(0.5),
@@ -44,7 +48,7 @@ class EngageAdminScreen extends StatelessWidget {
           ), // Image.asset('assets/imgs/background.png') ),
           child: _children[adminContonroller.currentIndex]),
       bottomNavigationBar: GetBuilder<EngageAdminController>(
-          builder: (_) =>  BottomNavigationBar(
+        builder: (_) => BottomNavigationBar(
           onTap: adminContonroller.onTabTapped, // new
           currentIndex: adminContonroller.currentIndex, // new
           backgroundColor: Colors.black,

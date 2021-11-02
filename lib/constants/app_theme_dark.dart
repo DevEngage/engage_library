@@ -199,7 +199,6 @@ class AppThemes {
             borderRadius: BorderRadius.all(Radius.circular(8.0)),
           ),
           fillColor: _darkInputFillColor,
-          //focusColor: _darkBorderActiveColor,
         ),
         dataTableTheme: DataTableThemeData(
           dataTextStyle: TextStyle(fontSize: 10, color: Color(0xFFE4EBF6)),
@@ -208,9 +207,6 @@ class AppThemes {
           columnSpacing: 20.0,
         ),
         dividerColor: Color(0xFFEDF2F9),
-        // iconTheme: IconThemeData(
-        //   color: Color(0xFF3B516C),
-        // ),
         bottomAppBarTheme: BottomAppBarTheme(
           color: Color(0xFF95AAC9),
         ),
