@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:engage_library/controllers/admin_controller.dart';
 import 'package:engage_library/controllers/user_controller.dart';
 import 'package:engage_library/screens/model_manage_screen.dart';
+import 'package:engage_library/utils/engage_item.dart';
 import 'package:engage_library/widgets/app_bar.dart';
 import 'package:engage_library/widgets/menus/menu_drawer.dart';
 import 'package:flutter/cupertino.dart';
@@ -34,7 +35,9 @@ class EngageAdminScreen extends StatelessWidget {
       //       ); // _addEditGoal(context, currentDate, goalCategory),
       //       // Provider.of<Goals>(context, listen: false).getList();
       //     }),
-      drawer: TaxbitMenuDrawer(),
+      drawer: EngageMenuDrawer(
+        menuItems: [EngageItem(name: 'settings', routePath: '/settings')],
+      ),
       appBar: EngageAppBar(),
       body: Container(
           decoration: BoxDecoration(

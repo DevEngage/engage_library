@@ -1,16 +1,18 @@
 import 'package:engage_library/controllers/user_controller.dart';
+import 'package:engage_library/utils/engage_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class TaxbitMenuDrawer extends StatefulWidget {
+class EngageMenuDrawer extends StatefulWidget {
   final Widget? title;
-  TaxbitMenuDrawer({Key? key, this.title});
+  final List<EngageItem> menuItems;
+  EngageMenuDrawer({Key? key, this.title, this.menuItems = const []});
 
   @override
-  _TaxbitMenuDrawerState createState() => _TaxbitMenuDrawerState();
+  _EngageMenuDrawerState createState() => _EngageMenuDrawerState();
 }
 
-class _TaxbitMenuDrawerState extends State<TaxbitMenuDrawer> {
+class _EngageMenuDrawerState extends State<EngageMenuDrawer> {
   buildMenuItem(title, icon, route) {
     return ListTile(
       // minVerticalPadding: 10,
@@ -58,9 +60,9 @@ class _TaxbitMenuDrawerState extends State<TaxbitMenuDrawer> {
             SizedBox(
               height: 20,
             ),
-            buildMenuItem('Settings', Icons.settings, 'settings'),
-            buildMenuItem('Help Center', Icons.help_center, 'help-center'),
-            buildMenuItem('App Feedback', Icons.feedback, 'help-center'),
+            for (EngageItem item in widget.menuItems)
+              buildMenuItem(item.name, item.icon, item.routePath),
+            // buildMenuItem('Help Center', Icons.help_center, 'help-center'f
             Container(
               padding: EdgeInsets.only(left: 0, top: 50),
               child: Row(children: [
