@@ -137,6 +137,10 @@ class EngagefireDoc<T> {
     return JsonMapper.deserialize<T>(jsonEncode(data));
   }
 
+  $watchBuilder(builder) {
+    return builder(this);
+  }
+
   // getFireImage() async {
   //   final ref =
   //       firebase_storage.FirebaseStorage.instance.ref('${widget.imageRef}');

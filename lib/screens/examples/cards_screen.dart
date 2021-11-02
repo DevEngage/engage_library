@@ -1,4 +1,5 @@
 import 'package:engage_library/utils/engage_item.dart';
+import 'package:engage_library/utils/engagefire_doc.dart';
 import 'package:engage_library/widgets/cards/card_notification.dart';
 import 'package:engage_library/widgets/cards/card_progress.dart';
 import 'package:engage_library/widgets/cards/card_value.dart';
@@ -13,7 +14,11 @@ class CardsScreen extends StatelessWidget {
         body: ListView(
       children: [
         Text('Cards'),
-        EngageCardValue(item: EngageItemModel(name: 'Value', value: 'test')),
+        EngagefireDoc(path: 'Test', id: 'test').$watchBuilder((doc) {
+          print(doc);
+          return EngageCardValue(
+              item: EngageItemModel(name: 'test', value: 'test'));
+        }),
         EngageCardNotification(
           title: 'Notification Card',
           description: '1000',
