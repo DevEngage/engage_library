@@ -95,7 +95,7 @@ class EngagefireDoc<T> {
   // doc = doc.$refres();
   $refresh() {
     if (id != null) {
-      $parent.getDoc(id);
+      return $parent.getDoc(id);
     }
   }
 

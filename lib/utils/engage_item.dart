@@ -1,18 +1,18 @@
 import 'package:engage_library/utils/engagefire_doc.dart';
 
-class EngageItem<T> {
+class EngageItemModel<T> {
   final String? name;
   final String? routePath;
   final String? docPath;
   final String? icon;
   final String? details;
   final Function? onPressed;
-  final dynamic value;
-  final EngagefireDoc<T>? doc;
-  final dynamic docValue;
+  dynamic value;
+  late final EngagefireDoc<T>? doc;
+  dynamic docValue;
   final bool valueAsProgress;
   final num? progressMax;
-  EngageItem({
+  EngageItemModel({
     this.name,
     this.routePath,
     this.docPath,
@@ -24,5 +24,13 @@ class EngageItem<T> {
     this.docValue,
     this.valueAsProgress = false,
     this.progressMax = 100,
-  });
+  }) {
+    if (doc == null && docPath != null) {
+      doc = EngagefireDoc<T>(path: docPath);
+    }
+  }
+
+  refresh() {
+    docValue = doc.$refresh();
+  }
 }

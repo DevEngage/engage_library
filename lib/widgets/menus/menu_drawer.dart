@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 class EngageMenuDrawer extends StatefulWidget {
   final Widget? title;
-  final List<EngageItem> menuItems;
+  final List<EngageItemModel> menuItems;
   EngageMenuDrawer({Key? key, this.title, this.menuItems = const []});
 
   @override
@@ -60,7 +60,7 @@ class _EngageMenuDrawerState extends State<EngageMenuDrawer> {
             SizedBox(
               height: 20,
             ),
-            for (EngageItem item in widget.menuItems)
+            for (EngageItemModel item in widget.menuItems)
               buildMenuItem(item.name, item.icon, item.routePath),
             // buildMenuItem('Help Center', Icons.help_center, 'help-center'f
             Container(
@@ -75,8 +75,8 @@ class _EngageMenuDrawerState extends State<EngageMenuDrawer> {
                     //           (Set<MaterialState> states) =>
                     //               AppThemes.primaryColor),
                     // ),
-                    child:
-                        Text('Sign Out', style: TextStyle(color: Colors.white)),
+                    child: Text(
+                        'Sign Out'), //, style: TextStyle(color: Colors.white)
                     onPressed: () async {
                       Get.back();
                       await usersController.logout();
