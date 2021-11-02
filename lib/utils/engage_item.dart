@@ -9,7 +9,7 @@ class EngageItemModel<T> {
   final Function? onPressed;
   dynamic value;
   late final EngagefireDoc<T>? doc;
-  dynamic docValue;
+  String? docValue;
   final bool valueAsProgress;
   final num? progressMax;
   EngageItemModel({
@@ -25,12 +25,24 @@ class EngageItemModel<T> {
     this.valueAsProgress = false,
     this.progressMax = 100,
   }) {
-    if (doc == null && docPath != null) {
-      doc = EngagefireDoc<T>(path: docPath);
+    setDoc();
+    setValueFromDoc();
+  }
+
+  refresh() async {
+    doc = await doc?.$refresh();
+    setValueFromDoc();
+  }
+
+  setValueFromDoc() {
+    if (doc != null && docValue != null) {
+      value = doc?.$toMap()[docValue];
     }
   }
 
-  refresh() {
-    docValue = doc.$refresh();
+  setDoc() {
+    if (doc == null && docPath != null) {
+      doc = EngagefireDoc<T>(path: docPath);
+    }
   }
 }

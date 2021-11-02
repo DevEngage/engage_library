@@ -36,7 +36,9 @@ class EngageAdminScreen extends StatelessWidget {
       //       // Provider.of<Goals>(context, listen: false).getList();
       //     }),
       drawer: EngageMenuDrawer(
-        menuItems: [EngageItemModel(name: 'settings', routePath: '/settings')],
+        menuItems: [
+          EngageItemModel(name: 'Cards', routePath: '/cards'),
+        ],
       ),
       appBar: EngageAppBar(),
       body: Container(

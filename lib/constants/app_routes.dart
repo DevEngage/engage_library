@@ -17,7 +17,7 @@ class AppRoutes {
     GetPage(name: '/login', page: () => EngageLoginScreen()),
     GetPage(name: '/admin', page: () => EngageAdminScreen()),
     GetPage(name: '/admin-manage-model', page: () => EngageModelManageScreen()),
-    GetPage(name: '/widgets', page: () => CardsScreen()),
+    GetPage(name: '/cards', page: () => CardsScreen()),
     GetPage(
         name: '/admin-add-models',
         page: () => EngageAddScreen(path: 'engageModels', fields: [

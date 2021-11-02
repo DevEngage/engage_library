@@ -1,14 +1,13 @@
+import 'package:engage_library/utils/engage_item.dart';
 import 'package:engage_library/widgets/cards/card.dart';
 import 'package:flutter/material.dart';
 
 class EngageCardValue extends StatelessWidget {
-  final String title;
-  final String value;
   final bool isLoading;
+  final EngageItemModel item;
   const EngageCardValue({
     Key? key,
-    required this.title,
-    required this.value,
+    required this.item,
     this.isLoading = false,
   }) : super(key: key);
 
@@ -18,7 +17,7 @@ class EngageCardValue extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            title,
+            item.name ?? '',
             style: Theme.of(context).textTheme.headline2,
           ),
           if (isLoading)
@@ -35,7 +34,7 @@ class EngageCardValue extends StatelessWidget {
             )
           else
             Text(
-              value,
+              item.value ?? '',
               style: Theme.of(context).textTheme.headline3,
             ),
         ],

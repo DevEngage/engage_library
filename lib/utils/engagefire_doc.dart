@@ -23,14 +23,20 @@ class EngagefireDoc<T> {
     this.id,
   }) {
     if (path is String) {
-      this.$parent = EngagefireCollection(path: path);
+      this.$parent = EngagefireCollection<T>(path: path);
     } else {
       this.$parent = path;
     }
   }
 
   @JsonProperty(ignoreForSerialization: true)
-  DocumentReference<dynamic> get $ref => $parent.$ref.doc(id);
+  DocumentReference<dynamic> get $ref => $parent.$ref
+      .withConverter(
+        fromFirestore: (snapshot, _) =>
+            $fromFirestore(snapshot.data()!, snapshot.id),
+        toFirestore: (doc, _) => $toMap(),
+      )
+      .doc(id);
 
   // .withConverter(
   //       fromFirestore: (snapshot, _) =>
@@ -92,11 +98,12 @@ class EngagefireDoc<T> {
 
   $count(field) {}
 
-  // doc = doc.$refres();
-  $refresh() {
+  // doc = doc.$refresh();
+  Future<EngagefireDoc<T>?> $refresh() async {
     if (id != null) {
-      return $parent.getDoc(id);
+      return await $parent.getDoc(id);
     }
+    return null;
   }
 
   $incField([value = 1]) {}

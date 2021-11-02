@@ -1,3 +1,4 @@
+import 'package:engage_library/utils/engage_item.dart';
 import 'package:engage_library/widgets/cards/card_notification.dart';
 import 'package:engage_library/widgets/cards/card_progress.dart';
 import 'package:engage_library/widgets/cards/card_value.dart';
@@ -12,10 +13,7 @@ class CardsScreen extends StatelessWidget {
         body: ListView(
       children: [
         Text('Cards'),
-        EngageCardValue(
-          title: 'Value Card',
-          value: '1000',
-        ),
+        EngageCardValue(item: EngageItemModel(name: 'Value', value: 'test')),
         EngageCardNotification(
           title: 'Notification Card',
           description: '1000',

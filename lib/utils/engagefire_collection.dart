@@ -76,7 +76,7 @@ class EngagefireCollection<T> {
         as CollectionReference<T>;
   }
 
-  get refWithModel {
+  get $refWithModel {
     return FirebaseFirestore.instance.collection(path).withConverter<T>(
           fromFirestore: (snapshot, _) =>
               (T as EngagefireDoc).$fromMap(snapshot.data()!, snapshot.id),
@@ -93,7 +93,7 @@ class EngagefireCollection<T> {
   refresh() {}
 
   Future getDoc(id) {
-    return $ref.doc(id).get();
+    return $refWithModel.doc(id).get();
   }
 
   findAndSave() {}
