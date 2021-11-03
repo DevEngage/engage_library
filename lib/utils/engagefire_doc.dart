@@ -30,13 +30,7 @@ class EngagefireDoc<T> {
   }
 
   @JsonProperty(ignoreForSerialization: true)
-  DocumentReference<dynamic> get $ref => $parent.$ref
-      .withConverter(
-        fromFirestore: (snapshot, _) =>
-            $fromFirestore(snapshot.data()!, snapshot.id),
-        toFirestore: (doc, _) => $toMap(),
-      )
-      .doc(id);
+  DocumentReference<dynamic> get $ref => $parent.$ref.doc(id);
 
   // .withConverter(
   //       fromFirestore: (snapshot, _) =>
@@ -50,13 +44,26 @@ class EngagefireDoc<T> {
   //       toFirestore: (doc, _) => $toJson(),
   //     )
 
-  $stream() {
+  $streamBuilder({
+    required Function widget,
+    bool hasLoading = true,
+    bool showError = true,
+  }) {
     return StreamBuilder<DocumentSnapshot>(
         stream: $ref.snapshots(),
         builder:
             (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.hasData) {
             final item = snapshot.data!.data()!;
+            return widget(snapshot.data?.data(), false);
+          }
+          if (snapshot.hasError) {
+            return Container(
+              child: Text(snapshot.error.toString()),
+            );
+          }
+          if (hasLoading) {
+            return widget(null, true);
           }
           return Container();
         });

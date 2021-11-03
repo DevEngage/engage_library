@@ -14,10 +14,12 @@ class CardsScreen extends StatelessWidget {
         body: ListView(
       children: [
         Text('Cards'),
-        EngagefireDoc(path: 'Test', id: 'test').$watchBuilder((doc) {
-          print(doc);
+        EngagefireDoc(path: 'Test', id: 'test').$streamBuilder(
+            widget: (data, isLoading) {
           return EngageCardValue(
-            item: EngageItemModel(name: 'Calories', value: '200'),
+            isLoading: isLoading,
+            item: EngageItemModel(
+                name: 'Calories', value: data?['name'], valueAsProgress: true),
           );
         }),
         EngageCardNotification(
