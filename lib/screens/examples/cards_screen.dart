@@ -17,7 +17,8 @@ class CardsScreen extends StatelessWidget {
         EngagefireDoc(path: 'Test', id: 'test').$watchBuilder((doc) {
           print(doc);
           return EngageCardValue(
-              item: EngageItemModel(name: 'test', value: 'test'));
+            item: EngageItemModel(name: 'Calories', value: '200'),
+          );
         }),
         EngageCardNotification(
           title: 'Notification Card',
