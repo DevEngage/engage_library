@@ -38,23 +38,6 @@ class EngageCardValue extends StatelessWidget {
               item.value ?? '',
               style: Theme.of(context).textTheme.headline3,
             ),
-          if (item.valueAsProgress)
-            GFProgressBar(
-              percentage: 0.8,
-              lineHeight: 20,
-              alignment: MainAxisAlignment.spaceBetween,
-              child: const Text(
-                '80%',
-                textAlign: TextAlign.end,
-                style: TextStyle(fontSize: 16, color: Colors.white),
-              ),
-              leading:
-                  Icon(Icons.sentiment_dissatisfied, color: GFColors.DANGER),
-              trailing:
-                  Icon(Icons.sentiment_satisfied, color: GFColors.SUCCESS),
-              backgroundColor: Colors.black26,
-              progressBarColor: GFColors.INFO,
-            )
         ],
       ),
     );

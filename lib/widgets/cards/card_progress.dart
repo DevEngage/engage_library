@@ -1,5 +1,6 @@
 import 'package:engage_library/widgets/cards/card.dart';
 import 'package:flutter/material.dart';
+import 'package:getwidget/getwidget.dart';
 
 class EngageCardProgress extends StatelessWidget {
   final String title;
@@ -34,10 +35,22 @@ class EngageCardProgress extends StatelessWidget {
               ),
             )
           else
-            Text(
-              value,
-              style: Theme.of(context).textTheme.headline3,
-            ),
+            GFProgressBar(
+              // percentage: double.parse(value),
+              lineHeight: 20,
+              alignment: MainAxisAlignment.spaceBetween,
+              child: const Text(
+                '80%',
+                textAlign: TextAlign.end,
+                style: TextStyle(fontSize: 16, color: Colors.white),
+              ),
+              leading:
+                  Icon(Icons.sentiment_dissatisfied, color: GFColors.DANGER),
+              trailing:
+                  Icon(Icons.sentiment_satisfied, color: GFColors.SUCCESS),
+              backgroundColor: Colors.black26,
+              progressBarColor: GFColors.INFO,
+            )
         ],
       ),
     );
