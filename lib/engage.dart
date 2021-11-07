@@ -37,7 +37,8 @@ class Engage {
     await Engagefire.init(useEmulatorOnLocal: emulatorOnLocal);
     await GetStorage.init();
     await EngageAnalytics.init();
-    if ((GetPlatform.isAndroid || GetPlatform.isIOS) &&
+    if (Engage.adsEnabled &&
+        (GetPlatform.isAndroid || GetPlatform.isIOS) &&
         EngageAnalytics.isEnabled) {
       await MobileAds.instance.initialize();
     }
