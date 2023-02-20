@@ -88,7 +88,7 @@ class EngageInputState<T> extends State<EngageInput> {
   bool _focused = false;
   FocusNode? _node;
   MaskTextInputFormatter? maskFormatter;
-  WhitelistingTextInputFormatter? numberFormatter;
+  var numberFormatter;
   // List<SmartSelectOption<String>> _smartOptions = [];
   bool isLoading = true;
   dynamic _value;
@@ -107,7 +107,7 @@ class EngageInputState<T> extends State<EngageInput> {
       maskFormatter = MaskTextInputFormatter(
           mask: '+# (###) ###-###-####', filter: {"#": RegExp(r'[0-9]')});
     } else if (widget.type == 'number') {
-      numberFormatter = WhitelistingTextInputFormatter.digitsOnly;
+      numberFormatter = FilteringTextInputFormatter.digitsOnly;
       inputType = TextInputType.number;
     }
     if (widget.mask != null) {

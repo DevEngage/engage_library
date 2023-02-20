@@ -3,7 +3,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:get/utils.dart';
 
 class EngageAnalytics {
-  static FirebaseAnalytics analytics = FirebaseAnalytics();
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   static bool isEnabled = true;
   EngageAnalytics._();
 
@@ -31,6 +31,6 @@ class EngageAnalytics {
 
   static setUser(String? userId) async {
     if (userId == null || EngageAnalytics.isEnabled == false) return;
-    return await analytics.setUserId(userId);
+    return await analytics.setUserId(id: userId);
   }
 }
