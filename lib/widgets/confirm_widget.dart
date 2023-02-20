@@ -9,14 +9,14 @@ Future<void> engageConfirmWidget(BuildContext context,
         title: Text(title),
         content: Text(message),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             child: Text('Cancel', style: TextStyle(color: Colors.red)),
             onPressed: () {
               if (onCancled != null) onCancled();
               Navigator.of(context).pop();
             },
           ),
-          FlatButton(
+          TextButton(
             child: Text(confirmText),
             onPressed: () {
               if (onAgreed != null) onAgreed();
