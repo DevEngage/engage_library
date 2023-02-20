@@ -90,7 +90,7 @@ class EngageLoginScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               if (allowSkip)
-                FlatButton(
+                TextButton(
                     onPressed: () => skipLogin(context, usersController),
                     child: Text('Skip Login')),
             ],
