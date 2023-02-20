@@ -194,7 +194,7 @@ class _EngageAppBarState extends State<EngageAppBar> {
                     ],
                   )
                 else
-                  FlatButton(
+                  TextButton(
                     child: Text(
                       'Login',
                       // style: TextStyle(color: AppThemes.figmaWhite),
